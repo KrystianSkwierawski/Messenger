@@ -1,0 +1,8 @@
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\bin\Debug\netcoreapp3.1\Messenger.Infrastructure.deps.json
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\bin\Debug\netcoreapp3.1\Messenger.Infrastructure.dll
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcoreapp3.1\Messenger.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcoreapp3.1\Messenger.Infrastructure.AssemblyInfo.cs
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcoreapp3.1\Messenger.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\bin\Debug\netcoreapp3.1\Messenger.Infrastructure.pdb
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcoreapp3.1\Messenger.Infrastructure.dll
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcoreapp3.1\Messenger.Infrastructure.pdb

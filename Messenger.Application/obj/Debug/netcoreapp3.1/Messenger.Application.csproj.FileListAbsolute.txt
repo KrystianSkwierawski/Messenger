@@ -1,0 +1,9 @@
+C:\Users\bezi2\source\repos\Messenger\Messenger.Application\bin\Debug\netcoreapp3.1\Messenger.Application.deps.json
+C:\Users\bezi2\source\repos\Messenger\Messenger.Application\bin\Debug\netcoreapp3.1\Messenger.Application.dll
+C:\Users\bezi2\source\repos\Messenger\Messenger.Application\obj\Debug\netcoreapp3.1\Messenger.Application.AssemblyInfoInputs.cache
+C:\Users\bezi2\source\repos\Messenger\Messenger.Application\obj\Debug\netcoreapp3.1\Messenger.Application.AssemblyInfo.cs
+C:\Users\bezi2\source\repos\Messenger\Messenger.Application\bin\Debug\netcoreapp3.1\Messenger.Application.pdb
+C:\Users\bezi2\source\repos\Messenger\Messenger.Application\obj\Debug\netcoreapp3.1\Messenger.Application.csproj.CoreCompileInputs.cache
+C:\Users\bezi2\source\repos\Messenger\Messenger.Application\obj\Debug\netcoreapp3.1\Messenger.Application.dll
+C:\Users\bezi2\source\repos\Messenger\Messenger.Application\obj\Debug\netcoreapp3.1\Messenger.Application.pdb
+C:\Users\bezi2\source\repos\Messenger\Messenger.Application\obj\Debug\netcoreapp3.1\Messenger.Application.csprojAssemblyReference.cache
