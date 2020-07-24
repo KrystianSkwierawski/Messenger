@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Messenger.Domain.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Messenger.Data
@@ -14,5 +15,7 @@ namespace Messenger.Data
         {
             base.OnModelCreating(builder);
         }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

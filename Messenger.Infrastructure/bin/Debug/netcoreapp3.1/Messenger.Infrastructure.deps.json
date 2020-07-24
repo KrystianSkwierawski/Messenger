@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "Messenger.Infrastructure/1.0.0": {
         "dependencies": {
+          "Messenger.Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.5",
           "Microsoft.EntityFrameworkCore.Relational": "3.1.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.5"
@@ -16,29 +17,29 @@
           "Messenger.Infrastructure.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Cryptography.Internal/3.1.5": {
+      "Microsoft.AspNetCore.Cryptography.Internal/3.1.6": {
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.AspNetCore.Cryptography.Internal.dll": {
-            "assemblyVersion": "3.1.5.0",
-            "fileVersion": "3.100.520.27105"
+            "assemblyVersion": "3.1.6.0",
+            "fileVersion": "3.100.620.31714"
           }
         }
       },
-      "Microsoft.AspNetCore.Cryptography.KeyDerivation/3.1.5": {
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/3.1.6": {
         "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.Internal": "3.1.5"
+          "Microsoft.AspNetCore.Cryptography.Internal": "3.1.6"
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
-            "assemblyVersion": "3.1.5.0",
-            "fileVersion": "3.100.520.27105"
+            "assemblyVersion": "3.1.6.0",
+            "fileVersion": "3.100.620.31714"
           }
         }
       },
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore/3.1.5": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "3.1.6",
-          "Microsoft.Extensions.Identity.Stores": "3.1.5"
+          "Microsoft.Extensions.Identity.Stores": "3.1.6"
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll": {
@@ -224,29 +225,29 @@
           }
         }
       },
-      "Microsoft.Extensions.Identity.Core/3.1.5": {
+      "Microsoft.Extensions.Identity.Core/3.1.6": {
         "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "3.1.5",
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "3.1.6",
           "Microsoft.Extensions.Logging": "3.1.6",
           "Microsoft.Extensions.Options": "3.1.6"
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.Extensions.Identity.Core.dll": {
-            "assemblyVersion": "3.1.5.0",
-            "fileVersion": "3.100.520.27105"
+            "assemblyVersion": "3.1.6.0",
+            "fileVersion": "3.100.620.31714"
           }
         }
       },
-      "Microsoft.Extensions.Identity.Stores/3.1.5": {
+      "Microsoft.Extensions.Identity.Stores/3.1.6": {
         "dependencies": {
           "Microsoft.Extensions.Caching.Abstractions": "3.1.6",
-          "Microsoft.Extensions.Identity.Core": "3.1.5",
+          "Microsoft.Extensions.Identity.Core": "3.1.6",
           "Microsoft.Extensions.Logging": "3.1.6"
         },
         "runtime": {
           "lib/netcoreapp3.1/Microsoft.Extensions.Identity.Stores.dll": {
-            "assemblyVersion": "3.1.5.0",
-            "fileVersion": "3.100.520.27105"
+            "assemblyVersion": "3.1.6.0",
+            "fileVersion": "3.100.620.31714"
           }
         }
       },
@@ -906,6 +907,14 @@
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
         }
+      },
+      "Messenger.Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Identity.Stores": "3.1.6"
+        },
+        "runtime": {
+          "Messenger.Domain.dll": {}
+        }
       }
     }
   },
@@ -915,19 +924,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Microsoft.AspNetCore.Cryptography.Internal/3.1.5": {
+    "Microsoft.AspNetCore.Cryptography.Internal/3.1.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oLOay0PH+b0x9mTAFAZswlDuoZYOO2Is6eeDoN8pzx31zzpNL2RvEY343s8yaTVEzydymRduTyff4htRJgt6IA==",
-      "path": "microsoft.aspnetcore.cryptography.internal/3.1.5",
-      "hashPath": "microsoft.aspnetcore.cryptography.internal.3.1.5.nupkg.sha512"
+      "sha512": "sha512-+OyVi4mANQgFC9cIH/J+BKNFWBVgTIO16HZfBp+vtTv/FFzWCV1zhxRJ3u+ZVoEouA/LboOBbP3wg8jroKH8ug==",
+      "path": "microsoft.aspnetcore.cryptography.internal/3.1.6",
+      "hashPath": "microsoft.aspnetcore.cryptography.internal.3.1.6.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Cryptography.KeyDerivation/3.1.5": {
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/3.1.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-v74WSHk+DzJlmeu6ysTNHYLer8Dpfni+4rS7kk077uj0qM7FTsgvfDepqatMqiAoXVjjNTmR2SWC1bxNP5cpVg==",
-      "path": "microsoft.aspnetcore.cryptography.keyderivation/3.1.5",
-      "hashPath": "microsoft.aspnetcore.cryptography.keyderivation.3.1.5.nupkg.sha512"
+      "sha512": "sha512-RSSe+0lqHCufRumPXPB0OpMyZ+fCOQwdamCSvroaZFrmwgu/53Pl/H/yIirVgT1ujg07ofKirjh9pAxO+qZjGw==",
+      "path": "microsoft.aspnetcore.cryptography.keyderivation/3.1.6",
+      "hashPath": "microsoft.aspnetcore.cryptography.keyderivation.3.1.6.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore/3.1.5": {
       "type": "package",
@@ -1048,19 +1057,19 @@
       "path": "microsoft.extensions.dependencyinjection.abstractions/3.1.6",
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.3.1.6.nupkg.sha512"
     },
-    "Microsoft.Extensions.Identity.Core/3.1.5": {
+    "Microsoft.Extensions.Identity.Core/3.1.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-IIgCUsSYCpvhq3nDOY1qrXazT+xiNJnJPL7ZeT0e9l/2i6vF+zd/bvpfoKSAMTvCPkf3Ikgif0ZFBxG0YOjeMQ==",
-      "path": "microsoft.extensions.identity.core/3.1.5",
-      "hashPath": "microsoft.extensions.identity.core.3.1.5.nupkg.sha512"
+      "sha512": "sha512-yemccgaLb5/go27QWMjMGtv2D9OBOsfMpjOZIhCj1W3Ic1JUqQ7jfrEXhRGmQd1NKvsHMAgfjfEduvtRG3kgnw==",
+      "path": "microsoft.extensions.identity.core/3.1.6",
+      "hashPath": "microsoft.extensions.identity.core.3.1.6.nupkg.sha512"
     },
-    "Microsoft.Extensions.Identity.Stores/3.1.5": {
+    "Microsoft.Extensions.Identity.Stores/3.1.6": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6TvcOR2uMMJznfQNsOG3B0lTWIuJaFDPuJ4b2ustbtengrN/wZg01VGLBSi7BZ5ouRmchAUQ1rJBQFOETkUeLA==",
-      "path": "microsoft.extensions.identity.stores/3.1.5",
-      "hashPath": "microsoft.extensions.identity.stores.3.1.5.nupkg.sha512"
+      "sha512": "sha512-seY7tsbn2Jm+wmKktFlL5VKofYYvPsHb0F6ajNw2+j4F/H87Mke4yCZ02xGFo00M7/qknkoW/FWQ1RXwvhhg2g==",
+      "path": "microsoft.extensions.identity.stores/3.1.6",
+      "hashPath": "microsoft.extensions.identity.stores.3.1.6.nupkg.sha512"
     },
     "Microsoft.Extensions.Logging/3.1.6": {
       "type": "package",
@@ -1551,6 +1560,11 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    },
+    "Messenger.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

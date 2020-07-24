@@ -13,9 +13,9 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -68,4 +68,13 @@ body {
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.messenger__friends_container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.messenger__friends_container::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
 }

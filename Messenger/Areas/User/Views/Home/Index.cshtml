@@ -1,8 +1,41 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<div class="container-fluid">
+    <div class="col-3 fixed-bottom messenger_container h-50 px-0 border">
+        <div class="col pt-3 border-bottom messenger_logged-user">
+            <div class="d-flex">
+                <img src="~/images/avatar.png" class="rounded-circle mr-2" height="30" width="30" />
+                <div class="d-flex mt-1">
+                    <p>bezi</p>
+                    <i class="fas fa-circle pl-1 text-success" style="font-size: 8px;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-2 messenger__search-input_container">
+            <input class="form-control form-control-sm" type="text" placeholder="Search for friends" aria-label="Search">
+        </div>
+        <div class="pre-scrollable messenger__friends_container mt-4 overflow-auto">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+            <div class="col pt-3 ">
+                <div class="d-flex">
+                    <img src="~/images/avatar.png" class="rounded-circle mr-2" height="30" width="30" />
+                    <div class="d-flex mt-1">
+                        <p>bezi</p>
+                        <i class="fas fa-circle pl-1 text-success" style="font-size: 8px;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col pt-3 ">
+                <div class="d-flex">
+                    <img src="~/images/avatar.png" class="rounded-circle mr-2" height="30" width="30" />
+                    <div class="d-flex mt-1">
+                        <p>bezi</p>
+                        <i class="fas fa-circle pl-1 text-muted" style="font-size: 8px;"></i>
+                    </div>
+                </div>
+            </div>
+
+            
+
+        </div>
+    </div>
 </div>

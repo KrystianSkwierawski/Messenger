@@ -6,3 +6,7 @@ C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcore
 C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\bin\Debug\netcoreapp3.1\Messenger.Infrastructure.pdb
 C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcoreapp3.1\Messenger.Infrastructure.dll
 C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcoreapp3.1\Messenger.Infrastructure.pdb
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcoreapp3.1\Messenger.Infrastructure.csprojAssemblyReference.cache
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\bin\Debug\netcoreapp3.1\Messenger.Domain.dll
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\bin\Debug\netcoreapp3.1\Messenger.Domain.pdb
+C:\Users\bezi2\source\repos\Messenger\Messenger.Infrastructure\obj\Debug\netcoreapp3.1\Messenger.Infrastructure.csproj.CopyComplete
