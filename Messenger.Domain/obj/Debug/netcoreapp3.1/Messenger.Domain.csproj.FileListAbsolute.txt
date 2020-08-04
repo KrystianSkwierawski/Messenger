@@ -1,9 +1,0 @@
-C:\Users\bezi2\source\repos\Messenger\Messenger.Domain\bin\Debug\netcoreapp3.1\Messenger.Domain.deps.json
-C:\Users\bezi2\source\repos\Messenger\Messenger.Domain\bin\Debug\netcoreapp3.1\Messenger.Domain.dll
-C:\Users\bezi2\source\repos\Messenger\Messenger.Domain\bin\Debug\netcoreapp3.1\Messenger.Domain.pdb
-C:\Users\bezi2\source\repos\Messenger\Messenger.Domain\obj\Debug\netcoreapp3.1\Messenger.Domain.AssemblyInfoInputs.cache
-C:\Users\bezi2\source\repos\Messenger\Messenger.Domain\obj\Debug\netcoreapp3.1\Messenger.Domain.AssemblyInfo.cs
-C:\Users\bezi2\source\repos\Messenger\Messenger.Domain\obj\Debug\netcoreapp3.1\Messenger.Domain.dll
-C:\Users\bezi2\source\repos\Messenger\Messenger.Domain\obj\Debug\netcoreapp3.1\Messenger.Domain.pdb
-C:\Users\bezi2\source\repos\Messenger\Messenger.Domain\obj\Debug\netcoreapp3.1\Messenger.Domain.csprojAssemblyReference.cache
-C:\Users\bezi2\source\repos\Messenger\Messenger.Domain\obj\Debug\netcoreapp3.1\Messenger.Domain.csproj.CoreCompileInputs.cache
