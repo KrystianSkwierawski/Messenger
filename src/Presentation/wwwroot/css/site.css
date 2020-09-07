@@ -2,14 +2,14 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
@@ -19,62 +19,149 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+.main__container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: #36393F;
 }
 
-.messenger__friends_container::-webkit-scrollbar {
-    width: 5px;
+
+.side-menu__container {
+    height: 100%;
+    width: 15vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: #2F3136;
 }
 
-.messenger__friends_container::-webkit-scrollbar-thumb {
-    background: gray;
-    border-radius: 10px;
+
+.friends-profiles__container::-webkit-scrollbar {
+    display: none;
 }
+
+.side-menu__container_active {
+    width: 100vw;
+    position: fixed;
+}
+
+    .side-menu__container_active img {
+        width: 20%;
+        float: left;
+    }
+
+.friends-profiles__container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-grow: 1;
+}
+
+.friend-profile__container {
+    display: flex;
+}
+
+.side-menu__button {
+    font-size: 30px;
+    margin-top: 10px;
+    color: white;
+    align-self: center;
+    height: auto;
+}
+
+.content__container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .side-menu__button {
+        display: none !important;
+    }
+
+    .side-menu__container{
+        max-width: 15vw;
+        position: static;
+    }
+
+    .side-menu__container img {
+        width: 100%;
+        float: none;
+    }
+}
+
+
+.friend__container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages__container {
+    flex-grow: 1;
+}
+
+.input-to-send-messages__container {
+    width: 90%;
+    height: auto;
+    align-self: center;
+}
+
+.input-to-send-messages {
+    width: 100%;
+    background-color: #484C52;
+    border-radius: 8px;
+    height: auto;
+    resize: none;
+    color: white;
+}
+
+
+
+    .input-to-send-messages::-webkit-scrollbar {
+        display: none;
+    }
