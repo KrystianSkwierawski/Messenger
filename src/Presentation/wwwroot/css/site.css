@@ -90,6 +90,13 @@ html {
     .side-menu__container_active img {
         width: 20%;
         float: left;
+
+    }
+
+    .side-menu__container_active h4 {
+        display: block !important;
+       
+
     }
 
 .friends-profiles__container {
@@ -100,6 +107,7 @@ html {
 
 .friend-profile__container {
     display: flex;
+
 }
 
 .side-menu__button {
@@ -117,6 +125,11 @@ html {
     flex-direction: column;
 }
 
+.avatar{
+    width: 100%;
+    height: auto;
+}
+
 @media (min-width: 768px) {
     .side-menu__button {
         display: none !important;
@@ -128,7 +141,6 @@ html {
     }
 
     .side-menu__container img {
-        width: 100%;
         float: none;
     }
 }
