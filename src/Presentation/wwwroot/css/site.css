@@ -140,10 +140,34 @@ html {
     top: 50px;
     width: 100vw;
     background-color: #36393F;
+    display: flex;
+    flex-direction: column;
 }
 
+.settings__container{
+    height: 100px;
+    width: auto;
+    background-color: black
+}
 
-.friends-profiles__container {
+.friends__container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
     flex-grow: 1;
+}
+
+.friend__container {
+    display: flex;
+}
+
+.friend__image{
+    height: auto;
+    width: 18%;
+}
+
+.friend__name{
+    font-size: 20px;
+    align-self: center;
 }
 
