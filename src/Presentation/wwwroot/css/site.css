@@ -1,6 +1,11 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -71,19 +76,26 @@ html {
 
 
 .menu__container {
-    height: 7vh;
+    height: 50px;
     background-color: #2F3136;
-    display: flex;
+   position: relative;
 }
 
-.menu__button{
+
+.menu__button {
     font-size: 30px;
     color: white;
-    align-self: center;
+    position: absolute;
+    left: 2%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .menu__friend-name {
-    align-self: center;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    position: absolute;
 }
 
 
@@ -122,10 +134,10 @@ html {
     }
 
 .side-menu__container {
-    height: 93vh;
+    height: calc(100% - 50px);
     position: fixed;
     left: 0;
-    top: 7vh;
+    top: 50px;
     width: 100vw;
     background-color: #36393F;
 }
