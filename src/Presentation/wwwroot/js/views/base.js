@@ -1,8 +1,9 @@
 ﻿export const elements = {
-    sideMenuButton: document.querySelector('.side-menu__button'),
-    sideMenuContainer: document.querySelector('.side-menu__container')
+    menuButton: document.querySelector('.menu__button'),
+    menuContainer: document.querySelector('.side-menu__container'),
+    menuFriendName: document.querySelector('.menu__friend-name')
 };
 
 export const elementStrings = {
-
+    
 };

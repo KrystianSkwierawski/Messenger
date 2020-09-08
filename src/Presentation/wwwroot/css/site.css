@@ -65,93 +65,37 @@ html {
     width: 100%;
     height: 100vh;
     background-color: #36393F;
-}
-
-
-.side-menu__container {
-    height: 100%;
-    width: 15vw;
-    text-align: center;
-    display: flex;
     flex-direction: column;
+}
+
+
+
+.menu__container {
+    height: 7vh;
     background-color: #2F3136;
-}
-
-
-.friends-profiles__container::-webkit-scrollbar {
-    display: none;
-}
-
-.side-menu__container_active {
-    width: 100vw;
-    position: fixed;
-}
-
-    .side-menu__container_active img {
-        width: 20%;
-        float: left;
-
-    }
-
-    .side-menu__container_active h4 {
-        display: block !important;
-       
-
-    }
-
-.friends-profiles__container {
-    overflow-y: auto;
-    overflow-x: hidden;
-    flex-grow: 1;
-}
-
-.friend-profile__container {
     display: flex;
-
 }
 
-.side-menu__button {
+.menu__button{
     font-size: 30px;
-    margin-top: 10px;
     color: white;
     align-self: center;
-    height: auto;
 }
+
+.menu__friend-name {
+    align-self: center;
+}
+
 
 .content__container {
     display: flex;
     width: 100%;
     height: 100%;
     flex-direction: column;
-}
-
-.avatar{
-    width: 100%;
-    height: auto;
-}
-
-@media (min-width: 768px) {
-    .side-menu__button {
-        display: none !important;
-    }
-
-    .side-menu__container{
-        max-width: 15vw;
-        position: static;
-    }
-
-    .side-menu__container img {
-        float: none;
-    }
+    flex-grow: 1;
 }
 
 
-.friend__container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
 
 .messages__container {
     flex-grow: 1;
@@ -173,7 +117,21 @@ html {
 }
 
 
-
     .input-to-send-messages::-webkit-scrollbar {
         display: none;
     }
+
+.side-menu__container {
+    height: 93vh;
+    position: fixed;
+    left: 0;
+    top: 7vh;
+    width: 100vw;
+    background-color: #36393F;
+}
+
+
+.friends-profiles__container {
+    flex-grow: 1;
+}
+
