@@ -1,7 +1,7 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-*{
+* {
     margin: 0;
     padding: 0;
 }
@@ -78,7 +78,7 @@ html {
 .menu__container {
     height: 50px;
     background-color: #2F3136;
-   position: relative;
+    position: relative;
 }
 
 
@@ -133,41 +133,81 @@ html {
         display: none;
     }
 
+
 .side-menu__container {
     height: calc(100% - 50px);
     position: fixed;
     left: 0;
     top: 50px;
     width: 100vw;
-    background-color: #36393F;
+    background-color: #36393F;   
     display: flex;
     flex-direction: column;
-}
-
-.settings__container{
-    height: 100px;
-    width: auto;
-    background-color: black
 }
 
 .friends__container {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
     flex-grow: 1;
+    overflow-y: auto;
 }
+
+    .friends__container::-webkit-scrollbar {
+        display: none;
+    }
+
+
+.search-friends__input {
+    align-self: center;
+    width: 90%;
+    height: auto;
+    border-radius: 5px;
+    color: white;
+}
+
 
 .friend__container {
     display: flex;
+    cursor: pointer;
 }
 
-.friend__image{
+.friend__image {
     height: auto;
     width: 18%;
 }
 
-.friend__name{
+.friend__name {
     font-size: 20px;
     align-self: center;
 }
 
+@media (min-width: 768px) {
+    .menu__button {
+        display: none !important;
+    }
+
+    .side-menu__container {
+        left: 0;
+        width: 19vw;
+        background-color: #36393F;
+        display: flex !important;
+    }
+
+
+
+
+    .content__container {
+        width: calc(100% - 19vw);
+        position: absolute;
+        left: 19vw;
+        top: 50px;
+        height: calc(100% - 50px);
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .friend__image {
+        height: auto;
+        width: 23%;
+    }
+}
