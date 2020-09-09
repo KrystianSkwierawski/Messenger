@@ -174,6 +174,8 @@ html {
 .friend__image {
     height: auto;
     width: 18%;
+    align-self: center;
+
 }
 
 .friend__name {
@@ -181,7 +183,7 @@ html {
     align-self: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .menu__button {
         display: none !important;
     }
