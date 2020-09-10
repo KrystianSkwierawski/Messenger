@@ -206,4 +206,16 @@ html {
         height: auto;
         width: 23%;
     }
+
+    .menu__friend-name{
+        display: block !important;
+    }
+}
+
+.settings__container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    font-size: 25px;
+    justify-content: space-between;
 }
