@@ -219,3 +219,7 @@ html {
     font-size: 25px;
     justify-content: space-between;
 }
+
+.add-friend__button, .settings__button{
+    cursor: pointer;
+}
