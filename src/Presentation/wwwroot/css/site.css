@@ -76,26 +76,28 @@ html {
 
 
 .menu__container {
+    position: absolute;
     height: 50px;
+    width: 100%;
     background-color: #202225;
-    position: relative;
+    
 }
 
 
 .menu__button {
     font-size: 30px;
     color: white;
-    position: absolute;
-    left: 2%;
-    top: 50%;
-    transform: translateY(-50%);
+   left: 5px;
+   top: 50%;
+   position: absolute;
+   transform: translateY(-50%);
 }
 
 .menu__friend-name {
-    transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
     position: absolute;
+    transform: translate(-50%, -50%);
 }
 
 
@@ -111,7 +113,11 @@ html {
 
 
 .messages__container {
+    margin-top: 50px;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 
 .input-to-send-messages__container {
@@ -176,12 +182,51 @@ html {
     height: auto;
     width: 18%;
     align-self: center;
-
 }
 
 .friend__name {
     font-size: 20px;
     align-self: center;
+}
+
+
+
+.settings__container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    font-size: 25px;
+    justify-content: space-between;
+}
+
+.add-friend__button, .settings__button {
+    cursor: pointer;
+}
+
+.message__profile-picture {
+    width: 15%;
+    height: auto;
+    align-self: center;
+    justify-self: center;
+}
+
+.message {
+    margin-left: 5%;
+    display: flex;
+}
+
+.message__date-sended {
+    font-size: 10px;
+}
+
+.message__text-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.information-about-the-message__container {
+    display: flex;
 }
 
 @media (min-width: 992px) {
@@ -207,19 +252,11 @@ html {
         width: 23%;
     }
 
-    .menu__friend-name{
+    .menu__friend-name {
         display: block !important;
     }
-}
 
-.settings__container {
-    width: 100%;
-    height: auto;
-    display: flex;
-    font-size: 25px;
-    justify-content: space-between;
-}
-
-.add-friend__button, .settings__button{
-    cursor: pointer;
+    .message__profile-picture {
+        width: 5%;
+    }
 }
