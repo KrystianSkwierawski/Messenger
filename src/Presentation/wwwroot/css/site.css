@@ -199,16 +199,22 @@ html {
     justify-content: space-between;
 }
 
-.add-friend__button, .settings__button {
+.add-friend__button, .settings__button, .logout__button {
     cursor: pointer;
+    align-self: center;
 }
 
-.message__profile-picture {
-    width: 15%;
-    height: auto;
-    align-self: center;
-    justify-self: center;
-}
+    .logout__button{
+        background-color: transparent;
+        border: 0;
+    }
+
+    .message__profile-picture {
+        width: 15%;
+        height: auto;
+        align-self: center;
+        justify-self: center;
+    }
 
 .message {
     margin-left: 5%;
@@ -227,6 +233,15 @@ html {
 
 .information-about-the-message__container {
     display: flex;
+}
+
+.friend__request{
+    display: flex;
+    font-size: 4vh;
+}
+
+.friend__reject-request, .friend__accept-request{
+    cursor: pointer;
 }
 
 @media (min-width: 992px) {
