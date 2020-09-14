@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Messenger.Domain.Model
+namespace Domain.Model
 {
     public class Message
     {

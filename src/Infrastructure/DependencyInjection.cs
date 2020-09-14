@@ -1,12 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Domain.Interfaces;
+using Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Messenger.Infrastructure
+namespace Infrastructure
 {
     public static class DependencyInjection
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-
+            services.AddTransient<IDateTime, MachineDateTime>();
+            services.AddScoped<IContext, Context>();
 
             return services;
         }

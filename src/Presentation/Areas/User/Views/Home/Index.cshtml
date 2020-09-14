@@ -1,43 +1,101 @@
-﻿<div class="container-fluid">
-    <div class="col-md-3 fixed-bottom messenger-list_container h-50 px-0 border">
-        <i class="fas fa-times float-right mx-2 my-1 messenger__hide-list_btn"></i>
-        <div class="col pt-3 border-bottom messenger_logged-user">
-            <div class="d-flex">
-                <img src="~/images/avatar.png" class="rounded-circle mr-2" height="30" width="30" />
-                <div class="d-flex mt-1">
-                    <p>bezi</p>
-                    <i class="fas fa-circle pl-1 text-success" style="font-size: 8px;"></i>                   
-                </div>
-            </div>
-        </div>
-        <div class="container mt-2 messenger__search-input_container d-flex">
-            <input class="form-control form-control-sm" type="text" placeholder="Search for friends" aria-label="Search">
-            <i class="fas fa-user-plus messenger__add-friend_btn mt-2 ml-3"></i>
-        </div>
-        <div class="pre-scrollable messenger__friends_container mt-4 overflow-auto">
+﻿@model Domain.Model.ApplicationUser
 
-            <div class="col pt-3 ">
-                <div class="d-flex">
-                    <img src="~/images/avatar.png" class="rounded-circle mr-2" height="30" width="30" />
-                    <div class="d-flex mt-1">
-                        <p>bezi</p>
-                        <i class="fas fa-circle pl-1 text-success" style="font-size: 8px;"></i>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+<div class="main__container ">
+
+    <div class="menu__container">
+        <i class="fas fa-bars menu__button"></i>
+        <h4 class="text-white menu__friend-name ">szefnudy</h4>
+    </div>
+
+    <div class="content__container">
+
+        <div class="messages__container">
+
+            <div class="message mt-3">
+                <img src="~/images/avatar.png" class="message__profile-picture rounded-circle" />
+                <div class="message__text-container">
+                    <div class="information-about-the-message__container">
+                        <h4 class="message__profile-name text-white ml-3 text-primary">szefnudy</h4>
+                        <p class="message__date-sended ml-1 text-secondary">11/09/2020 15:55</p>
+                    </div>
+
+                    <div class="ml-3 text-white">
+                        <p>jakis tekst....</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col pt-3 ">
-                <div class="d-flex">
-                    <img src="~/images/avatar.png" class="rounded-circle mr-2" height="30" width="30" />
-                    <div class="d-flex mt-1">
-                        <p>bezi</p>
-                        <i class="fas fa-circle pl-1 text-muted" style="font-size: 8px;"></i>
-                    </div>
-                </div>
-            </div>
-
-
-
         </div>
+
+        <div class="input-to-send-messages__container mb-2 mt-1">
+            <textarea class="input-to-send-messages"></textarea>
+        </div>
+
     </div>
 </div>
+
+<div class="side-menu__container d-none">
+
+    <form class="form-inline justify-content-center md-form form-sm mt-0">
+        <input class=" search-friends__input mt-4" type="text" placeholder="Search" aria-label="Search">
+    </form>
+
+    <div class="friends__container">
+
+        @if (Model.Friends != null)
+        {
+            @foreach (var friend in Model.Friends)
+            {
+                if (friend.IsAccepted == true)
+                {                   
+                    <div class="friend__container ml-3 mb-4">
+                        <img src="~/images/avatar.png" class="friend__image rounded-circle" />
+                        <h4 class="friend__name text-white ml-2 text-break">@friend.ApplicationUser.UserName</h4>
+                    </div>
+                }
+                else
+                {
+                     <div class="friend__request ml-3 mb-1">
+                        <i class="fas fa-check text-success friend__accept-request"></i>
+                        <i class="fas fa-times ml-2 text-danger friend__reject-request"></i>
+                    </div>
+                     <div class="friend__container ml-3 mb-4">
+                        <img src="~/images/avatar.png" class="friend__image rounded-circle" />
+                        <h4 class="friend__name text-white ml-2 text-break">@friend.ApplicationUser.UserName</h4>
+                    </div>
+                }
+            }
+        }
+
+    </div>
+
+    <div class="settings__container text-white">
+        <i class="fas fa-user-plus add-friend__button ml-1"></i>
+
+
+        <form class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="text-danger my-0 logout__button">Logout</button>
+        </form>
+
+        <i class="fas fa-user-cog settings__button mr-1"></i>
+    </div>
+</div> }
+            else
+            {
+<ul>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+</ul>}
+
+
+<script type="module" src="~/js/index.js"></script>
