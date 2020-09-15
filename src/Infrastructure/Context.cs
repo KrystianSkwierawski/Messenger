@@ -14,6 +14,7 @@ namespace Infrastructure
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<RelationShip> RelationShips { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

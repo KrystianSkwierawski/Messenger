@@ -8,6 +8,7 @@ namespace Domain.Interfaces
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public DbSet<Message> Messages { get; set; }
+        public DbSet<RelationShip> RelationShips { get; set; }
 
         public void SaveChanges();
     }

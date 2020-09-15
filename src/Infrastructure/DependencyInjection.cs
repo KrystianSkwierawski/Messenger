@@ -1,5 +1,4 @@
 ﻿using Domain.Interfaces;
-using Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure

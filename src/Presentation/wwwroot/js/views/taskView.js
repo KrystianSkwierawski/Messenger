@@ -6,3 +6,13 @@ export const slideOutSideMenu = () => {
     elements.menuButton.classList.toggle('fa-times');
     elements.menuFriendName.classList.toggle('d-none');
 };
+
+export const getUserName = () => {
+    return elements.addFriendButton.dataset.username;
+};
+
+export const getFriends = () => {
+    const friends = elements.addFriendButton.dataset.friends
+
+    return JSON.parse(friends);
+};

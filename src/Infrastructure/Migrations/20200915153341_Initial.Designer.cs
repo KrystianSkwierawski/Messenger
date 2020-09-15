@@ -4,40 +4,22 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Messenger.Infrastructure.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200915153341_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Domain.Model.Friend", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("Friend");
-                });
 
             modelBuilder.Entity("Domain.Model.Message", b =>
                 {
@@ -47,19 +29,47 @@ namespace Messenger.Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RelationShipId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Time")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("RelationShipId");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("Domain.Model.RelationShip", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("InvitedUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("InvitingUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvitedUserId");
+
+                    b.HasIndex("InvitingUserId");
+
+                    b.ToTable("RelationShips");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -275,18 +285,24 @@ namespace Messenger.Infrastructure.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
-            modelBuilder.Entity("Domain.Model.Friend", b =>
-                {
-                    b.HasOne("Domain.Model.ApplicationUser", "ApplicationUser")
-                        .WithMany("Friends")
-                        .HasForeignKey("ApplicationUserId");
-                });
-
             modelBuilder.Entity("Domain.Model.Message", b =>
                 {
-                    b.HasOne("Domain.Model.ApplicationUser", "SentTo")
+                    b.HasOne("Domain.Model.RelationShip", "RelationShip")
                         .WithMany("Messages")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("RelationShipId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Model.RelationShip", b =>
+                {
+                    b.HasOne("Domain.Model.ApplicationUser", "InvitedUser")
+                        .WithMany()
+                        .HasForeignKey("InvitedUserId");
+
+                    b.HasOne("Domain.Model.ApplicationUser", "InvitingUser")
+                        .WithMany()
+                        .HasForeignKey("InvitingUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

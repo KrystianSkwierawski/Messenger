@@ -1,9 +1,7 @@
 ﻿using Domain.Interfaces;
 using Domain.Model;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +9,7 @@ namespace Application.Friends.Command
 {
     public class AddFriendCommand : IRequest
     {
-        public ApplicationUser User { get; set; }
+        public string CurrentUserId { get; set; }
         public string UserName { get; set; }
 
         public class AddFriendCommandHandler : IRequestHandler<AddFriendCommand>
@@ -26,16 +24,18 @@ namespace Application.Friends.Command
             public async Task<Unit> Handle(AddFriendCommand request, CancellationToken cancellationToken)
             {
                 ApplicationUser user = _context.ApplicationUsers.FirstOrDefault(x => x.UserName == request.UserName);
+                ApplicationUser currentUser = _context.ApplicationUsers.FirstOrDefault(x => x.Id == request.CurrentUserId);
 
                 if(user != null)
                 {
-                    Friend friend = new Friend()
+                    RelationShip relationShip = new RelationShip()
                     {
-                        ApplicationUser = request.User,
+                        InvitedUserId = user.Id,
+                        InvitingUserId = currentUser.Id,
                         IsAccepted = false
                     };
 
-                    user.Friends.Add(friend);
+                    _context.RelationShips.Add(relationShip);
 
                     _context.SaveChanges();
                 }
