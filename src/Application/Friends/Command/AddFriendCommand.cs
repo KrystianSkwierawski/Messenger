@@ -23,15 +23,15 @@ namespace Application.Friends.Command
 
             public async Task<Unit> Handle(AddFriendCommand request, CancellationToken cancellationToken)
             {
-                ApplicationUser user = _context.ApplicationUsers.FirstOrDefault(x => x.UserName == request.UserName);
-                ApplicationUser currentUser = _context.ApplicationUsers.FirstOrDefault(x => x.Id == request.CurrentUserId);
+                ApplicationUser invitedUser = _context.ApplicationUsers.FirstOrDefault(x => x.UserName == request.UserName);
+                ApplicationUser invitingUser = _context.ApplicationUsers.FirstOrDefault(x => x.Id == request.CurrentUserId);
 
-                if(user != null)
+                if(invitedUser != null)
                 {
                     RelationShip relationShip = new RelationShip()
                     {
-                        InvitedUserId = user.Id,
-                        InvitingUserId = currentUser.Id,
+                        InvitedUserId = invitedUser.Id,
+                        InvitingUserId = invitingUser.Id,
                         IsAccepted = false
                     };
 
