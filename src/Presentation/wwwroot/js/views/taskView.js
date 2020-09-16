@@ -12,7 +12,11 @@ export const getUserName = () => {
 };
 
 export const getFriends = () => {
-    const friends = elements.addFriendButton.dataset.friends
+    const friends = elements.addFriendButton.dataset.friends;   
 
     return JSON.parse(friends);
+};
+
+export const setFriendDataset = friends => {
+    elements.addFriendButton.dataset.friends = friends;
 };

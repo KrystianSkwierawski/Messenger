@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Domain.Model;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Application.ViewModel
 {
-   public  class HomeViewModel
+    public  class HomeViewModel
     {
+        public IQueryable<RelationShip> RelationShips { get; set; }
+        public List<ApplicationUser> Friends { get; set; }
     }
 }

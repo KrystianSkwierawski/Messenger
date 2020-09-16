@@ -23,7 +23,8 @@ async function addFriend(){
     const friendName = prompt('Friend name:');  
 
     if (ifDoesNotInvitingHimSelf(friendName) && ifDoesNotHaveThisFriend(friendName)) {
-        await Index.addFriend(friendName);
+        const friends = await Index.sendFriendRequest(friendName);
+        indexView.setFriendDataset(JSON.stringify(friends));
     }
     else {
         console.log('error');

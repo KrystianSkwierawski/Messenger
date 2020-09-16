@@ -1,4 +1,4 @@
-﻿@model IQueryable<RelationShip>
+﻿@model Application.ViewModel.HomeViewModel
 
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
@@ -8,24 +8,7 @@
 
     var _user = await UserManager.GetUserAsync(User);
     var _userId = _user?.Id;
-
-    List<ApplicationUser> _friends = new List<ApplicationUser>();
-
-    if (Model != null)
-    {
-        foreach (var relationShip in Model)
-        {
-            if (relationShip.InvitedUserId != _userId)
-            {
-                _friends.Add(relationShip.InvitedUser);
-            }
-            else if (relationShip.InvitingUserId != _userId)
-            {
-                _friends.Add(relationShip.InvitingUser);
-            }
-        }
-    }
-
+    var s = Json.Serialize(Model.Friends);
 }
 
 
@@ -72,12 +55,12 @@
 
         <div class="friends__container">
 
-            @if (_friends != null)
+            @if (Model.Friends != null)
             {
-                @foreach (var friend in _friends)
+                @foreach (var friend in Model.Friends)
                 {
-                    var relationShipWhereCurrentUserIsInvited = Model.FirstOrDefault(x => x.InvitedUserId == _userId && x.InvitingUserId == friend.Id);
-                    var relationShipWhereCurrentUserIsInviting = Model.FirstOrDefault(x => x.InvitingUserId == _userId && x.InvitedUserId == friend.Id);
+                    var relationShipWhereCurrentUserIsInvited = Model.RelationShips.FirstOrDefault(x => x.InvitedUserId == _userId && x.InvitingUserId == friend.Id);
+                    var relationShipWhereCurrentUserIsInviting = Model.RelationShips.FirstOrDefault(x => x.InvitingUserId == _userId && x.InvitedUserId == friend.Id);
 
 
                     if (relationShipWhereCurrentUserIsInvited != null)
@@ -116,7 +99,7 @@
         </div>
 
         <div class="settings__container text-white">
-            <i class="fas fa-user-plus add-friend__button ml-1" data-friends='@Json.Serialize(_friends)' data-username="@_user.UserName" ></i>
+            <i class="fas fa-user-plus add-friend__button ml-1" data-friends='@Json.Serialize(Model.Friends)' data-username="@_user.UserName" ></i>
 
 
             <form class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

@@ -1,10 +1,12 @@
-﻿using Application.Friends.Command;
-using Application.User.Query;
+﻿using Application.RelationShips.Command;
+using Application.RelationShips.Query;
+using Application.ViewModel;
 using Domain.Model;
 using Messenger.Application.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Presentation.Areas.User.Controllers;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
@@ -36,20 +38,38 @@ namespace Messenger.Areas.User.Controllers
 
                 IQueryable<RelationShip> relationShipsValue = relationShips.Value as IQueryable<RelationShip>;
 
-                return View(relationShipsValue);
+                HomeViewModel homeViewModel = new HomeViewModel()
+                {
+                    RelationShips = relationShipsValue,
+                    Friends = GetFriends(userId, relationShipsValue)
+                };
+
+                return View(homeViewModel);
             }
 
             return View();
         }
 
+       
         [HttpPost]
         public async Task<ActionResult> SendFriendRequest([FromBody] string userName)
         {
-            return base.Ok(await Mediator.Send(new SendFriendRequestCommand
+            string userId = GetUserId();
+
+            base.Ok(await Mediator.Send(new AddRelationShipCommand
             {
-                CurrentUserId = GetUserId(),
+                CurrentUserId = userId,
                 UserName = userName
             }));
+
+            OkObjectResult relationShips = base.Ok(await Mediator.Send(new GetRelationShipsQuery
+            {
+                Id = userId
+            }));
+
+            IQueryable<RelationShip> relationShipsValue = relationShips.Value as IQueryable<RelationShip>;
+
+            return new JsonResult(GetFriends(userId, relationShipsValue));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -71,6 +91,29 @@ namespace Messenger.Areas.User.Controllers
             }
 
             return o_userId;
+        }
+
+        // zrob query w friends zamiast tej metody
+        private List<ApplicationUser> GetFriends(string userId, IQueryable<RelationShip> relationShipsValue)
+        {
+            List<ApplicationUser> o_friends = new List<ApplicationUser>();
+
+            if (relationShipsValue != null)
+            {
+                foreach (var relationShip in relationShipsValue)
+                {
+                    if (relationShip.InvitedUserId != userId)
+                    {
+                        o_friends.Add(relationShip.InvitedUser);
+                    }
+                    else if (relationShip.InvitingUserId != userId)
+                    {
+                        o_friends.Add(relationShip.InvitingUser);
+                    }
+                }
+            }
+
+            return o_friends;
         }
     }
 }

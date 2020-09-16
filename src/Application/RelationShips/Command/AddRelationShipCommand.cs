@@ -5,23 +5,23 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Friends.Command
+namespace Application.RelationShips.Command
 {
-    public class SendFriendRequestCommand : IRequest
+    public class AddRelationShipCommand : IRequest
     {
         public string CurrentUserId { get; set; }
         public string UserName { get; set; }
 
-        public class AddFriendCommandHandler : IRequestHandler<SendFriendRequestCommand>
+        public class AddRelationShipCommandHandler : IRequestHandler<AddRelationShipCommand>
         {
             private readonly IContext _context;
 
-            public AddFriendCommandHandler(IContext context)
+            public AddRelationShipCommandHandler(IContext context)
             {
                 _context = context;
             }
 
-            public async Task<Unit> Handle(SendFriendRequestCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(AddRelationShipCommand request, CancellationToken cancellationToken)
             {
                 ApplicationUser invitedUser = _context.ApplicationUsers.FirstOrDefault(x => x.UserName == request.UserName);
                 ApplicationUser invitingUser = _context.ApplicationUsers.FirstOrDefault(x => x.Id == request.CurrentUserId);

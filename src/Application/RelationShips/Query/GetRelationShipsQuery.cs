@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.User.Query
+namespace Application.RelationShips.Query
 {
     public class GetRelationShipsQuery : IRequest<IQueryable<RelationShip>>
     {
