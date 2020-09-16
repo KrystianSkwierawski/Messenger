@@ -1,7 +1,6 @@
 using Application;
 using Infrastructure;
 using MediatR;
-using Messenger.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -53,7 +52,6 @@ namespace Messenger
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseAuthentication();

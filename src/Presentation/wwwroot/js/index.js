@@ -23,11 +23,15 @@ async function addFriend(){
     const friendName = prompt('Friend name:');  
 
     if (ifDoesNotInvitingHimSelf(friendName) && ifDoesNotHaveThisFriend(friendName)) {
-        const friends = await Index.sendFriendRequest(friendName);
-        indexView.setFriendDataset(JSON.stringify(friends));
-    }
-    else {
-        console.log('error');
+        const request = await Index.sendFriendRequest(friendName);
+        indexView.setFriendDataset(JSON.stringify(request.friends));
+
+        if (request.userExist) {
+            toastr.success('The friend request has been sent');
+        }
+        else {
+            toastr.info('There is no such user');
+        }
     }
 }
 

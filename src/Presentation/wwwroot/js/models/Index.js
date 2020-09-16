@@ -8,8 +8,8 @@
             body: JSON.stringify(userName),
         });
 
-        const friends = await result.json();
-        return friends;
+        const data = await result.json();
+        return data;
     }
     catch(error){
         console.log(error);

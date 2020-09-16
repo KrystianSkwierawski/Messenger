@@ -56,20 +56,21 @@ namespace Messenger.Areas.User.Controllers
         {
             string userId = GetUserId();
 
-            base.Ok(await Mediator.Send(new AddRelationShipCommand
+            OkObjectResult userExistResult =  base.Ok(await Mediator.Send(new AddRelationShipCommand
             {
                 CurrentUserId = userId,
                 UserName = userName
             }));
 
-            OkObjectResult relationShips = base.Ok(await Mediator.Send(new GetRelationShipsQuery
+            OkObjectResult relationShipsResult = base.Ok(await Mediator.Send(new GetRelationShipsQuery
             {
                 Id = userId
             }));
 
-            IQueryable<RelationShip> relationShipsValue = relationShips.Value as IQueryable<RelationShip>;
+            bool userExist = (bool)userExistResult.Value;
+            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)relationShipsResult.Value;
 
-            return new JsonResult(GetFriends(userId, relationShipsValue));
+            return new JsonResult(new { friends = GetFriends(userId, relationShips), userExist = userExist});
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

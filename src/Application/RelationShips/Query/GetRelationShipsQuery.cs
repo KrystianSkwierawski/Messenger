@@ -27,6 +27,8 @@ namespace Application.RelationShips.Query
 
                 relationShips = _context.RelationShips.Where(x => x.InvitedUserId == request.Id || x.InvitingUserId == request.Id);
 
+
+
                 foreach (var relationShip in relationShips)
                 {
                     relationShip.InvitedUser = _context.ApplicationUsers.FirstOrDefault(x => x.Id == relationShip.InvitedUserId);

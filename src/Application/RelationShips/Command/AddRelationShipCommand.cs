@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Application.RelationShips.Command
 {
-    public class AddRelationShipCommand : IRequest
+    public class AddRelationShipCommand : IRequest<bool>
     {
         public string CurrentUserId { get; set; }
         public string UserName { get; set; }
 
-        public class AddRelationShipCommandHandler : IRequestHandler<AddRelationShipCommand>
+        public class AddRelationShipCommandHandler : IRequestHandler<AddRelationShipCommand, bool>
         {
             private readonly IContext _context;
 
@@ -21,7 +21,7 @@ namespace Application.RelationShips.Command
                 _context = context;
             }
 
-            public async Task<Unit> Handle(AddRelationShipCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(AddRelationShipCommand request, CancellationToken cancellationToken)
             {
                 ApplicationUser invitedUser = _context.ApplicationUsers.FirstOrDefault(x => x.UserName == request.UserName);
                 ApplicationUser invitingUser = _context.ApplicationUsers.FirstOrDefault(x => x.Id == request.CurrentUserId);
@@ -38,9 +38,13 @@ namespace Application.RelationShips.Command
                     _context.RelationShips.Add(relationShip);
 
                     await _context.SaveChangesAsync();
-                }
 
-                return Unit.Value;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }               
             }
         }
 
