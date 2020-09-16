@@ -1,5 +1,6 @@
 ﻿using Domain.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
@@ -10,6 +11,6 @@ namespace Domain.Interfaces
         public DbSet<Message> Messages { get; set; }
         public DbSet<RelationShip> RelationShips { get; set; }
 
-        public void SaveChanges();
+        public Task SaveChangesAsync();
     }
 }

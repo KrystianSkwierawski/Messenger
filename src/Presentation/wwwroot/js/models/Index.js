@@ -1,6 +1,6 @@
 ﻿export async function addFriend(userName) {
     try {
-        await fetch(`/User/Home/AddFriend`, {
+        await fetch(`/User/Home/SendFriendRequest`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

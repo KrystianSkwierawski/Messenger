@@ -19,11 +19,14 @@ elements.friendsContainer.addEventListener('click', e => {
     }
 });
 
-function addFriend(){
+async function addFriend(){
     const friendName = prompt('Friend name:');  
 
     if (ifDoesNotInvitingHimSelf(friendName) && ifDoesNotHaveThisFriend(friendName)) {
-        Index.addFriend(friendName);
+        await Index.addFriend(friendName);
+    }
+    else {
+        console.log('error');
     }
 }
 

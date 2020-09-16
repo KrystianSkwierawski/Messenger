@@ -2,6 +2,7 @@
 using Domain.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Infrastructure
 {
@@ -21,9 +22,9 @@ namespace Infrastructure
             base.OnModelCreating(builder);
         }
 
-        void IContext.SaveChanges()
+        public async Task SaveChangesAsync()
         {
-            base.SaveChanges();
+            await base.SaveChangesAsync();
         }
     }
 }

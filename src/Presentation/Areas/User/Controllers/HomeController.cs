@@ -43,9 +43,9 @@ namespace Messenger.Areas.User.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddFriend([FromBody] string userName)
+        public async Task<ActionResult> SendFriendRequest([FromBody] string userName)
         {
-            return base.Ok(await Mediator.Send(new AddFriendCommand
+            return base.Ok(await Mediator.Send(new SendFriendRequestCommand
             {
                 CurrentUserId = GetUserId(),
                 UserName = userName
