@@ -22,7 +22,7 @@ elements.friendsContainer.addEventListener('click', e => {
 async function addFriend(){
     const friendName = prompt('Friend name:');  
 
-    if (ifDoesNotInvitingHimSelf(friendName) && ifDoesNotHaveThisFriend(friendName)) {
+    if (doesNotInvitingHimSelf(friendName) && doesNotHaveThisFriend(friendName)) {
         const request = await Index.sendFriendRequest(friendName);
         indexView.setFriendDataset(JSON.stringify(request.friends));
 
@@ -38,7 +38,7 @@ async function addFriend(){
     }
 }
 
-const ifDoesNotHaveThisFriend = friendName => {
+const doesNotHaveThisFriend = friendName => {
     const friends = indexView.getFriends();
 
     const result = friends.filter(x => x.userName === friendName);
@@ -46,7 +46,7 @@ const ifDoesNotHaveThisFriend = friendName => {
     return result.length === 0 ? true : false;
 };
 
-const ifDoesNotInvitingHimSelf = friendName => {
+const doesNotInvitingHimSelf = friendName => {
     const currentUserId = indexView.getUserName();  
 
     return friendName === currentUserId ? false : true;
