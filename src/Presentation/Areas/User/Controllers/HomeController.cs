@@ -1,4 +1,5 @@
-﻿using Application.RelationShips.Command;
+﻿using Application.Friends.Query;
+using Application.RelationShips.Command;
 using Application.RelationShips.Query;
 using Application.ViewModel;
 using Domain.Model;
@@ -31,17 +32,21 @@ namespace Messenger.Areas.User.Controllers
 
             if (userId != null)
             {
-                OkObjectResult relationShips = base.Ok(await Mediator.Send(new GetRelationShipsQuery
+                IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
                 {
                     Id = userId
-                }));
+                })).Value;
 
-                IQueryable<RelationShip> relationShipsValue = relationShips.Value as IQueryable<RelationShip>;
+                List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+                {
+                    Id = userId,
+                    RelationShips = relationShips
+                })).Value;
 
                 HomeViewModel homeViewModel = new HomeViewModel()
                 {
-                    RelationShips = relationShipsValue,
-                    Friends = GetFriends(userId, relationShipsValue)
+                    RelationShips = relationShips,
+                    Friends = friends
                 };
 
                 return View(homeViewModel);
@@ -50,27 +55,30 @@ namespace Messenger.Areas.User.Controllers
             return View();
         }
 
-       
+
         [HttpPost]
         public async Task<ActionResult> SendFriendRequest([FromBody] string userName)
         {
             string userId = GetUserId();
 
-            OkObjectResult userExistResult =  base.Ok(await Mediator.Send(new AddRelationShipCommand
+            bool userExist = (bool)base.Ok(await Mediator.Send(new AddRelationShipCommand
             {
                 CurrentUserId = userId,
                 UserName = userName
-            }));
+            })).Value;
 
-            OkObjectResult relationShipsResult = base.Ok(await Mediator.Send(new GetRelationShipsQuery
+            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
             {
                 Id = userId
-            }));
+            })).Value;
 
-            bool userExist = (bool)userExistResult.Value;
-            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)relationShipsResult.Value;
+            List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+            {
+                Id = userId,
+                RelationShips = relationShips
+            })).Value;
 
-            return new JsonResult(new { friends = GetFriends(userId, relationShips), userExist = userExist});
+            return new JsonResult(new { friends = friends, userExist = userExist });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -79,6 +87,8 @@ namespace Messenger.Areas.User.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+
+        //sprobuj wywalic do osobnej klasy
         private string GetUserId()
         {
             string o_userId = string.Empty;
@@ -86,35 +96,12 @@ namespace Messenger.Areas.User.Controllers
             ClaimsIdentity claimsIdentity = (ClaimsIdentity)User.Identity;
             Claim claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            if(claim != null)
+            if (claim != null)
             {
                 o_userId = claim.Value;
             }
 
             return o_userId;
-        }
-
-        // zrob query w friends zamiast tej metody
-        private List<ApplicationUser> GetFriends(string userId, IQueryable<RelationShip> relationShipsValue)
-        {
-            List<ApplicationUser> o_friends = new List<ApplicationUser>();
-
-            if (relationShipsValue != null)
-            {
-                foreach (var relationShip in relationShipsValue)
-                {
-                    if (relationShip.InvitedUserId != userId)
-                    {
-                        o_friends.Add(relationShip.InvitedUser);
-                    }
-                    else if (relationShip.InvitingUserId != userId)
-                    {
-                        o_friends.Add(relationShip.InvitingUser);
-                    }
-                }
-            }
-
-            return o_friends;
         }
     }
 }

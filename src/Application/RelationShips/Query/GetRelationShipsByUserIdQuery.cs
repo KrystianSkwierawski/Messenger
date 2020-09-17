@@ -7,21 +7,20 @@ using System.Threading.Tasks;
 
 namespace Application.RelationShips.Query
 {
-    public class GetRelationShipsQuery : IRequest<IQueryable<RelationShip>>
+    public class GetRelationShipsByUserIdQuery : IRequest<IQueryable<RelationShip>>
     {
         public string Id { get; set; }
 
-
-        public class GetRelationShipsQueryHandler : IRequestHandler<GetRelationShipsQuery, IQueryable<RelationShip>>
+        public class GetRelationShipsByUserIdQueryHandler : IRequestHandler<GetRelationShipsByUserIdQuery, IQueryable<RelationShip>>
         {
             private readonly IContext _context;
 
-            public GetRelationShipsQueryHandler(IContext context)
+            public GetRelationShipsByUserIdQueryHandler(IContext context)
             {
                 _context = context;
             }
 
-            public async Task<IQueryable<RelationShip>> Handle(GetRelationShipsQuery request, CancellationToken cancellationToken)
+            public async Task<IQueryable<RelationShip>> Handle(GetRelationShipsByUserIdQuery request, CancellationToken cancellationToken)
             {
                 IQueryable<RelationShip> relationShips = Enumerable.Empty<RelationShip>().AsQueryable();
 

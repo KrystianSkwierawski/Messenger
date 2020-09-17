@@ -33,6 +33,9 @@ async function addFriend(){
             toastr.info('There is no such user');
         }
     }
+    else {
+        console.log('error');
+    }
 }
 
 const ifDoesNotHaveThisFriend = friendName => {
