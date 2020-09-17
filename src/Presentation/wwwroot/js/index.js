@@ -6,7 +6,7 @@ elements.menuButton.addEventListener('click', () => {
     indexView.slideOutSideMenu();
 });
 
-elements.addFriendButton.addEventListener('click', addFriend);
+elements.addFriendButton.addEventListener('click', trySendFriendRequest);
    
 elements.friendsContainer.addEventListener('click', e => {
 
@@ -19,14 +19,15 @@ elements.friendsContainer.addEventListener('click', e => {
     }
 });
 
-async function addFriend(){
+async function trySendFriendRequest(){
     const friendName = prompt('Friend name:');  
 
     if (doesNotInvitingHimSelf(friendName) && doesNotHaveThisFriend(friendName)) {
         const request = await Index.sendFriendRequest(friendName);
-        indexView.setFriendDataset(JSON.stringify(request.friends));
-
+             
         if (request.userExist) {
+            
+            indexView.setFriendDataset(JSON.stringify(request.friends));
             toastr.success('The friend request has been sent');
         }
         else {

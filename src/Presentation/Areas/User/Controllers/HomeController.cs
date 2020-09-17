@@ -60,7 +60,13 @@ namespace Messenger.Areas.User.Controllers
         public async Task<ActionResult> SendFriendRequest([FromBody] string userName)
         {
             string userId = GetUserId();
-      
+
+            bool userExist = (bool)base.Ok(await Mediator.Send(new AddRelationShipCommand
+            {
+                CurrentUserId = userId,
+                UserName = userName
+            })).Value;
+
             IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
             {
                 Id = userId
@@ -70,12 +76,6 @@ namespace Messenger.Areas.User.Controllers
             {
                 Id = userId,
                 RelationShips = relationShips
-            })).Value;
-
-            bool userExist = (bool)base.Ok(await Mediator.Send(new AddRelationShipCommand
-            {
-                CurrentUserId = userId,
-                UserName = userName
             })).Value;
 
             return new JsonResult(new { friends = friends, userExist = userExist });
