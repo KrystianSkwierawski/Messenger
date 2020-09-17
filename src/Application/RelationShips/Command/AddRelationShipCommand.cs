@@ -39,11 +39,11 @@ namespace Application.RelationShips.Command
 
                     await _context.SaveChangesAsync();
 
-                    return true;
+                    return true; //user exist
                 }
                 else
                 {
-                    return false;
+                    return false; //user doesn't exist
                 }               
             }
         }
