@@ -81,6 +81,30 @@ namespace Messenger.Areas.User.Controllers
             return new JsonResult(new { friends = friends, userExist = userExist });
         }
 
+        [HttpPost]
+        public async Task<ActionResult> AcceptFriendRequest([FromBody] string invitingUserId)
+        {
+            base.Ok(await Mediator.Send(new AcceptFriendRequestCommand
+            {
+                InvitedUserId = GetUserId(),
+                InvitingUserId = invitingUserId
+            }));
+
+            return new JsonResult(new EmptyResult());
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RejectFriendRequest([FromBody] string invitingUserId)
+        {
+            base.Ok(await Mediator.Send(new RejectFriendRequestCommand
+            {
+                InvitedUserId = GetUserId(),
+                InvitingUserId = invitingUserId
+            }));
+
+            return new JsonResult(new EmptyResult());
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

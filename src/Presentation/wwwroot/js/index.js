@@ -8,14 +8,20 @@ elements.menuButton.addEventListener('click', () => {
 
 elements.addFriendButton.addEventListener('click', trySendFriendRequest);
    
-elements.friendsContainer.addEventListener('click', e => {
+elements.friendsContainer.addEventListener('click', async e => {
 
     if (e.target.matches(`.${elementStrings.friendAcceptRequest}`)) {
-        console.log('accept');
+        const friendContainer = e.target.parentNode.parentNode;        
+        indexView.removeFriendRequestContainer(friendContainer);
+
+        Index.acceptFriendRequest(friendContainer.id);           
     }
 
     if (e.target.matches(`.${elementStrings.friendRejectRequest}`)) {
-        console.log('reject');
+        const friendContainer = e.target.parentNode.parentNode;
+        indexView.removeFriendContainer(friendContainer);
+
+        Index.rejectFriendRequest(friendContainer.id);
     }
 });
 

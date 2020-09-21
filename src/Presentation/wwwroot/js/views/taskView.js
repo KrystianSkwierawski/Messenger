@@ -20,3 +20,12 @@ export const getFriends = () => {
 export const setFriendDataset = friends => {
     elements.addFriendButton.dataset.friends = friends;
 };
+
+export const removeFriendRequestContainer = friendContainer => {
+    friendContainer.removeChild(friendContainer.firstElementChild);   
+};
+
+export const removeFriendContainer = friendContainer => {
+    const friendsContainer = friendContainer.parentNode;
+    friendsContainer.removeChild(friendContainer);
+};

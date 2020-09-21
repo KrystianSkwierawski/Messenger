@@ -63,34 +63,29 @@
                     var relationShipWhereCurrentUserIsInviting = Model.RelationShips.FirstOrDefault(x => x.InvitingUserId == _userId && x.InvitedUserId == friend.Id);
 
 
-                    if (relationShipWhereCurrentUserIsInvited != null)
+                    if (
+                        (relationShipWhereCurrentUserIsInviting != null && relationShipWhereCurrentUserIsInviting.IsAccepted == true) ||
+                        (relationShipWhereCurrentUserIsInvited != null && relationShipWhereCurrentUserIsInvited.IsAccepted == true)
+                        )
                     {
-                        if (relationShipWhereCurrentUserIsInvited.IsAccepted == false)
-                        {
-
+                        <div id="@friend.Id">
+                            <div class="friend__details ml-3 mb-4">
+                                <img src="~/images/avatar.png" class="friend__image rounded-circle" />
+                                <h4 class="friend__name text-white ml-2 text-break">@friend.UserName</h4>
+                            </div>
+                        </div>
+                    }
+                    else if (relationShipWhereCurrentUserIsInvited != null && relationShipWhereCurrentUserIsInvited.IsAccepted == false)
+                    {
+                        <div id="@friend.Id">
                             <div class="friend__request ml-3 mb-1">
                                 <i class="fas fa-check text-success friend__accept-request"></i>
                                 <i class="fas fa-times ml-2 text-danger friend__reject-request"></i>
                             </div>
-                            <div class="friend__container ml-3 mb-4">
+                            <div class="friend__details ml-3 mb-4">
                                 <img src="~/images/avatar.png" class="friend__image rounded-circle" />
                                 <h4 class="friend__name text-white ml-2 text-break">@friend.UserName</h4>
                             </div>
-
-                        }
-                        else
-                        {
-                            <div class="friend__container ml-3 mb-4">
-                                <img src="~/images/avatar.png" class="friend__image rounded-circle" />
-                                <h4 class="friend__name text-white ml-2 text-break">@friend.UserName</h4>
-                            </div>
-                        }
-                    }
-                    else if (relationShipWhereCurrentUserIsInviting.IsAccepted == true)
-                    {
-                        <div class="friend__container ml-3 mb-4">
-                            <img src="~/images/avatar.png" class="friend__image rounded-circle" />
-                            <h4 class="friend__name text-white ml-2 text-break">@friend.UserName</h4>
                         </div>
                     }
                 }
@@ -99,7 +94,7 @@
         </div>
 
         <div class="settings__container text-white">
-            <i class="fas fa-user-plus add-friend__button ml-1" data-friends='@Json.Serialize(Model.Friends)' data-username="@_user.UserName" ></i>
+            <i class="fas fa-user-plus add-friend__button ml-1" data-friends='@Json.Serialize(Model.Friends)' data-username="@_user.UserName"></i>
 
 
             <form class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

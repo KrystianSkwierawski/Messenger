@@ -8,5 +8,6 @@
 
 export const elementStrings = {
     friendAcceptRequest: 'friend__accept-request',
-    friendRejectRequest: 'friend__reject-request'
+    friendRejectRequest: 'friend__reject-request',
+    friendRequest: 'friend__request'
 };

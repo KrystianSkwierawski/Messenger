@@ -173,7 +173,7 @@ html {
 }
 
 
-.friend__container {
+.friend__details {
     display: flex;
     cursor: pointer;
 }
