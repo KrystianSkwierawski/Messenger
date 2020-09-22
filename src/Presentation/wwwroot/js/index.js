@@ -14,15 +14,20 @@ elements.friendsContainer.addEventListener('click', async e => {
         const friendContainer = e.target.parentNode.parentNode;        
         indexView.removeFriendRequestContainer(friendContainer);
 
-        Index.acceptFriendRequest(friendContainer.id);           
+        const relationShips = await Index.acceptFriendRequest(friendContainer.id);
+
+        indexView.setRelationShipsDataset(JSON.stringify(relationShips));
     }
 
     if (e.target.matches(`.${elementStrings.friendRejectRequest}`)) {
         const friendContainer = e.target.parentNode.parentNode;
         indexView.removeFriendContainer(friendContainer);
 
-        Index.rejectFriendRequest(friendContainer.id);
-    }
+        const result = await Index.rejectFriendRequest(friendContainer.id);
+
+        indexView.setFriendDataset(JSON.stringify(result.friends));
+        indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
+    }     
 });
 
 async function trySendFriendRequest(){
@@ -44,6 +49,17 @@ async function trySendFriendRequest(){
         console.log('error');
     }
 }
+
+elements.searchInput.addEventListener('change', () => {
+    const friends = indexView.getFriends();   
+    const userName = indexView.getSearchingUserName()
+
+    const filteredFriends = friends.filter(x => x.userName.includes(userName));
+
+    indexView.clearFriendsContainer();
+    indexView.renderFriends(filteredFriends);
+    
+});
 
 const doesNotHaveThisFriend = friendName => {
     const friends = indexView.getFriends();

@@ -7,7 +7,10 @@ namespace Domain.Model
         public int Id { get; set; }
         public string Content { get; set; }
         public string Time { get; set; }
+
+        [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         [ForeignKey("RelationShip")]
         public int RelationShipId { get; set; }
