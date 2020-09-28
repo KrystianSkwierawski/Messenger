@@ -7,11 +7,11 @@ elements.menuButton.addEventListener('click', () => {
 });
 
 elements.addFriendButton.addEventListener('click', trySendFriendRequest);
-   
+
 elements.friendsContainer.addEventListener('click', async e => {
 
     if (e.target.matches(`.${elementStrings.friendAcceptRequest}`)) {
-        const friendContainer = e.target.parentNode.parentNode;        
+        const friendContainer = e.target.parentNode.parentNode;
         indexView.removeFriendRequestContainer(friendContainer);
 
         const relationShips = await Index.acceptFriendRequest(friendContainer.id);
@@ -27,17 +27,17 @@ elements.friendsContainer.addEventListener('click', async e => {
 
         indexView.setFriendDataset(JSON.stringify(result.friends));
         indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
-    }     
+    }
 });
 
-async function trySendFriendRequest(){
-    const friendName = prompt('Friend name:');  
+async function trySendFriendRequest() {
+    const friendName = prompt('Friend name:');
 
     if (doesNotInvitingHimSelf(friendName) && doesNotHaveThisFriend(friendName)) {
         const request = await Index.sendFriendRequest(friendName);
-             
+
         if (request.userExist) {
-            
+
             indexView.setFriendDataset(JSON.stringify(request.friends));
             toastr.success('The friend request has been sent');
         }
@@ -51,15 +51,29 @@ async function trySendFriendRequest(){
 }
 
 elements.searchInput.addEventListener('change', () => {
-    const friends = indexView.getFriends();   
+    const friends = indexView.getFriends();
     const userName = indexView.getSearchingUserName()
 
     const filteredFriends = friends.filter(x => x.userName.includes(userName));
 
     indexView.clearFriendsContainer();
     indexView.renderFriends(filteredFriends);
-    
+
 });
+
+elements.friendsContainer.addEventListener('click', async e => {
+    if (e.target.matches(`.${elementStrings.friendContainer}, .${elementStrings.friendContainer} *`)) {
+        await openRelationShip(e);
+    }
+});
+
+const openRelationShip = async e => {  
+    const friendDetails = indexView.getFriendDetails(e);
+
+    const messages = await Index.getMessagesOfCurrentRelationShip(friendDetails.id);
+    
+    indexView.renderRelationShip(messages, friendDetails.userName);
+};
 
 const doesNotHaveThisFriend = friendName => {
     const friends = indexView.getFriends();
@@ -70,7 +84,7 @@ const doesNotHaveThisFriend = friendName => {
 };
 
 const doesNotInvitingHimSelf = friendName => {
-    const currentUserId = indexView.getUserName();  
+    const currentUserId = indexView.getUserName();
 
     return friendName === currentUserId ? false : true;
-}
+};

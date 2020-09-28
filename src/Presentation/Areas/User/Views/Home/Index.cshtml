@@ -13,18 +13,18 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="main__container ">
+    <div class="main__container" data-userid="@_userId">
 
         <div class="menu__container">
             <i class="fas fa-bars menu__button"></i>
-            <h4 class="text-white menu__friend-name ">szefnudy</h4>
+            <h4 class="text-white menu__friend-name"></h4>
         </div>
 
         <div class="content__container">
 
             <div class="messages__container">
 
-                <div class="message mt-3">
+                @*<div class="message mt-3">
                     <img src="~/images/avatar.png" class="message__profile-picture rounded-circle" />
                     <div class="message__text-container">
                         <div class="information-about-the-message__container">
@@ -36,7 +36,7 @@
                             <p>jakis tekst....</p>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
             </div>
 
@@ -67,7 +67,7 @@
                         (relationShipWhereCurrentUserIsInvited != null && relationShipWhereCurrentUserIsInvited.IsAccepted == true)
                         )
                     {
-                        <div id="@friend.Id">
+                        <div class="friend__container" id="@friend.Id">
                             <div class="friend__details ml-3 mb-4">
                                 <img src="~/images/avatar.png" class="friend__image rounded-circle" />
                                 <h4 class="friend__name text-white ml-2 text-break">@friend.UserName</h4>
@@ -76,7 +76,7 @@
                     }
                     else if (relationShipWhereCurrentUserIsInvited != null && relationShipWhereCurrentUserIsInvited.IsAccepted == false)
                     {
-                        <div id="@friend.Id">
+                        <div class="friend__container" id="@friend.Id">
                             <div class="friend__request ml-3 mb-1">
                                 <i class="fas fa-check text-success friend__accept-request"></i>
                                 <i class="fas fa-times ml-2 text-danger friend__reject-request"></i>

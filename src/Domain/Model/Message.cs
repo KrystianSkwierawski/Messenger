@@ -6,7 +6,7 @@ namespace Domain.Model
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public string Time { get; set; }
+        public string DateSended { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }
@@ -14,6 +14,5 @@ namespace Domain.Model
 
         [ForeignKey("RelationShip")]
         public int RelationShipId { get; set; }
-        public RelationShip RelationShip { get; set; }
     }
 }

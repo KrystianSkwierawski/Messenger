@@ -4,14 +4,16 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20200928131629_ChangedMessages2")]
+    partial class ChangedMessages2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,7 +293,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Model.Message", b =>
                 {
                     b.HasOne("Domain.Model.ApplicationUser", "ApplicationUser")
-                        .WithMany("Messages")
+                        .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Domain.Model.RelationShip", null)

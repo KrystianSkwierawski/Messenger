@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Domain.Model
 {
@@ -14,6 +15,5 @@ namespace Domain.Model
         public bool IsAccepted { get; set; }
 
         public List<Message> Messages { get; set; }
-
     }
 }

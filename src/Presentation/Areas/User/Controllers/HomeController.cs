@@ -1,4 +1,5 @@
 ﻿using Application.Friends.Query;
+using Application.Messages.Query;
 using Application.RelationShips.Command;
 using Application.RelationShips.Query;
 using Application.ViewModel;
@@ -53,6 +54,18 @@ namespace Messenger.Areas.User.Controllers
             }
 
             return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> GetMessagesByCurrentUserIdAndFriendId([FromBody] string friendId)
+        {
+            List<Message> messages = (List<Message>)base.Ok(await Mediator.Send(new GetMessagesByCurrentUserIdAndFriendIdQuery
+            {
+                CurrentUserId = GetUserId(),
+                FriendId = friendId
+            })).Value;
+
+            return new JsonResult(messages);
         }
 
 

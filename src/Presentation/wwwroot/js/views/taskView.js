@@ -12,7 +12,7 @@ export const getUserName = () => {
 };
 
 export const getFriends = () => {
-    const friends = elements.addFriendButton.dataset.friends;   
+    const friends = elements.addFriendButton.dataset.friends;
 
     return JSON.parse(friends);
 };
@@ -25,6 +25,10 @@ const getRelationShips = () => {
     const relationShips = elements.friendsContainer.dataset.relationships;
 
     return JSON.parse(relationShips);
+};
+
+const clearMessagesContainer = () => {
+    elements.messagesContainer.innerHTML = "";
 };
 
 export const clearFriendsContainer = () => {
@@ -45,7 +49,7 @@ export const renderFriends = friends => {
         );
 
         const userIsAccepted = relationShipsThatAreNotAccepted.length !== 0 ? true : false;
-       
+
         if (userIsAccepted) {
             markup = `
                          <div id="${friend.id}">
@@ -60,7 +64,7 @@ export const renderFriends = friends => {
                         </div>
             `;
 
-            
+
         }
         else {
             markup = `
@@ -72,9 +76,59 @@ export const renderFriends = friends => {
                         </div>
             `;
         }
-     
+
         elements.friendsContainer.insertAdjacentHTML('beforeend', markup);
     });
+};
+
+export const renderRelationShip = (messages, userName) => {
+    setMenuFriendName(userName);  
+    showInputToSendMessagesContainer();
+
+    if (messages) {
+        clearMessagesContainer();
+        renderMessages(messages);
+    }
+};
+
+export const getFriendDetails = e => {
+    const friendContainer = e.target.closest(`.${elementStrings.friendContainer}`);
+
+    return {
+        id: friendContainer.id,
+        userName: friendContainer.querySelector('.friend__name').textContent
+    };
+};
+
+const showInputToSendMessagesContainer = () => {
+    elements.inputToSendMessagesContainer.classList.add('active');
+};
+
+const renderMessages = messages => {
+    messages.forEach(message => {
+        const markup = `
+                <div class="message mt-3">
+                    <img src="./images/avatar.png" class="message__profile-picture rounded-circle" />
+                    <div class="message__text-container">
+                        <div class="information-about-the-message__container">
+                            <h4 class="message__profile-name text-white ml-3 text-primary">${message.applicationUser.userName}</h4>
+                            <p class="message__date-sended ml-1 text-secondary">${message.dateSended}</p>
+                        </div>
+
+                        <div class="ml-3 text-white">
+                            <p>${message.content}</p>
+                        </div>
+                    </div>
+                </div>
+        `;
+
+        elements.messagesContainer.insertAdjacentHTML('beforeend', markup);
+    });
+};
+
+const setMenuFriendName = userName => {
+
+    elements.menuFriendName.textContent = userName;
 };
 
 export const setFriendDataset = friends => {
@@ -86,10 +140,11 @@ export const setRelationShipsDataset = relationShips => {
 }
 
 export const removeFriendRequestContainer = friendContainer => {
-    friendContainer.removeChild(friendContainer.firstElementChild);   
+    friendContainer.removeChild(friendContainer.firstElementChild);
 };
 
 export const removeFriendContainer = friendContainer => {
     const friendsContainer = friendContainer.parentNode;
     friendsContainer.removeChild(friendContainer);
 };
+

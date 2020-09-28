@@ -124,6 +124,11 @@ html {
     width: 90%;
     height: auto;
     align-self: center;
+    display: none;
+}
+
+.input-to-send-messages__container.active{
+    display: block;
 }
 
 .input-to-send-messages {
@@ -222,7 +227,7 @@ html {
 }
 
 .message__date-sended {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .message__text-container {
