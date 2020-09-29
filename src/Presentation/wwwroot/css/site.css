@@ -91,6 +91,8 @@ html {
    top: 50%;
    position: absolute;
    transform: translateY(-50%);
+   border: none;
+   background-color: transparent;
 }
 
 .menu__friend-name {
@@ -181,6 +183,8 @@ html {
 .friend__details {
     display: flex;
     cursor: pointer;
+    border: none;
+    background-color: transparent;
 }
 
 .friend__image {
@@ -207,6 +211,14 @@ html {
 .add-friend__button, .settings__button, .logout__button {
     cursor: pointer;
     align-self: center;
+}
+
+
+.add-friend__button, .settings__button {
+    font-size: 100%;
+    color: white;
+    background-color: transparent;
+    border: none;
 }
 
     .logout__button{
@@ -248,9 +260,10 @@ html {
 
 .friend__reject-request, .friend__accept-request{
     cursor: pointer;
+    font-size: 100%;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1300px) {
     .menu__button {
         display: none !important;
     }

@@ -54,13 +54,13 @@ export const renderFriends = friends => {
             markup = `
                          <div id="${friend.id}">
                             <div class="friend__request ml-3 mb-1">
-                                <i class="fas fa-check text-success friend__accept-request"></i>
-                                <i class="fas fa-times ml-2 text-danger friend__reject-request"></i>
+                                <button class="fas fa-check text-success p-0 friend__accept-request btn btn-link"></button>
+                                <button class="fas fa-times ml-2 text-danger p-0 friend__reject-request btn btn-link"></button>
                             </div>
-                            <div class="friend__details ml-3 mb-4">
+                            <button class="friend__details ml-3 mb-4">
                                 <img src="./images/avatar.png" class="friend__image rounded-circle" alt="friend avatar"/>
-                                <h4 class="friend__name text-white ml-2 text-break">${friend.userName}</h4>
-                            </div>
+                                <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
+                            </button>
                         </div>
             `;
 
@@ -69,10 +69,10 @@ export const renderFriends = friends => {
         else {
             markup = `
                         <div id="${friend.id}">
-                            <div class="friend__details ml-3 mb-4">
+                            <button class="friend__details ml-3 mb-4">
                                 <img src="./images/avatar.png" class="friend__image rounded-circle" alt="friend avatar"/>
-                                <h4 class="friend__name text-white ml-2 text-break">${friend.userName}</h4>
-                            </div>
+                                <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
+                            </button>
                         </div>
             `;
         }
@@ -111,7 +111,7 @@ const renderMessages = messages => {
                     <img src="./images/avatar.png" class="message__profile-picture rounded-circle" alt="friend avatar"/>
                     <div class="message__text-container">
                         <div class="information-about-the-message__container">
-                            <h4 class="message__profile-name text-white ml-3 text-primary">${message.applicationUser.userName}</h4>
+                            <h3 class="message__profile-name text-white ml-3 text-primary">${message.applicationUser.userName}</h3>
                             <p class="message__date-sended ml-1 text-secondary">${message.dateSended}</p>
                         </div>
 

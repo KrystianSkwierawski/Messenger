@@ -28,6 +28,10 @@ elements.friendsContainer.addEventListener('click', async e => {
         indexView.setFriendDataset(JSON.stringify(result.friends));
         indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
     }
+
+    if (e.target.matches(`.${elementStrings.friendDetails}, .${elementStrings.friendDetails} *`)) {
+        await openRelationShip(e);
+    }
 });
 
 async function trySendFriendRequest() {
@@ -59,12 +63,6 @@ elements.searchInput.addEventListener('change', () => {
     indexView.clearFriendsContainer();
     indexView.renderFriends(filteredFriends);
 
-});
-
-elements.friendsContainer.addEventListener('click', async e => {
-    if (e.target.matches(`.${elementStrings.friendContainer}, .${elementStrings.friendContainer} *`)) {
-        await openRelationShip(e);
-    }
 });
 
 const openRelationShip = async e => {  

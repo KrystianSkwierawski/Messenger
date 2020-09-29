@@ -16,5 +16,6 @@ export const elementStrings = {
     friendAcceptRequest: 'friend__accept-request',
     friendRejectRequest: 'friend__reject-request',
     friendRequest: 'friend__request',
-    friendContainer: 'friend__container'
+    friendContainer: 'friend__container',
+    friendDetails: 'friend__details'
 };
