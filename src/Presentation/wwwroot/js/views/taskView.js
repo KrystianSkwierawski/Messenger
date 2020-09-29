@@ -57,7 +57,7 @@ export const renderFriends = friends => {
                                 <button class="fas fa-check text-success p-0 friend__accept-request btn btn-link"></button>
                                 <button class="fas fa-times ml-2 text-danger p-0 friend__reject-request btn btn-link"></button>
                             </div>
-                            <button class="friend__details ml-3 mb-4">
+                            <button disabled class="friend__details ml-3 mb-4">
                                 <img src="./images/avatar.png" class="friend__image rounded-circle" alt="friend avatar"/>
                                 <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
                             </button>
@@ -89,6 +89,11 @@ export const renderRelationShip = (messages, userName) => {
         clearMessagesContainer();
         renderMessages(messages);
     }
+};
+
+export const enableFriendDetails = friendContainer => {
+    const friendDetails = friendContainer.querySelector(`.${elementStrings.friendDetails}`);
+    friendDetails.disabled = false;
 };
 
 export const getFriendDetails = e => {

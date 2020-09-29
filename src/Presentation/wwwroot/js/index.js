@@ -2,37 +2,46 @@
 import * as indexView from './views/taskView.js';
 import * as Index from './models/Index.js';
 
-elements.menuButton.addEventListener('click', () => {
-    indexView.slideOutSideMenu();
-});
+elements.searchInput.addEventListener('change', searchFriendsByUserName);
+
+elements.menuButton.addEventListener('click', indexView.slideOutSideMenu);
 
 elements.addFriendButton.addEventListener('click', trySendFriendRequest);
 
 elements.friendsContainer.addEventListener('click', async e => {
 
     if (e.target.matches(`.${elementStrings.friendAcceptRequest}`)) {
-        const friendContainer = e.target.parentNode.parentNode;
-        indexView.removeFriendRequestContainer(friendContainer);
-
-        const relationShips = await Index.acceptFriendRequest(friendContainer.id);
-
-        indexView.setRelationShipsDataset(JSON.stringify(relationShips));
+        await acceptFriendRequest(e);
     }
 
     if (e.target.matches(`.${elementStrings.friendRejectRequest}`)) {
-        const friendContainer = e.target.parentNode.parentNode;
-        indexView.removeFriendContainer(friendContainer);
-
-        const result = await Index.rejectFriendRequest(friendContainer.id);
-
-        indexView.setFriendDataset(JSON.stringify(result.friends));
-        indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
+        await rejectFriendRequest(e);
     }
 
     if (e.target.matches(`.${elementStrings.friendDetails}, .${elementStrings.friendDetails} *`)) {
         await openRelationShip(e);
     }
 });
+
+async function acceptFriendRequest(e) {
+    const friendContainer = e.target.parentNode.parentNode;
+    indexView.removeFriendRequestContainer(friendContainer);
+
+    const relationShips = await Index.acceptFriendRequest(friendContainer.id);
+    indexView.enableFriendDetails(friendContainer);
+
+    indexView.setRelationShipsDataset(JSON.stringify(relationShips));
+}
+
+async function rejectFriendRequest(e) {
+    const friendContainer = e.target.parentNode.parentNode;
+    indexView.removeFriendContainer(friendContainer);
+
+    const result = await Index.rejectFriendRequest(friendContainer.id);
+
+    indexView.setFriendDataset(JSON.stringify(result.friends));
+    indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
+}
 
 async function trySendFriendRequest() {
     const friendName = prompt('Friend name:');
@@ -54,16 +63,17 @@ async function trySendFriendRequest() {
     }
 }
 
-elements.searchInput.addEventListener('change', () => {
+function searchFriendsByUserName() {
     const friends = indexView.getFriends();
-    const userName = indexView.getSearchingUserName()
+    const userName = indexView.getSearchingUserName().toLowerCase();
 
-    const filteredFriends = friends.filter(x => x.userName.includes(userName));
+    const filteredFriends = friends.filter(x => x.userName.toLowerCase().includes(userName));
 
-    indexView.clearFriendsContainer();
-    indexView.renderFriends(filteredFriends);
-
-});
+    if (filteredFriends) {
+        indexView.clearFriendsContainer();
+        indexView.renderFriends(filteredFriends);
+    }  
+}
 
 const openRelationShip = async e => {  
     const friendDetails = indexView.getFriendDetails(e);
