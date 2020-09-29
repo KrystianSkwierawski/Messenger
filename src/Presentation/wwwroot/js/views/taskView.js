@@ -58,7 +58,7 @@ export const renderFriends = friends => {
                                 <i class="fas fa-times ml-2 text-danger friend__reject-request"></i>
                             </div>
                             <div class="friend__details ml-3 mb-4">
-                                <img src="./images/avatar.png" class="friend__image rounded-circle" />
+                                <img src="./images/avatar.png" class="friend__image rounded-circle" alt="friend avatar"/>
                                 <h4 class="friend__name text-white ml-2 text-break">${friend.userName}</h4>
                             </div>
                         </div>
@@ -70,7 +70,7 @@ export const renderFriends = friends => {
             markup = `
                         <div id="${friend.id}">
                             <div class="friend__details ml-3 mb-4">
-                                <img src="./images/avatar.png" class="friend__image rounded-circle" />
+                                <img src="./images/avatar.png" class="friend__image rounded-circle" alt="friend avatar"/>
                                 <h4 class="friend__name text-white ml-2 text-break">${friend.userName}</h4>
                             </div>
                         </div>
@@ -108,7 +108,7 @@ const renderMessages = messages => {
     messages.forEach(message => {
         const markup = `
                 <div class="message mt-3">
-                    <img src="./images/avatar.png" class="message__profile-picture rounded-circle" />
+                    <img src="./images/avatar.png" class="message__profile-picture rounded-circle" alt="friend avatar"/>
                     <div class="message__text-container">
                         <div class="information-about-the-message__container">
                             <h4 class="message__profile-name text-white ml-3 text-primary">${message.applicationUser.userName}</h4>
@@ -127,7 +127,6 @@ const renderMessages = messages => {
 };
 
 const setMenuFriendName = userName => {
-
     elements.menuFriendName.textContent = userName;
 };
 
