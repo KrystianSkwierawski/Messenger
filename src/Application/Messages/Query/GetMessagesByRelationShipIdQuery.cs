@@ -11,7 +11,7 @@ namespace Application.Messages.Query
 {
     public class GetMessagesByRelationShipIdQuery : IRequest<List<Message>>
     {
-        public int Id { get; set; }
+        public int RelationShipId { get; set; }
 
         public class GetMessagesByCurrentUserIdAndFriendIdQueryHandler : IRequestHandler<GetMessagesByRelationShipIdQuery, List<Message>>
         {
@@ -24,7 +24,7 @@ namespace Application.Messages.Query
 
             public async Task<List<Message>> Handle(GetMessagesByRelationShipIdQuery request, CancellationToken cancellationToken)
             {
-                return _context.Messages.Include(x => x.ApplicationUser).Where(x => x.RelationShipId == request.Id).ToList();
+                return _context.Messages.Include(x => x.ApplicationUser).Where(x => x.RelationShipId == request.RelationShipId).ToList();
             }
         }
     }

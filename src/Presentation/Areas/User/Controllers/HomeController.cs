@@ -67,7 +67,7 @@ namespace Messenger.Areas.User.Controllers
 
             List<Message> messages = (List<Message>)base.Ok(await Mediator.Send(new GetMessagesByRelationShipIdQuery
             {
-                Id = relationShipId
+                RelationShipId = relationShipId
             })).Value;
 
             return new JsonResult(messages);
