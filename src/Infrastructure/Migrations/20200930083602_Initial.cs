@@ -188,7 +188,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(nullable: true),
-                    Time = table.Column<string>(nullable: true),
+                    DateSended = table.Column<string>(nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     RelationShipId = table.Column<int>(nullable: false)
                 },

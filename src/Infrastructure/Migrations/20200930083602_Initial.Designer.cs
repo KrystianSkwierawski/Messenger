@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20200928132446_ChangedMessages3")]
-    partial class ChangedMessages3
+    [Migration("20200930083602_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -293,7 +293,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Model.Message", b =>
                 {
                     b.HasOne("Domain.Model.ApplicationUser", "ApplicationUser")
-                        .WithMany("Messages")
+                        .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Domain.Model.RelationShip", null)

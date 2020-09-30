@@ -25,13 +25,7 @@ namespace Application.RelationShips.Query
             {
                 IQueryable<RelationShip> relationShips = Enumerable.Empty<RelationShip>().AsQueryable();
 
-                relationShips = _context.RelationShips.Where(x => x.InvitedUserId == request.Id || x.InvitingUserId == request.Id);
-
-                foreach (var relationShip in relationShips)
-                {
-                    relationShip.InvitedUser = _context.ApplicationUsers.FirstOrDefault(x => x.Id == relationShip.InvitedUserId);
-                    relationShip.InvitingUser = _context.ApplicationUsers.FirstOrDefault(x => x.Id == relationShip.InvitingUserId);
-                }
+                relationShips = _context.RelationShips.Include(x => x.InvitedUser).Include(x => x.InvitingUser).Where(x => x.InvitedUserId == request.Id || x.InvitingUserId == request.Id);
 
                 return relationShips;
             }

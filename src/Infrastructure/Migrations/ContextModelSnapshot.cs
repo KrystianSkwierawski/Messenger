@@ -291,7 +291,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Model.Message", b =>
                 {
                     b.HasOne("Domain.Model.ApplicationUser", "ApplicationUser")
-                        .WithMany("Messages")
+                        .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Domain.Model.RelationShip", null)

@@ -59,10 +59,15 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> GetMessagesByCurrentUserIdAndFriendId([FromBody] string friendId)
         {
-            List<Message> messages = (List<Message>)base.Ok(await Mediator.Send(new GetMessagesByCurrentUserIdAndFriendIdQuery
+            int relationShipId = (int)base.Ok(await Mediator.Send(new GetRelationShipIdByUserIdAndFriendId
             {
-                CurrentUserId = GetUserId(),
-                FriendId = friendId
+                FriendId = friendId,
+                CurrentUserId = GetUserId()
+            })).Value;
+
+            List<Message> messages = (List<Message>)base.Ok(await Mediator.Send(new GetMessagesByRelationShipIdQuery
+            {
+                Id = relationShipId
             })).Value;
 
             return new JsonResult(messages);
