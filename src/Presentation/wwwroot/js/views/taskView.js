@@ -52,7 +52,7 @@ export const renderFriends = friends => {
 
         if (userIsAccepted) {
             markup = `
-                         <div id="${friend.id}">
+                         <div class="friend__container" id="${friend.id}">
                             <div class="friend__request ml-3 mb-1">
                                 <button class="fas fa-check text-success p-0 friend__accept-request btn btn-link"></button>
                                 <button class="fas fa-times ml-2 text-danger p-0 friend__reject-request btn btn-link"></button>
@@ -68,7 +68,7 @@ export const renderFriends = friends => {
         }
         else {
             markup = `
-                        <div id="${friend.id}">
+                        <div class="friend__container" id="${friend.id}">
                             <button class="friend__details ml-3 mb-4">
                                 <img src="./images/avatar.png" class="friend__image rounded-circle" alt="friend avatar"/>
                                 <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
