@@ -51,7 +51,7 @@ export async function rejectFriendRequest(id) {
 
 export async function getMessagesOfCurrentRelationShip(friendId) {
     try {
-        const result = await fetch(`/User/Home/GetMessagesByCurrentUserIdAndFriendId`, {
+        const result = await fetch(`/User/Home/GetMessagesFromCurrentRelationShip`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

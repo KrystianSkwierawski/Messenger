@@ -57,7 +57,7 @@ namespace Messenger.Areas.User.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> GetMessagesByCurrentUserIdAndFriendId([FromBody] string friendId)
+        public async Task<ActionResult> GetMessagesFromCurrentRelationShip([FromBody] string friendId)
         {
             int relationShipId = (int)base.Ok(await Mediator.Send(new GetRelationShipIdByUserIdAndFriendId
             {
