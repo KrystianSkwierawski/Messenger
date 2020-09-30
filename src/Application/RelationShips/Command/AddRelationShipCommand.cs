@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces;
 using Domain.Model;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,10 +24,10 @@ namespace Application.RelationShips.Command
 
             public async Task<bool> Handle(AddRelationShipCommand request, CancellationToken cancellationToken)
             {
-                ApplicationUser invitedUser = _context.ApplicationUsers.FirstOrDefault(x => x.UserName == request.UserName);
-                ApplicationUser invitingUser = _context.ApplicationUsers.FirstOrDefault(x => x.Id == request.CurrentUserId);
+                ApplicationUser invitedUser = await _context.ApplicationUsers.FirstOrDefaultAsync(x => x.UserName == request.UserName);
+                ApplicationUser invitingUser = await _context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == request.CurrentUserId);
 
-                if(invitedUser != null)
+                if (invitedUser != null)
                 {
                     RelationShip relationShip = new RelationShip()
                     {
@@ -35,7 +36,7 @@ namespace Application.RelationShips.Command
                         IsAccepted = false
                     };
 
-                    _context.RelationShips.Add(relationShip);
+                    await _context.RelationShips.AddAsync(relationShip);
 
                     await _context.SaveChangesAsync();
 
@@ -44,7 +45,7 @@ namespace Application.RelationShips.Command
                 else
                 {
                     return false; //user doesn't exist
-                }               
+                }
             }
         }
 

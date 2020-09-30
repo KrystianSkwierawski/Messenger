@@ -1,6 +1,7 @@
 ﻿using Domain.Interfaces;
 using Domain.Model;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace Application.RelationShips.Command
 
             public async Task<Unit> Handle(RejectFriendRequestCommand request, CancellationToken cancellationToken)
             {
-                RelationShip relationShip = _context.RelationShips.FirstOrDefault(
+                RelationShip relationShip = await _context.RelationShips.FirstOrDefaultAsync(
                     x => x.InvitedUserId == request.InvitedUserId &&
                     x.InvitingUserId == request.InvitingUserId
                 );

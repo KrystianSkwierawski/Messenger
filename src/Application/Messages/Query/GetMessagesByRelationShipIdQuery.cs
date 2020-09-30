@@ -24,7 +24,7 @@ namespace Application.Messages.Query
 
             public async Task<List<Message>> Handle(GetMessagesByRelationShipIdQuery request, CancellationToken cancellationToken)
             {
-                return _context.Messages.Include(x => x.ApplicationUser).Where(x => x.RelationShipId == request.RelationShipId).ToList();
+                return await _context.Messages.Include(x => x.ApplicationUser).Where(x => x.RelationShipId == request.RelationShipId).ToListAsync();
             }
         }
     }

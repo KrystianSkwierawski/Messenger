@@ -58,7 +58,7 @@ export const renderFriends = friends => {
                                 <button class="fas fa-times ml-2 text-danger p-0 friend__reject-request btn btn-link"></button>
                             </div>
                             <button disabled class="friend__details ml-3 mb-4">
-                                <img src="./images/avatar.png" class="friend__image rounded-circle" alt="friend avatar"/>
+                                <img src="./images/avatar.jpg" class="friend__image rounded-circle" alt="friend avatar"/>
                                 <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
                             </button>
                         </div>
@@ -70,7 +70,7 @@ export const renderFriends = friends => {
             markup = `
                         <div class="friend__container" id="${friend.id}">
                             <button class="friend__details ml-3 mb-4">
-                                <img src="./images/avatar.png" class="friend__image rounded-circle" alt="friend avatar"/>
+                                <img src="./images/avatar.jpg" class="friend__image rounded-circle" alt="friend avatar"/>
                                 <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
                             </button>
                         </div>
@@ -113,7 +113,7 @@ const renderMessages = messages => {
     messages.forEach(message => {
         const markup = `
                 <div class="message mt-3">
-                    <img src="./images/avatar.png" class="message__profile-picture rounded-circle" alt="friend avatar"/>
+                    <img src="./images/avatar.jpg" class="message__profile-picture rounded-circle" alt="friend avatar"/>
                     <div class="message__text-container">
                         <div class="information-about-the-message__container">
                             <h3 class="message__profile-name text-white ml-3 text-primary">${message.applicationUser.userName}</h3>
