@@ -57,8 +57,8 @@ namespace Messenger.Areas.User.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> GetMessagesFromCurrentRelationShipAndRelationShipId([FromBody] string friendId)
+        [HttpGet]
+        public async Task<ActionResult> GetMessagesFromCurrentRelationShipAndRelationShipId(string friendId)
         {
             int relationShipId = (int)base.Ok(await Mediator.Send(new GetRelationShipIdByUserIdAndFriendId
             {
@@ -76,7 +76,7 @@ namespace Messenger.Areas.User.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> SendFriendRequest([FromBody] string userName)
+        public async Task<ActionResult> SendFriendRequest(string userName)
         {
             string userId = GetUserId();
 
@@ -115,7 +115,7 @@ namespace Messenger.Areas.User.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult> AcceptFriendRequest([FromBody] string invitingUserId)
+        public async Task<ActionResult> AcceptFriendRequest(string invitingUserId)
         {
             string userId = GetUserId();
 
@@ -134,7 +134,7 @@ namespace Messenger.Areas.User.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> RejectFriendRequest([FromBody] string invitingUserId)
+        public async Task<ActionResult> RejectFriendRequest(string invitingUserId)
         {
             string userId = GetUserId();
 
