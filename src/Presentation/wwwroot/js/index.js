@@ -23,6 +23,23 @@ elements.friendsContainer.addEventListener('click', async e => {
     }
 });
 
+elements.inputToSendMessages.addEventListener('keypress', async () => {
+    const enterKey = 13;
+    const message = indexView.getInputToSendMessagesValue();
+
+    const inputIsNotEmpty = message.trim() ? true : false;
+
+    if (event.keyCode === enterKey && inputIsNotEmpty && !event.shiftKey) {
+        await sendMessage(message);
+    }
+});
+
+async function sendMessage(message) {
+    const relationShipId = indexView.getRelationShipId();
+
+    await Index.addMessage(message, relationShipId);
+};
+
 async function acceptFriendRequest(e) {
     const friendContainer = e.target.parentNode.parentNode;
     indexView.removeFriendRequestContainer(friendContainer);
@@ -78,9 +95,10 @@ function searchFriendsByUserName() {
 const openRelationShip = async e => {  
     const friendDetails = indexView.getFriendDetails(e);
 
-    const messages = await Index.getMessagesOfCurrentRelationShip(friendDetails.id);
-    
-    indexView.renderRelationShip(messages, friendDetails.userName);
+    const result = await Index.getMessagesOfCurrentRelationShipAndRelationShipId(friendDetails.id);
+
+    indexView.setRelationShipIdDataset(result.relationShipId);
+    indexView.renderRelationShip(result.messages, friendDetails.userName);
 };
 
 const doesNotHaveThisFriend = friendName => {

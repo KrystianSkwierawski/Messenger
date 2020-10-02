@@ -1,4 +1,5 @@
 ﻿using Application.Friends.Query;
+using Application.Messages.Command;
 using Application.Messages.Query;
 using Application.RelationShips.Command;
 using Application.RelationShips.Query;
@@ -7,12 +8,19 @@ using Domain.Model;
 using Messenger.Application.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Presentation.Areas.User.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
+using Nancy.Json;
+using Newtonsoft.Json.Linq;
+using System.Dynamic;
 
 namespace Messenger.Areas.User.Controllers
 {
@@ -57,7 +65,7 @@ namespace Messenger.Areas.User.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> GetMessagesFromCurrentRelationShip([FromBody] string friendId)
+        public async Task<ActionResult> GetMessagesFromCurrentRelationShipAndRelationShipId([FromBody] string friendId)
         {
             int relationShipId = (int)base.Ok(await Mediator.Send(new GetRelationShipIdByUserIdAndFriendId
             {
@@ -70,7 +78,7 @@ namespace Messenger.Areas.User.Controllers
                 RelationShipId = relationShipId
             })).Value;
 
-            return new JsonResult(messages);
+            return new JsonResult(new { messages = messages, relationShipId = relationShipId });
         }
 
 
@@ -98,6 +106,20 @@ namespace Messenger.Areas.User.Controllers
 
             return new JsonResult(new { friends = friends, userExist = userExist });
         }
+
+        [HttpPost]
+        public async Task<ActionResult> AddMessage(string messageContent, int relationShipId)
+        {
+            base.Ok(await Mediator.Send(new AddMessageCommand
+            {
+                MessageContent = messageContent,
+                RelationShipId = relationShipId,
+                UserId = GetUserId()
+            }));
+
+            return new JsonResult(new EmptyResult());
+        }
+
 
         [HttpPost]
         public async Task<ActionResult> AcceptFriendRequest([FromBody] string invitingUserId)

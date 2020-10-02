@@ -4,6 +4,6 @@ namespace Domain.Interfaces
 {
     public interface IDateTime
     {
-        DateTime Now { get; }
+        string Now { get; }
     }
 }

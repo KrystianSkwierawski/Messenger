@@ -152,3 +152,14 @@ export const removeFriendContainer = friendContainer => {
     friendsContainer.removeChild(friendContainer);
 };
 
+export const setRelationShipIdDataset = id => {
+    elements.mainContainer.dataset.relatioshipid = id;
+};
+
+export const getRelationShipId = () => {
+    return elements.mainContainer.dataset.relatioshipid;
+};
+
+export const getInputToSendMessagesValue = () => {
+    return elements.inputToSendMessages.value;
+};

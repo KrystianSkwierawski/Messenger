@@ -13,7 +13,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="main__container" data-userid="@_userId">
+    <div class="main__container" data-relatioshipid="" data-userid="@_userId">
 
         <div class="menu__container">
             <button class="fas fa-bars menu__button"></button>
@@ -41,7 +41,7 @@
             </div>
 
             <div class="input-to-send-messages__container mb-2 mt-1">
-                <textarea class="input-to-send-messages"></textarea>
+                <textarea class="input-to-send-messages p-1"></textarea>
             </div>
 
         </div>
