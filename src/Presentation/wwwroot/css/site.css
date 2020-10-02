@@ -255,7 +255,7 @@ html {
 .friend__request{
     display: flex;
     font-size: 28px;
-    justify-content: center;
+    
 }
 
 .friend__reject-request, .friend__accept-request{
