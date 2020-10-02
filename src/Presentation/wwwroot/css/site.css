@@ -268,6 +268,11 @@ html {
         display: none !important;
     }
 
+    .messages__container {
+        margin-top: 0;
+    }
+
+
     .side-menu__container {
         width: 19vw;
         display: flex !important;

@@ -38,6 +38,7 @@ async function sendMessage(message) {
     const relationShipId = indexView.getRelationShipId();
 
     await Index.addMessage(message, relationShipId);
+    indexView.clearInputToSendMessages();
 };
 
 async function acceptFriendRequest(e) {

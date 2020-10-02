@@ -163,3 +163,7 @@ export const getRelationShipId = () => {
 export const getInputToSendMessagesValue = () => {
     return elements.inputToSendMessages.value;
 };
+
+export const clearInputToSendMessages = () => {
+    elements.inputToSendMessages.value = "";
+};
