@@ -8,19 +8,12 @@ using Domain.Model;
 using Messenger.Application.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Presentation.Areas.User.Controllers;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Text.Json.Serialization;
-using Nancy.Json;
-using Newtonsoft.Json.Linq;
-using System.Dynamic;
 
 namespace Messenger.Areas.User.Controllers
 {
