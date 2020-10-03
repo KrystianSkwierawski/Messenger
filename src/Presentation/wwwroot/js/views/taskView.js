@@ -121,7 +121,7 @@ const renderMessages = messages => {
                         </div>
 
                         <div class="ml-3 text-white">
-                            <p>${message.content}</p>
+                            ${message.content}
                         </div>
                     </div>
                 </div>
