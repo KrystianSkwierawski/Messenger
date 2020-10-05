@@ -100,7 +100,11 @@ const openRelationShip = async e => {
 
     indexView.setRelationShipIdDataset(result.relationShipId);
     indexView.renderRelationShip(result.messages, friendDetails.userName);
+
+    indexView.scrollMessagesContainerToBottom();
 };
+
+window.addEventListener('resize', indexView.scrollMessagesContainerToBottom);
 
 const doesNotHaveThisFriend = friendName => {
     const friends = indexView.getFriends();

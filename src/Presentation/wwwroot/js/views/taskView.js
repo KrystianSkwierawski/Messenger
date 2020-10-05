@@ -81,13 +81,13 @@ export const renderFriends = friends => {
     });
 };
 
-export const renderRelationShip = (messages, userName) => {
+export const renderRelationShip = async (messages, userName) => {
     setMenuFriendName(userName);  
     showInputToSendMessagesContainer();
 
     if (messages) {
         clearMessagesContainer();
-        renderMessages(messages);
+        await renderMessages(messages);
     }
 };
 
@@ -166,4 +166,8 @@ export const getInputToSendMessagesValue = () => {
 
 export const clearInputToSendMessages = () => {
     elements.inputToSendMessages.value = "";
+};
+
+export const scrollMessagesContainerToBottom = () => {
+    elements.messagesContainer.scrollTop = elements.messagesContainer.scrollHeight;
 };
