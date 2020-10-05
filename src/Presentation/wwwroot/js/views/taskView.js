@@ -171,3 +171,4 @@ export const clearInputToSendMessages = () => {
 export const scrollMessagesContainerToBottom = () => {
     elements.messagesContainer.scrollTop = elements.messagesContainer.scrollHeight;
 };
+

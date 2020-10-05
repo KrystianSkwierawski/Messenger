@@ -1,6 +1,7 @@
 ﻿import { elements, elementStrings } from './views/base.js';
 import * as indexView from './views/taskView.js';
 import * as Index from './models/Index.js';
+import * as Emotes from './models/Emotes.js';
 
 elements.searchInput.addEventListener('change', searchFriendsByUserName);
 
@@ -37,7 +38,9 @@ elements.inputToSendMessages.addEventListener('keypress', async () => {
 async function sendMessage(message) {
     const relationShipId = indexView.getRelationShipId();
 
-    await Index.addMessage(message, relationShipId);
+    const convertedMessage = Emotes.convertTextToEmotes(message);
+
+    await Index.addMessage(convertedMessage, relationShipId);
     indexView.clearInputToSendMessages();
 };
 
