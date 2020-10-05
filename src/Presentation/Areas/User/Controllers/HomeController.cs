@@ -103,14 +103,14 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> AddMessage(string messageContent, int relationShipId)
         {
-            base.Ok(await Mediator.Send(new AddMessageCommand
+            Message message = (Message)base.Ok(await Mediator.Send(new AddMessageCommand
             {
                 MessageContent = messageContent,
                 RelationShipId = relationShipId,
                 UserId = GetUserId()
-            }));
+            })).Value;
 
-            return new JsonResult(new EmptyResult());
+            return new JsonResult(message);
         }
 
 

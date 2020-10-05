@@ -2,6 +2,7 @@
 import * as indexView from './views/taskView.js';
 import * as Index from './models/Index.js';
 import * as Emotes from './models/Emotes.js';
+import * as chatHub from './signalr.js';
 
 elements.searchInput.addEventListener('change', searchFriendsByUserName);
 
@@ -21,6 +22,7 @@ elements.friendsContainer.addEventListener('click', async e => {
 
     if (e.target.matches(`.${elementStrings.friendDetails}, .${elementStrings.friendDetails} *`)) {
         await openRelationShip(e);
+        indexView.scrollMessagesContainerToBottom();  
     }
 });
 
@@ -30,18 +32,22 @@ elements.inputToSendMessages.addEventListener('keypress', async () => {
 
     const inputIsNotEmpty = message.trim() ? true : false;
 
-    if (event.keyCode === enterKey && inputIsNotEmpty && !event.shiftKey) {
-        await sendMessage(message);
+    if (event.keyCode === enterKey && inputIsNotEmpty && !event.shiftKey) {       
+        await sendMessage(message);      
+        indexView.clearInputToSendMessages();
+        indexView.scrollMessagesContainerToBottom();
     }
 });
+
+window.addEventListener('resize', indexView.scrollMessagesContainerToBottom);
 
 async function sendMessage(message) {
     const relationShipId = indexView.getRelationShipId();
 
     const convertedMessage = Emotes.convertTextToEmotes(message);
 
-    await Index.addMessage(convertedMessage, relationShipId);
-    indexView.clearInputToSendMessages();
+    const resultMessage = await Index.addMessage(convertedMessage, relationShipId);
+    chatHub.sendMessage(resultMessage);    
 };
 
 async function acceptFriendRequest(e) {
@@ -104,10 +110,8 @@ const openRelationShip = async e => {
     indexView.setRelationShipIdDataset(result.relationShipId);
     indexView.renderRelationShip(result.messages, friendDetails.userName);
 
-    indexView.scrollMessagesContainerToBottom();
+    chatHub.joinGroup(result.relationShipId);
 };
-
-window.addEventListener('resize', indexView.scrollMessagesContainerToBottom);
 
 const doesNotHaveThisFriend = friendName => {
     const friends = indexView.getFriends();

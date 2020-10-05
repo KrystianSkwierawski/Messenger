@@ -108,7 +108,7 @@ export async function getMessagesOfCurrentRelationShipAndRelationShipId(friendId
 
 export async function addMessage(messageContent, relationShipId) {
     try {
-       await $.ajax({
+       const result = await $.ajax({
             url: '/User/Home/AddMessage',
             type: 'POST',
             data: {
@@ -116,6 +116,8 @@ export async function addMessage(messageContent, relationShipId) {
                 relationShipId: relationShipId
             },
        });
+
+       return result;
     }
     catch (error) {
         console.log(error);

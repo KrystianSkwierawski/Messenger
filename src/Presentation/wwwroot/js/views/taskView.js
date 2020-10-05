@@ -81,13 +81,15 @@ export const renderFriends = friends => {
     });
 };
 
-export const renderRelationShip = async (messages, userName) => {
+export const renderRelationShip = (messages, userName) => {
     setMenuFriendName(userName);  
     showInputToSendMessagesContainer();
 
     if (messages) {
         clearMessagesContainer();
-        await renderMessages(messages);
+        messages.forEach(message => renderMessage(message));
+
+        //await renderMessages(messages);
     }
 };
 
@@ -109,9 +111,30 @@ const showInputToSendMessagesContainer = () => {
     elements.inputToSendMessagesContainer.classList.add('active');
 };
 
-const renderMessages = messages => {
-    messages.forEach(message => {
-        const markup = `
+//const renderMessages = messages => {
+//    messages.forEach(message => {
+//        const markup = `
+//                <div class="message mt-3">
+//                    <img src="./images/avatar.jpg" class="message__profile-picture rounded-circle" alt="friend avatar"/>
+//                    <div class="message__text-container">
+//                        <div class="information-about-the-message__container">
+//                            <h3 class="message__profile-name text-white ml-3 text-primary">${message.applicationUser.userName}</h3>
+//                            <p class="message__date-sended ml-1 text-secondary">${message.dateSended}</p>
+//                        </div>
+
+//                        <div class="ml-3 text-white">
+//                            ${message.content}
+//                        </div>
+//                    </div>
+//                </div>
+//        `;
+
+//        elements.messagesContainer.insertAdjacentHTML('beforeend', markup);
+//    });
+//};
+
+export const renderMessage = message => {
+    const markup = `
                 <div class="message mt-3">
                     <img src="./images/avatar.jpg" class="message__profile-picture rounded-circle" alt="friend avatar"/>
                     <div class="message__text-container">
@@ -127,8 +150,7 @@ const renderMessages = messages => {
                 </div>
         `;
 
-        elements.messagesContainer.insertAdjacentHTML('beforeend', markup);
-    });
+    elements.messagesContainer.insertAdjacentHTML('beforeend', markup);
 };
 
 const setMenuFriendName = userName => {
@@ -169,6 +191,9 @@ export const clearInputToSendMessages = () => {
 };
 
 export const scrollMessagesContainerToBottom = () => {
-    elements.messagesContainer.scrollTop = elements.messagesContainer.scrollHeight;
+    const scrollHeight = elements.messagesContainer.scrollHeight;
+    const clientHeight = elements.messagesContainer.clientHeight;
+
+    elements.messagesContainer.scrollTop = scrollHeight - clientHeight;
 };
 

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Presentation.Hubs;
 using System.Reflection;
 
 namespace Messenger
@@ -34,6 +35,7 @@ namespace Messenger
             services.AddRazorPages();
             services.AddInfrastructure();
             services.AddApplication();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +65,7 @@ namespace Messenger
                     name: "default",
                     pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }
