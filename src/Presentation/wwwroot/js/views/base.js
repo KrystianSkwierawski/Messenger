@@ -17,5 +17,5 @@ export const elementStrings = {
     friendRejectRequest: 'friend__reject-request',
     friendRequest: 'friend__request',
     friendContainer: 'friend__container',
-    friendDetails: 'friend__details'
+    friendDetails: 'friend__details',
 };

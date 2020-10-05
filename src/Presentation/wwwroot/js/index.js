@@ -33,10 +33,10 @@ elements.inputToSendMessages.addEventListener('keypress', async () => {
     const inputIsNotEmpty = message.trim() ? true : false;
 
     if (event.keyCode === enterKey && inputIsNotEmpty && !event.shiftKey) {       
-        await sendMessage(message);      
-        indexView.clearInputToSendMessages();
-        indexView.scrollMessagesContainerToBottom();
+       await sendMessage(message);      
+       indexView.clearInputToSendMessages();             
     }
+
 });
 
 window.addEventListener('resize', indexView.scrollMessagesContainerToBottom);
@@ -47,7 +47,7 @@ async function sendMessage(message) {
     const convertedMessage = Emotes.convertTextToEmotes(message);
 
     const resultMessage = await Index.addMessage(convertedMessage, relationShipId);
-    chatHub.sendMessage(resultMessage);    
+    await chatHub.sendMessage(resultMessage);    
 };
 
 async function acceptFriendRequest(e) {
@@ -110,7 +110,7 @@ const openRelationShip = async e => {
     indexView.setRelationShipIdDataset(result.relationShipId);
     indexView.renderRelationShip(result.messages, friendDetails.userName);
 
-    chatHub.joinGroup(result.relationShipId);
+    await chatHub.joinGroup(result.relationShipId);
 };
 
 const doesNotHaveThisFriend = friendName => {

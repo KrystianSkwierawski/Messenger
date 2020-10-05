@@ -4,8 +4,9 @@ var hub = new signalR.HubConnectionBuilder()
     .withUrl('/chatHub')
     .build();
 
-hub.on('ReceiveMessage', message => {
-    indexView.renderMessage(message);
+hub.on('ReceiveMessage', async message => {
+    await indexView.renderMessage(message);
+    indexView.scrollMessagesContainerToBottom();
 });
 
 hub.start().then(function () {
@@ -14,15 +15,15 @@ hub.start().then(function () {
     return console.error(err.toString());
 });
 
-export const sendMessage = message => {
-    hub.invoke('Send', message);
+export const sendMessage = async message => {
+   await hub.invoke('Send', message);
 };
 
-export const joinGroup = relationShipId => {
-    hub.invoke('JoinGroup', relationShipId);
+export const joinGroup = async relationShipId => {
+   await hub.invoke('JoinGroup', relationShipId);
 };
 
 
-export const leaveGroup = relationShipId => {
-    hub.invoke('LeaveGroup', relationShipId);
+export const leaveGroup = async relationShipId => {
+    await hub.invoke('LeaveGroup', relationShipId);
 };

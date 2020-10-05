@@ -77,7 +77,7 @@ export const renderFriends = friends => {
             `;
         }
 
-        elements.friendsContainer.insertAdjacentHTML('beforeend', markup);
+        elements.friendsContainer.insertAdjacentHTML('afterbegin', markup);
     });
 };
 
@@ -196,4 +196,5 @@ export const scrollMessagesContainerToBottom = () => {
 
     elements.messagesContainer.scrollTop = scrollHeight - clientHeight;
 };
+
 
