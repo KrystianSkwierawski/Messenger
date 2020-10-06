@@ -155,7 +155,7 @@ namespace Messenger.Areas.User.Controllers
                 RelationShips = relationShips
             })).Value;
 
-            return new JsonResult(new { relationShips = relationShips, friends = friends });
+            return new JsonResult(new { relationShips = relationShips, friends = friends/*.OrderByDescending(x => x.Id)*/ });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

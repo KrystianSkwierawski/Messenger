@@ -65,7 +65,7 @@ namespace Messenger
                     name: "default",
                     pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
-                endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapHub<MessengerHub>("/messengerhub");
             });
         }
     }

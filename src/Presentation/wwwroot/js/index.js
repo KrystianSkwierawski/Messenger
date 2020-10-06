@@ -2,7 +2,7 @@
 import * as indexView from './views/taskView.js';
 import * as Index from './models/Index.js';
 import * as Emotes from './models/Emotes.js';
-import * as chatHub from './signalr.js';
+import * as messengerHub from './messengerHub.js';
 
 elements.searchInput.addEventListener('change', searchFriendsByUserName);
 
@@ -13,7 +13,7 @@ elements.addFriendButton.addEventListener('click', trySendFriendRequest);
 elements.friendsContainer.addEventListener('click', async e => {
 
     if (e.target.matches(`.${elementStrings.friendAcceptRequest}`)) {
-        await acceptFriendRequest(e);
+        await acceptFriendRequest(e);        
     }
 
     if (e.target.matches(`.${elementStrings.friendRejectRequest}`)) {
@@ -47,7 +47,7 @@ async function sendMessage(message) {
     const convertedMessage = Emotes.convertTextToEmotes(message);
 
     const resultMessage = await Index.addMessage(convertedMessage, relationShipId);
-    await chatHub.sendMessage(resultMessage);    
+    await messengerHub.sendMessage(resultMessage);    
 };
 
 async function acceptFriendRequest(e) {
@@ -58,6 +58,8 @@ async function acceptFriendRequest(e) {
     indexView.enableFriendDetails(friendContainer);
 
     indexView.setRelationShipsDataset(JSON.stringify(relationShips));
+
+    await messengerHub.tryToRenderAFriendToTheSender(friendContainer.id);
 }
 
 async function rejectFriendRequest(e) {
@@ -110,7 +112,7 @@ const openRelationShip = async e => {
     indexView.setRelationShipIdDataset(result.relationShipId);
     indexView.renderRelationShip(result.messages, friendDetails.userName);
 
-    await chatHub.joinGroup(result.relationShipId);
+    await messengerHub.joinGroup(result.relationShipId);
 };
 
 const doesNotHaveThisFriend = friendName => {

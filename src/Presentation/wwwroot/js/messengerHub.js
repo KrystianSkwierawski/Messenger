@@ -1,8 +1,12 @@
 ﻿import * as indexView from './views/taskView.js';
 
 var hub = new signalR.HubConnectionBuilder()
-    .withUrl('/chatHub')
+    .withUrl('/messengerHub')
     .build();
+
+hub.on('RenderFriend', async friend => {
+    await indexView.renderFriend(friend);
+});
 
 hub.on('ReceiveMessage', async message => {
     await indexView.renderMessage(message);
@@ -24,7 +28,10 @@ export const joinGroup = async relationShipId => {
    await hub.invoke('JoinGroup', relationShipId);
 };
 
-
 const tryLeaveGroup = async () => {
     await hub.invoke('TryLeaveGroup');
+};
+
+export const tryToRenderAFriendToTheSender = async invitingUserId => {
+    await hub.invoke('TryToRenderAFriendToTheSender', invitingUserId);
 };

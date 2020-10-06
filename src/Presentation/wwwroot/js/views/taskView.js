@@ -35,6 +35,19 @@ export const clearFriendsContainer = () => {
     elements.friendsContainer.innerHTML = "";
 };
 
+export const renderFriend = friend => {
+    const markup = `
+                        <div class="friend__container" id="${friend.id}">
+                            <button class="friend__details ml-3 mb-4">
+                                <img src="./images/avatar.jpg" class="friend__image rounded-circle" alt="friend avatar"/>
+                                <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
+                            </button>
+                        </div>
+    `;
+
+    elements.friendsContainer.insertAdjacentHTML('beforeend', markup);
+};
+
 export const renderFriends = friends => {
     const relationShips = getRelationShips();
 
@@ -77,7 +90,7 @@ export const renderFriends = friends => {
             `;
         }
 
-        elements.friendsContainer.insertAdjacentHTML('afterbegin', markup);
+        elements.friendsContainer.insertAdjacentHTML('beforeend', markup);
     });
 };
 
