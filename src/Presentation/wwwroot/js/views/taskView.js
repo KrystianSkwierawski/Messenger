@@ -35,7 +35,7 @@ export const clearFriendsContainer = () => {
     elements.friendsContainer.innerHTML = "";
 };
 
-export const renderFriend = friend => {
+export const renderAcceptedFriend = friend => {
     const markup = `
                         <div class="friend__container" id="${friend.id}">
                             <button class="friend__details ml-3 mb-4">

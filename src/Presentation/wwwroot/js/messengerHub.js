@@ -4,8 +4,8 @@ var hub = new signalR.HubConnectionBuilder()
     .withUrl('/messengerHub')
     .build();
 
-hub.on('RenderFriend', async friend => {
-    await indexView.renderFriend(friend);
+hub.on('RenderAcceptedFriend', async friend => {
+    await indexView.renderAcceptedFriend(friend);
 });
 
 hub.on('ReceiveMessage', async message => {

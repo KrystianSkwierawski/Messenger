@@ -52,7 +52,7 @@ namespace Presentation.Hubs
                     Id = Context.UserIdentifier
                 });
 
-                await Clients.Client(connetion.ConnectionId).SendAsync("RenderFriend", friend);
+                await Clients.Client(connetion.ConnectionId).SendAsync("RenderAcceptedFriend", friend);
             }
         }
 
