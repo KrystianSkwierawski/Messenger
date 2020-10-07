@@ -58,6 +58,25 @@ namespace Messenger.Areas.User.Controllers
         }
 
         [HttpGet]
+        public async Task<ActionResult> GetFriendsAndRelationShips()
+        {
+            string userId = GetUserId();
+
+            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
+            {
+                Id = userId
+            })).Value;
+
+            List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+            {
+                Id = userId,
+                RelationShips = relationShips
+            })).Value;
+
+            return new JsonResult(new { relationShips = relationShips, friends = friends });
+        }
+
+        [HttpGet]
         public async Task<ActionResult> GetMessagesFromCurrentRelationShipAndRelationShipId(string friendId)
         {
             int relationShipId = (int)base.Ok(await Mediator.Send(new GetRelationShipIdByUserIdAndFriendId
@@ -86,18 +105,7 @@ namespace Messenger.Areas.User.Controllers
                 UserName = userName
             })).Value;
 
-            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
-            {
-                Id = userId
-            })).Value;
-
-            List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
-            {
-                Id = userId,
-                RelationShips = relationShips
-            })).Value;
-
-            return new JsonResult(new { friends = friends, userExist = userExist });
+            return new JsonResult(userExist);
         }
 
         [HttpPost]
@@ -130,7 +138,13 @@ namespace Messenger.Areas.User.Controllers
                 Id = userId
             })).Value;
 
-            return new JsonResult(relationShips);
+            List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+            {
+                Id = userId,
+                RelationShips = relationShips
+            })).Value;
+
+            return new JsonResult(new { relationShips = relationShips, friends = friends});
         }
 
         [HttpPost]

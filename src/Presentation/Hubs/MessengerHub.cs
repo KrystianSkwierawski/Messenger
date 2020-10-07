@@ -43,16 +43,31 @@ namespace Presentation.Hubs
 
         public async Task TryToRenderAFriendToTheSender(string invitingUserId)
         {
-            HubCallerContext connetion = _connections.FirstOrDefault(x => x.UserIdentifier == invitingUserId);
+            HubCallerContext invitingUserConnection = _connections.FirstOrDefault(x => x.UserIdentifier == invitingUserId);
 
-            if(connetion != null)
+            if(invitingUserConnection != null)
             {
-                ApplicationUser friend = await _mediator.Send(new GetFriendByIdQuery
+                ApplicationUser invitedUser = await _mediator.Send(new GetFriendByIdQuery
                 {
                     Id = Context.UserIdentifier
                 });
 
-                await Clients.Client(connetion.ConnectionId).SendAsync("RenderAcceptedFriend", friend);
+                await Clients.Client(invitingUserConnection.ConnectionId).SendAsync("RenderAcceptedFriend", invitedUser);
+            }
+        }
+
+        public async Task SendFriendRequest(string invitedUserName)
+        {
+            HubCallerContext invitedUserConnection = _connections.FirstOrDefault(x => x.User.Identity.Name == invitedUserName);
+
+            if(invitedUserConnection != null)
+            {
+                ApplicationUser invitingUser = await _mediator.Send(new GetFriendByIdQuery
+                {
+                    Id = Context.UserIdentifier
+                });
+
+                await Clients.Client(invitedUserConnection.ConnectionId).SendAsync("RenderNotAcceptedFriend", invitingUser);
             }
         }
 

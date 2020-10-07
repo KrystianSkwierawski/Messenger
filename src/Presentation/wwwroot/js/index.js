@@ -36,7 +36,6 @@ elements.inputToSendMessages.addEventListener('keypress', async () => {
        await sendMessage(message);      
        indexView.clearInputToSendMessages();             
     }
-
 });
 
 window.addEventListener('resize', indexView.scrollMessagesContainerToBottom);
@@ -54,10 +53,11 @@ async function acceptFriendRequest(e) {
     const friendContainer = e.target.parentNode.parentNode;
     indexView.removeFriendRequestContainer(friendContainer);
 
-    const relationShips = await Index.acceptFriendRequest(friendContainer.id);
+    const result = await Index.acceptFriendRequest(friendContainer.id);
     indexView.enableFriendDetails(friendContainer);
 
-    indexView.setRelationShipsDataset(JSON.stringify(relationShips));
+    indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
+    indexView.setFriendDataset(JSON.stringify(result.friends));
 
     await messengerHub.tryToRenderAFriendToTheSender(friendContainer.id);
 }
@@ -76,12 +76,12 @@ async function trySendFriendRequest() {
     const friendName = prompt('Friend name:');
 
     if (doesNotInvitingHimSelf(friendName) && doesNotHaveThisFriend(friendName)) {
-        const request = await Index.sendFriendRequest(friendName);
+        const userExist = await Index.sendFriendRequest(friendName);
 
-        if (request.userExist) {
-
-            indexView.setFriendDataset(JSON.stringify(request.friends));
+        if (userExist) {
             toastr.success('The friend request has been sent');
+
+            messengerHub.sendFriendRequest(friendName);
         }
         else {
             toastr.info('There is no such user');

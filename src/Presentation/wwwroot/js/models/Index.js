@@ -139,3 +139,17 @@ export async function addMessage(messageContent, relationShipId) {
     //    console.log(error);
     //}
 }
+
+export async function getFriendsAndRelationShips() {
+    try {
+        const result = await $.ajax({
+            url: '/User/Home/GetFriendsAndRelationShips',
+            type: 'GET'
+        });
+
+        return result;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
