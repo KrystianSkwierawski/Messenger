@@ -13,8 +13,8 @@ namespace Presentation.Hubs
     {
         readonly IMediator _mediator;
 
-        static List<HubCallerContext> CurrentConnections = new List<HubCallerContext>();
-        static Dictionary<string, string> groups = new Dictionary<string, string>();
+        static List<HubCallerContext> _connections = new List<HubCallerContext>();
+        static Dictionary<string, string> _groups = new Dictionary<string, string>();
 
         public MessengerHub(IMediator mediator)
         {
@@ -23,7 +23,7 @@ namespace Presentation.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            CurrentConnections.Add(Context);
+            _connections.Add(Context);
   
             await base.OnConnectedAsync();
         }
@@ -36,14 +36,14 @@ namespace Presentation.Hubs
             await base.OnDisconnectedAsync(exception);
         }
 
-        public async Task Send(Message message)
+        public async Task SendMessage(Message message)
         {
             await Clients.Group(message.RelationShipId.ToString()).SendAsync("ReceiveMessage", message);
         }
 
         public async Task TryToRenderAFriendToTheSender(string invitingUserId)
         {
-            HubCallerContext connetion = CurrentConnections.FirstOrDefault(x => x.UserIdentifier == invitingUserId);
+            HubCallerContext connetion = _connections.FirstOrDefault(x => x.UserIdentifier == invitingUserId);
 
             if(connetion != null)
             {
@@ -58,7 +58,7 @@ namespace Presentation.Hubs
 
         public async Task JoinGroup(int relationShipId)
         {
-            groups.Add(Context.ConnectionId, relationShipId.ToString());
+            _groups.Add(Context.ConnectionId, relationShipId.ToString());
             await Groups.AddToGroupAsync(Context.ConnectionId, relationShipId.ToString());
         }
 
@@ -69,10 +69,10 @@ namespace Presentation.Hubs
 
         private async Task LeaveGroupIfGroupsContainsConnectionId()
         {          
-            if (groups.ContainsKey(Context.ConnectionId))
+            if (_groups.ContainsKey(Context.ConnectionId))
             {
-                string groupName = groups[Context.ConnectionId];
-                groups.Remove(Context.ConnectionId);
+                string groupName = _groups[Context.ConnectionId];
+                _groups.Remove(Context.ConnectionId);
 
                 await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
             }
@@ -80,17 +80,12 @@ namespace Presentation.Hubs
 
         private void TryRemoveConnection()
         {
-            HubCallerContext connection = CurrentConnections.FirstOrDefault(x => x.UserIdentifier == Context.UserIdentifier);
+            HubCallerContext connection = _connections.FirstOrDefault(x => x.UserIdentifier == Context.UserIdentifier);
 
             if (connection != null)
             {
-                CurrentConnections.Remove(connection);
+                _connections.Remove(connection);
             }
-        }
-
-        public List<HubCallerContext> GetAllActiveConnections()
-        {
-            return CurrentConnections.ToList();
         }
     }
 }

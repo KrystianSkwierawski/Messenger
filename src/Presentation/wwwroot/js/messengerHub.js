@@ -14,13 +14,12 @@ hub.on('ReceiveMessage', async message => {
 });
 
 hub.start().then(function () {
-
-}).catch(function (err) {
+]}).catch(function (err) {
     return console.error(err.toString());
 });
 
 export const sendMessage = async message => {
-   await hub.invoke('Send', message);
+    await hub.invoke('SendMessage', message);
 };
 
 export const joinGroup = async relationShipId => {
