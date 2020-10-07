@@ -1,5 +1,5 @@
 ﻿import { elements, elementStrings } from './views/base.js';
-import * as indexView from './views/taskView.js';
+import * as indexView from './views/indexView.js';
 import * as Index from './models/Index.js';
 import * as Emotes from './models/Emotes.js';
 import * as messengerHub from './messengerHub.js';

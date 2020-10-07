@@ -1,4 +1,4 @@
-﻿import * as indexView from './views/taskView.js';
+﻿import * as indexView from './views/indexView.js';
 import * as Index from './models/Index.js';
 
 var hub = new signalR.HubConnectionBuilder()
