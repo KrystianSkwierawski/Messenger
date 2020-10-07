@@ -70,45 +70,27 @@ export const renderFriends = friends => {
     const relationShips = getRelationShips();
 
     friends.forEach(friend => {
-        let markup;
         const currentUserName = getUserName();
 
-        const relationShipsThatAreNotAccepted = relationShips.filter(x =>
-            x.invitingUser.userName === friend.userName &&
-            x.invitedUser.userName === currentUserName &&
+        const relationShipsWhereAreNotAccepted = relationShips.filter(x =>
+            ((x.invitingUser.userName === friend.userName && x.invitedUser.userName === currentUserName) ||
+            (x.invitingUser.userName === currentUserName && x.invitedUser.userName === friend.userName)) &&
             x.isAccepted === false
         );
 
-        const userIsAccepted = relationShipsThatAreNotAccepted.length !== 0 ? true : false;
+        const relationShipsIsAccepted = relationShipsWhereAreNotAccepted.length === 0 ? true : false;
 
-        if (userIsAccepted) {
-            markup = `
-                         <div class="friend__container" id="${friend.id}">
-                            <div class="friend__request ml-3 mb-1">
-                                <button class="fas fa-check text-success p-0 friend__accept-request btn btn-link"></button>
-                                <button class="fas fa-times ml-2 text-danger p-0 friend__reject-request btn btn-link"></button>
-                            </div>
-                            <button disabled class="friend__details ml-3 mb-4">
-                                <img src="./images/avatar.jpg" class="friend__image rounded-circle" alt="friend avatar"/>
-                                <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
-                            </button>
-                        </div>
-            `;
-
-
+        if (relationShipsIsAccepted) {
+            renderAcceptedFriend(friend);
         }
         else {
-            markup = `
-                        <div class="friend__container" id="${friend.id}">
-                            <button class="friend__details ml-3 mb-4">
-                                <img src="./images/avatar.jpg" class="friend__image rounded-circle" alt="friend avatar"/>
-                                <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
-                            </button>
-                        </div>
-            `;
-        }
+            const relationShipsWhereCurrentUserIsInvited = relationShipsWhereAreNotAccepted.filter(x => x.invitedUser.userName == currentUserName);
+            const currentUserIsInvited = relationShipsWhereCurrentUserIsInvited.length === 0 ? false : true;
 
-        elements.friendsContainer.insertAdjacentHTML('beforeend', markup);
+            if (currentUserIsInvited) {
+                renderNotAcceptedFriend(friend);
+            }        
+        }
     });
 };
 
@@ -119,8 +101,6 @@ export const renderRelationShip = (messages, userName) => {
     if (messages) {
         clearMessagesContainer();
         messages.forEach(message => renderMessage(message));
-
-        //await renderMessages(messages);
     }
 };
 
@@ -141,28 +121,6 @@ export const getFriendDetails = e => {
 const showInputToSendMessagesContainer = () => {
     elements.inputToSendMessagesContainer.classList.add('active');
 };
-
-//const renderMessages = messages => {
-//    messages.forEach(message => {
-//        const markup = `
-//                <div class="message mt-3">
-//                    <img src="./images/avatar.jpg" class="message__profile-picture rounded-circle" alt="friend avatar"/>
-//                    <div class="message__text-container">
-//                        <div class="information-about-the-message__container">
-//                            <h3 class="message__profile-name text-white ml-3 text-primary">${message.applicationUser.userName}</h3>
-//                            <p class="message__date-sended ml-1 text-secondary">${message.dateSended}</p>
-//                        </div>
-
-//                        <div class="ml-3 text-white">
-//                            ${message.content}
-//                        </div>
-//                    </div>
-//                </div>
-//        `;
-
-//        elements.messagesContainer.insertAdjacentHTML('beforeend', markup);
-//    });
-//};
 
 export const renderMessage = message => {
     const markup = `

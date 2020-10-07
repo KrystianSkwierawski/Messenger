@@ -22,7 +22,7 @@ namespace Application.Friends.Query
                 {
                     foreach (var relationShip in request.RelationShips)
                     {
-                        if (relationShip.InvitedUserId != request.Id && relationShip.IsAccepted)
+                        if (relationShip.InvitedUserId != request.Id)
                         {
                             o_friends.Add(relationShip.InvitedUser);
                         }

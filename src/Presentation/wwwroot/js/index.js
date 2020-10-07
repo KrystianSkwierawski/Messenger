@@ -76,11 +76,12 @@ async function trySendFriendRequest() {
     const friendName = prompt('Friend name:');
 
     if (doesNotInvitingHimSelf(friendName) && doesNotHaveThisFriend(friendName)) {
-        const userExist = await Index.sendFriendRequest(friendName);
+        const result = await Index.sendFriendRequest(friendName);
 
-        if (userExist) {
+        if (result.userExist) {
             toastr.success('The friend request has been sent');
-
+            indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
+            indexView.setFriendDataset(JSON.stringify(result.friends));
             messengerHub.sendFriendRequest(friendName);
         }
         else {

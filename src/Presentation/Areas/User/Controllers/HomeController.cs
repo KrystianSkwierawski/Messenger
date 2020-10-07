@@ -105,7 +105,19 @@ namespace Messenger.Areas.User.Controllers
                 UserName = userName
             })).Value;
 
-            return new JsonResult(userExist);
+            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
+            {
+                Id = userId
+            })).Value;
+
+            List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+            {
+                Id = userId,
+                RelationShips = relationShips
+            })).Value;
+
+
+            return new JsonResult(new { userExist = userExist, friends = friends, relationShips = relationShips });
         }
 
         [HttpPost]
