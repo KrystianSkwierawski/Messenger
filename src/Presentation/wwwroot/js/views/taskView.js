@@ -113,7 +113,7 @@ export const renderFriends = friends => {
 };
 
 export const renderRelationShip = (messages, userName) => {
-    setMenuFriendName(userName);  
+    setMenuFriendName(userName);
     showInputToSendMessagesContainer();
 
     if (messages) {

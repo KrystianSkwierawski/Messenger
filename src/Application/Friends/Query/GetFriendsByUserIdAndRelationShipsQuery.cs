@@ -24,7 +24,7 @@ namespace Application.Friends.Query
                 {
                     foreach (var relationShip in request.RelationShips)
                     {
-                        if (relationShip.InvitedUserId != request.Id)
+                        if (relationShip.InvitedUserId != request.Id && relationShip.IsAccepted)
                         {
                             o_friends.Add(relationShip.InvitedUser);
                         }
