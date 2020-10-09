@@ -11,6 +11,11 @@ _emojis.set(";(", "😭");
 _emojis.set(";)", "😉");
 _emojis.set(":o", "😮");
 _emojis.set(":O", "😮");
+_emojis.set(":*", "😗");
+_emojis.set(";*", "😘");
+_emojis.set(":/", "😕");
+_emojis.set(":|", "😐");
+_emojis.set("B)", "😎");
 
 export const convertTextToEmojis = (text) => {
     _emojis.forEach((value, key) => {
