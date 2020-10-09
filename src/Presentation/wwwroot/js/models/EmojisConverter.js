@@ -1,19 +1,19 @@
-﻿export const emotes = new Map();
+﻿const _emojis = new Map();
 
-emotes.set(":)", "🙂");
-emotes.set(":(", "😟");
-emotes.set("<3", "❤");
-emotes.set(":d", "😀");
-emotes.set(":D", "😀");
-emotes.set(":p", "😛");
-emotes.set(":P", "😛");
-emotes.set(";(", "😭");
-emotes.set(";)", "😉");
-emotes.set(":o", "😮");
-emotes.set(":O", "😮");
+_emojis.set(":)", "🙂");
+_emojis.set(":(", "😟");
+_emojis.set("<3", "❤");
+_emojis.set(":d", "😀");
+_emojis.set(":D", "😀");
+_emojis.set(":p", "😛");
+_emojis.set(":P", "😛");
+_emojis.set(";(", "😭");
+_emojis.set(";)", "😉");
+_emojis.set(":o", "😮");
+_emojis.set(":O", "😮");
 
-export const convertTextToEmotes = (text) => {
-    emotes.forEach((value, key) => {
+export const convertTextToEmojis = (text) => {
+    _emojis.forEach((value, key) => {
         text = text.replace(key, value);
     });
 

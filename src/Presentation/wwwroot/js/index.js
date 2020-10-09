@@ -62,7 +62,7 @@ elements.displayEmojisButton.addEventListener('click', () => {
 async function sendMessage(message) {
     const relationShipId = indexView.getRelationShipId();
 
-    const convertedMessage = EmojisConverter.convertTextToEmotes(message);
+    const convertedMessage = EmojisConverter.convertTextToEmojis(message);
 
     const resultMessage = await Index.addMessage(convertedMessage, relationShipId);
     await messengerHub.sendMessage(resultMessage);    
