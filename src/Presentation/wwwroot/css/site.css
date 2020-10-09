@@ -80,19 +80,18 @@ html {
     height: 50px;
     width: 100%;
     background-color: #202225;
-    
 }
 
 
 .menu__button {
     font-size: 30px;
     color: white;
-   left: 5px;
-   top: 50%;
-   position: absolute;
-   transform: translateY(-50%);
-   border: none;
-   background-color: transparent;
+    left: 5px;
+    top: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
 }
 
 .menu__friend-name {
@@ -129,12 +128,12 @@ html {
     display: none;
 }
 
-.input-to-send-messages__container.active{
-    display: block;
-}
+    .input-to-send-messages__container.active {
+        display: flex;
+    }
 
 .input-to-send-messages {
-    width: 100%;
+    flex-grow: 1;
     background-color: #484C52;
     border-radius: 8px;
     height: auto;
@@ -221,17 +220,17 @@ html {
     border: none;
 }
 
-    .logout__button{
-        background-color: transparent;
-        border: 0;
-    }
+.logout__button {
+    background-color: transparent;
+    border: 0;
+}
 
-    .message__profile-picture {
-        width: 15%;
-        height: auto;
-        align-self: center;
-        justify-self: center;
-    }
+.message__profile-picture {
+    width: 15%;
+    height: auto;
+    align-self: center;
+    justify-self: center;
+}
 
 .message {
     margin-left: 5%;
@@ -252,16 +251,46 @@ html {
     display: flex;
 }
 
-.friend__request{
+.friend__request {
     display: flex;
     font-size: 28px;
-    
 }
 
-.friend__reject-request, .friend__accept-request{
+.friend__reject-request, .friend__accept-request {
     cursor: pointer;
     font-size: 100%;
 }
+
+.display-emojis__button {
+    border: none;
+    background-color: transparent;
+    font-size: 22px;
+}
+
+.emojis__container {
+    position: absolute;
+    background-color: white;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 30%;
+    border-radius: 12px;
+    width: 90%;
+    overflow: auto;
+    display: none;
+    font-size: 24px;
+}
+
+.emojis__container.active {
+    display: inline;
+}
+
+
+.emojis__container button {
+    border: none;
+    background-color: transparent;
+}
+
 
 @media (min-width: 1300px) {
     .menu__button {

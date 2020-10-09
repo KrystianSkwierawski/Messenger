@@ -9,7 +9,9 @@
     messagesContainer: document.querySelector('.messages__container'),
     inputToSendMessages: document.querySelector('.input-to-send-messages'),
     mainContainer: document.querySelector('.main__container'),
-    inputToSendMessagesContainer: document.querySelector('.input-to-send-messages__container')
+    inputToSendMessagesContainer: document.querySelector('.input-to-send-messages__container'),
+    displayEmojisButton: document.querySelector('.display-emojis__button'),
+    emojisContainer: document.querySelector('.emojis__container'),
 };
 
 export const elementStrings = {

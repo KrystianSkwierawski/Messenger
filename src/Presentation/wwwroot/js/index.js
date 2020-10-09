@@ -1,8 +1,22 @@
 ﻿import { elements, elementStrings } from './views/base.js';
 import * as indexView from './views/indexView.js';
 import * as Index from './models/Index.js';
-import * as Emotes from './models/Emotes.js';
+import * as EmojisConverter from './models/EmojisConverter.js';
+import * as Emojis from './models/Emojis.js';
 import * as messengerHub from './messengerHub.js';
+
+addEmojisToEmojisContainer(Emojis.smileys);
+
+async function addEmojisToEmojisContainer(emojis) {   
+    await indexView.renderEmojisToEmojisContainer(emojis);
+    const emojisButton = document.querySelectorAll('.emojis__button');
+
+    Array.from(emojisButton).forEach(emojiButton => {
+        emojiButton.addEventListener('click', e => {
+            indexView.addEmojiToInputToSendMessagesInput(e);
+        });
+    });
+};
 
 elements.searchInput.addEventListener('change', searchFriendsByUserName);
 
@@ -40,10 +54,15 @@ elements.inputToSendMessages.addEventListener('keypress', async () => {
 
 window.addEventListener('resize', indexView.scrollMessagesContainerToBottom);
 
+elements.displayEmojisButton.addEventListener('click', () => {
+    indexView.displayEmojisContainer();
+});
+
+
 async function sendMessage(message) {
     const relationShipId = indexView.getRelationShipId();
 
-    const convertedMessage = Emotes.convertTextToEmotes(message);
+    const convertedMessage = EmojisConverter.convertTextToEmotes(message);
 
     const resultMessage = await Index.addMessage(convertedMessage, relationShipId);
     await messengerHub.sendMessage(resultMessage);    

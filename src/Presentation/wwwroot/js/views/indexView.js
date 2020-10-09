@@ -154,6 +154,10 @@ export const setRelationShipsDataset = relationShips => {
     elements.friendsContainer.dataset.relationships = relationShips;
 }
 
+export const displayEmojisContainer = () => {
+    elements.emojisContainer.classList.toggle('active');
+};
+
 export const removeFriendRequestContainer = friendContainer => {
     friendContainer.removeChild(friendContainer.firstElementChild);
 };
@@ -179,6 +183,12 @@ export const clearInputToSendMessages = () => {
     elements.inputToSendMessages.value = "";
 };
 
+export const addEmojiToInputToSendMessagesInput = e => {
+    const emoji = e.path[0].innerText;
+
+    elements.inputToSendMessages.value += emoji;
+};
+
 export const scrollMessagesContainerToBottom = () => {
     const scrollHeight = elements.messagesContainer.scrollHeight;
     const clientHeight = elements.messagesContainer.clientHeight;
@@ -188,6 +198,14 @@ export const scrollMessagesContainerToBottom = () => {
 
 export const getCurrentUserId = () => {
     return elements.mainContainer.dataset.userid;
+};
+
+export const renderEmojisToEmojisContainer = async emojis => {
+    await emojis.forEach(emoji => {
+        const markup = `<button class="emojis__button">${emoji}</button>`;
+
+        elements.emojisContainer.insertAdjacentHTML('beforeend', markup);
+    });
 };
 
 
