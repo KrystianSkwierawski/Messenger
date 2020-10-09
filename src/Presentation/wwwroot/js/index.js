@@ -9,9 +9,9 @@ addEmojisToEmojisContainer(Emojis.smileys);
 
 async function addEmojisToEmojisContainer(emojis) {   
     await indexView.renderEmojisToEmojisContainer(emojis);
-    const emojisButton = document.querySelectorAll('.emojis__button');
+    const emojiButtons = document.querySelectorAll('.emoji__button');
 
-    Array.from(emojisButton).forEach(emojiButton => {
+    Array.from(emojiButtons).forEach(emojiButton => {
         emojiButton.addEventListener('click', e => {
             indexView.addEmojiToInputToSendMessagesInput(e);
         });

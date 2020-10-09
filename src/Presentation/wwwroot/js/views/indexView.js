@@ -202,7 +202,7 @@ export const getCurrentUserId = () => {
 
 export const renderEmojisToEmojisContainer = async emojis => {
     await emojis.forEach(emoji => {
-        const markup = `<button class="emojis__button">${emoji}</button>`;
+        const markup = `<button class="emoji__button">${emoji}</button>`;
 
         elements.emojisContainer.insertAdjacentHTML('beforeend', markup);
     });
