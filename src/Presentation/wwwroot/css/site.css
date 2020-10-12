@@ -261,11 +261,19 @@ html {
     font-size: 100%;
 }
 
-.display-emojis__button {
+.display-emojis__button, .send-message__button {
     border: none;
     background-color: transparent;
-    font-size: 22px;
 }
+
+.display-emojis__button {
+    font-size: 18px;
+}
+
+.send-message__button {
+    font-size: 30px;
+}
+
 
 .emojis__container {
     position: absolute;
@@ -291,6 +299,14 @@ html {
     background-color: transparent;
 }
 
+@media (min-width: 992px) {
+    .emojis__container {
+        height: 30%;
+        width: 40%;
+        right: 0;
+        transform: translate(0);
+    }
+}
 
 @media (min-width: 1300px) {
     .menu__button {

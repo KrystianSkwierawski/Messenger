@@ -24,6 +24,13 @@ elements.menuButton.addEventListener('click', indexView.slideOutSideMenu);
 
 elements.addFriendButton.addEventListener('click', trySendFriendRequest);
 
+elements.sendMessageButton.addEventListener('click', async () => {
+    const message = indexView.getInputToSendMessagesValue();
+
+    await sendMessage(message);
+    indexView.clearInputToSendMessages();
+});
+
 elements.friendsContainer.addEventListener('click', async e => {
 
     if (e.target.matches(`.${elementStrings.friendAcceptRequest}`)) {
@@ -36,6 +43,7 @@ elements.friendsContainer.addEventListener('click', async e => {
 
     if (e.target.matches(`.${elementStrings.friendDetails}, .${elementStrings.friendDetails} *`)) {
         await openRelationShip(e);
+        indexView.slideOutSideMenu();
         indexView.scrollMessagesContainerToBottom();  
     }
 });

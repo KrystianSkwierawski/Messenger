@@ -12,6 +12,7 @@
     inputToSendMessagesContainer: document.querySelector('.input-to-send-messages__container'),
     displayEmojisButton: document.querySelector('.display-emojis__button'),
     emojisContainer: document.querySelector('.emojis__container'),
+    sendMessageButton: document.querySelector('.send-message__button')
 };
 
 export const elementStrings = {
