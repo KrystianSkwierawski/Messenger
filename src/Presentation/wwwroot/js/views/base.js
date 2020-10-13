@@ -12,7 +12,9 @@
     inputToSendMessagesContainer: document.querySelector('.input-to-send-messages__container'),
     displayEmojisButton: document.querySelector('.display-emojis__button'),
     emojisContainer: document.querySelector('.emojis__container'),
-    sendMessageButton: document.querySelector('.send-message__button')
+    sendMessageButton: document.querySelector('.send-message__button'),
+    emojis: document.querySelector('.emojis'),
+    emojiTypeButton: document.querySelectorAll('.emoji-type__button')
 };
 
 export const elementStrings = {
@@ -21,4 +23,5 @@ export const elementStrings = {
     friendRequest: 'friend__request',
     friendContainer: 'friend__container',
     friendDetails: 'friend__details',
+    emojiTypeButtonActive: 'emoji-type__button_active'
 };

@@ -13,10 +13,45 @@ async function addEmojisToEmojisContainer(emojis) {
 
     Array.from(emojiButtons).forEach(emojiButton => {
         emojiButton.addEventListener('click', e => {
-            indexView.addEmojiToInputToSendMessagesInput(e);
+            indexView.addEmojiToInputToSendMessagesInput(e.target.innerText);
         });
     });
 };
+
+Array.from(elements.emojiTypeButton).forEach(emojiTypeButton => {
+    emojiTypeButton.addEventListener('click', e => {
+        indexView.changeActiveEmojiTypeButton(e.target);
+
+        const emojiType = e.target.id;
+
+        switch (emojiType) {
+            case 'smileys':
+                addEmojisToEmojisContainer(Emojis.smileys);
+                break;
+
+            case 'gesturesAndBodyParts':
+                addEmojisToEmojisContainer(Emojis.gesturesAndBodyParts);
+                break;
+
+            case 'peopleAndFantasy':
+                addEmojisToEmojisContainer(Emojis.peopleAndFantasy);
+                break;
+
+            case 'activityAndSports':
+                addEmojisToEmojisContainer(Emojis.activityAndSports);
+                break;
+
+            case 'foodAndDrink':
+                addEmojisToEmojisContainer(Emojis.foodAndDrink);
+                break;
+
+            case 'animalsAndNature':
+                addEmojisToEmojisContainer(Emojis.animalsAndNature);
+                break;
+        }
+    });
+});
+
 
 elements.searchInput.addEventListener('change', searchFriendsByUserName);
 
@@ -26,8 +61,12 @@ elements.addFriendButton.addEventListener('click', trySendFriendRequest);
 
 elements.sendMessageButton.addEventListener('click', async () => {
     const message = indexView.getInputToSendMessagesValue();
+    const inputIsNotEmpty = message.trim() ? true : false;
 
-    await sendMessage(message);
+    if (inputIsNotEmpty) {
+        await sendMessage(message);
+    }
+    
     indexView.clearInputToSendMessages();
 });
 

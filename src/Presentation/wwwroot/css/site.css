@@ -274,11 +274,14 @@ html {
     font-size: 30px;
 }
 
+.message-content__container{
+    font-size: 17px;
+}
 
 .emojis__container {
     position: absolute;
-    background-color: white;
-    bottom: 15%;
+    background-color: #2F3136;
+    bottom: 20%;
     left: 50%;
     transform: translateX(-50%);
     height: 30%;
@@ -290,7 +293,20 @@ html {
 }
 
 .emojis__container.active {
-    display: inline;
+    display: flex;
+    flex-direction: column;
+}
+
+.emojis-types__container {
+    display: flex;
+}
+
+.emoji-type__button_active {
+    background-color: #747579 !important;
+}
+
+.emojis{
+    flex-grow: 1;
 }
 
 

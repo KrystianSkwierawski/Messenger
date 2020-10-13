@@ -132,7 +132,7 @@ export const renderMessage = message => {
                             <p class="message__date-sended ml-1 text-secondary">${message.dateSended}</p>
                         </div>
 
-                        <div class="ml-3 text-white">
+                        <div class="ml-3 text-white message-content__container">
                             ${message.content}
                         </div>
                     </div>
@@ -183,9 +183,7 @@ export const clearInputToSendMessages = () => {
     elements.inputToSendMessages.value = "";
 };
 
-export const addEmojiToInputToSendMessagesInput = e => {
-    const emoji = e.path[0].innerText;
-
+export const addEmojiToInputToSendMessagesInput = emoji => {
     elements.inputToSendMessages.value += emoji;
 };
 
@@ -201,11 +199,20 @@ export const getCurrentUserId = () => {
 };
 
 export const renderEmojisToEmojisContainer = async emojis => {
+    elements.emojis.innerHTML = "";
+
     await emojis.forEach(emoji => {
         const markup = `<button class="emoji__button">${emoji}</button>`;
 
-        elements.emojisContainer.insertAdjacentHTML('beforeend', markup);
+        elements.emojis.insertAdjacentHTML('beforeend', markup);
     });
+};
+
+export const changeActiveEmojiTypeButton = currentTypeButton => {
+    const previousEmojiTypeButton = document.querySelector(`.${elementStrings.emojiTypeButtonActive}`);
+    previousEmojiTypeButton.classList.toggle(elementStrings.emojiTypeButtonActive);
+
+    currentTypeButton.classList.toggle(elementStrings.emojiTypeButtonActive);
 };
 
 
