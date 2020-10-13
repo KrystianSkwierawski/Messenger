@@ -128,13 +128,26 @@ export const renderMessage = message => {
                     <img src="./images/avatar.jpg" class="message__profile-picture rounded-circle" alt="friend avatar"/>
                     <div class="message__text-container">
                         <div class="information-about-the-message__container">
-                            <h3 class="message__profile-name text-white ml-3 text-primary">${message.applicationUser.userName}</h3>
+                            <h3 class="message__profile-name text-white ml-3 mb-0 text-primary">${message.applicationUser.userName}</h3>
                             <p class="message__date-sended ml-1 text-secondary">${message.dateSended}</p>
+
+                            <div class="dropright ml-2">
+                              <button class="message-settings__button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-h"></i>
+                              </button>
+                              <div class="message-dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item text-white">Edit</button>
+                                <button class="dropdown-item text-white">Remove</button>
+                              </div>
+                            </div>
+
                         </div>
 
                         <div class="ml-3 text-white message-content__container">
                             ${message.content}
                         </div>
+
+                        
                     </div>
                 </div>
         `;

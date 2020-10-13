@@ -309,11 +309,25 @@ html {
     flex-grow: 1;
 }
 
-
 .emojis__container button {
     border: none;
     background-color: transparent;
 }
+
+.message-settings__button {
+    color: #DBDCDD;
+    background-color: transparent;
+    border: none;
+    font-size: 15px;    
+}
+
+.message-dropdown-menu {
+    background-color: #484C52;
+}
+
+    .message-dropdown-menu button:hover {
+        background-color: #484C52 !important;
+    }
 
 @media (min-width: 992px) {
     .emojis__container {
