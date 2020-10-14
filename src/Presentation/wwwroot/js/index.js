@@ -194,7 +194,7 @@ const openRelationShip = async e => {
 };
 
 
-const addEventListeningToAllRemoveMessageButtons = () => {
+export const addEventListeningToAllRemoveMessageButtons = () => {
     const removeMessageButtons = document.querySelectorAll(`.${elementStrings.removeMessageButton}`);
 
     Array.from(removeMessageButtons).forEach(removeMessageButton => {
@@ -210,11 +210,13 @@ const addEventListeningToAllRemoveMessageButtons = () => {
     });
 };
 
-const addEventListeningToAllEditMessageButtons = () => {
+export const addEventListeningToAllEditMessageButtons = () => {
     const editMessageButtons = document.querySelectorAll(`.${elementStrings.editMessageButton}`);
 
     Array.from(editMessageButtons).forEach(editMessageButton => {
         editMessageButton.addEventListener('click', e => {
+            console.log('edit');
+
             //const messageId = indexView.getMessageId(e);
 
             //if (messageId) {

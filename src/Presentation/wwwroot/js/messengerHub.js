@@ -1,5 +1,6 @@
 ﻿import * as indexView from './views/indexView.js';
 import * as Index from './models/Index.js';
+import * as index from './index.js';
 
 var hub = new signalR.HubConnectionBuilder()
     .withUrl('/messengerHub')
@@ -32,7 +33,9 @@ hub.on('RenderNotAcceptedFriend', async invitingUser => {
 
 hub.on('ReceiveMessage', async message => {
     await indexView.renderMessage(message);
-    indexView.scrollMessagesContainerToBottom();   
+    indexView.scrollMessagesContainerToBottom();
+    index.addEventListeningToAllEditMessageButtons();
+    index.addEventListeningToAllRemoveMessageButtons();
 });
 
 hub.start().then(function () {
