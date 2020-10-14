@@ -23,5 +23,8 @@ export const elementStrings = {
     friendRequest: 'friend__request',
     friendContainer: 'friend__container',
     friendDetails: 'friend__details',
-    emojiTypeButtonActive: 'emoji-type__button_active'
+    emojiTypeButtonActive: 'emoji-type__button_active',
+    emojiButton: 'emoji__button',
+    removeMessageButton: 'remove-message__button',
+    editMessageButton: 'edit-message__button'
 };

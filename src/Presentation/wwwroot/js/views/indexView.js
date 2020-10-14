@@ -94,13 +94,13 @@ export const renderFriends = friends => {
     });
 };
 
-export const renderRelationShip = (messages, userName) => {
+export const renderRelationShip = async (messages, userName) => {
     setMenuFriendName(userName);
     showInputToSendMessagesContainer();
 
     if (messages) {
         clearMessagesContainer();
-        messages.forEach(message => renderMessage(message));
+        await messages.forEach(message => renderMessage(message));
     }
 };
 
@@ -124,7 +124,7 @@ const showInputToSendMessagesContainer = () => {
 
 export const renderMessage = message => {
     const markup = `
-                <div class="message mt-3">
+                <div class="message mt-3" id="${message.id}">
                     <img src="./images/avatar.jpg" class="message__profile-picture rounded-circle" alt="friend avatar"/>
                     <div class="message__text-container">
                         <div class="information-about-the-message__container">
@@ -136,14 +136,14 @@ export const renderMessage = message => {
                                 <i class="fas fa-ellipsis-h"></i>
                               </button>
                               <div class="message-dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item text-white">Edit</button>
-                                <button class="dropdown-item text-white">Remove</button>
+                                <button class="dropdown-item text-white edit-message__button">Edit</button>
+                                <button class="dropdown-item text-white remove-message__button">Remove</button>
                               </div>
                             </div>
 
                         </div>
 
-                        <div class="ml-3 text-white message-content__container">
+                        <div class="ml-3 text-white message-content__container text-break">
                             ${message.content}
                         </div>
 

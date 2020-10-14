@@ -9,7 +9,7 @@ addEmojisToEmojisContainer(Emojis.smileys);
 
 async function addEmojisToEmojisContainer(emojis) {   
     await indexView.renderEmojisToEmojisContainer(emojis);
-    const emojiButtons = document.querySelectorAll('.emoji__button');
+    const emojiButtons = document.querySelectorAll(`.${elementStrings.emojiButton}`);
 
     Array.from(emojiButtons).forEach(emojiButton => {
         emojiButton.addEventListener('click', e => {
@@ -53,11 +53,80 @@ Array.from(elements.emojiTypeButton).forEach(emojiTypeButton => {
 });
 
 
+function searchFriendsByUserName() {
+    const friends = indexView.getFriends();
+    const userName = indexView.getSearchingUserName().toLowerCase();
+
+    const filteredFriends = friends.filter(x => x.userName.toLowerCase().includes(userName));
+
+    if (filteredFriends) {
+        indexView.clearFriendsContainer();
+        indexView.renderFriends(filteredFriends);
+    }
+}
+
 elements.searchInput.addEventListener('change', searchFriendsByUserName);
 
 elements.menuButton.addEventListener('click', indexView.slideOutSideMenu);
 
+const doesNotHaveThisFriend = friendName => {
+    const friends = indexView.getFriends();
+
+    const result = friends.filter(x => x.userName === friendName);
+
+    return result.length === 0 ? true : false;
+};
+
+const doesNotInvitingHimSelf = friendName => {
+    const currentUserId = indexView.getUserName();
+
+    return friendName === currentUserId ? false : true;
+};
+
+async function trySendFriendRequest() {
+    const friendName = prompt('Friend name:');
+
+    if (doesNotInvitingHimSelf(friendName) && doesNotHaveThisFriend(friendName)) {
+        const result = await Index.sendFriendRequest(friendName);
+
+        if (result.userExist) {
+            toastr.success('The friend request has been sent');
+            indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
+            indexView.setFriendDataset(JSON.stringify(result.friends));
+            messengerHub.sendFriendRequest(friendName);
+        }
+        else {
+            toastr.info('There is no such user');
+        }
+    }
+    else {
+        console.log('error');
+    }
+}
+
 elements.addFriendButton.addEventListener('click', trySendFriendRequest);
+
+async function sendMessage(message) {
+    const relationShipId = indexView.getRelationShipId();
+
+    const convertedMessage = EmojisConverter.convertTextToEmojis(message);
+
+    const resultMessage = await Index.addMessage(convertedMessage, relationShipId);
+    await messengerHub.sendMessage(resultMessage);
+};
+
+elements.inputToSendMessages.addEventListener('keypress', async () => {
+    const enterKey = 13;
+    const message = indexView.getInputToSendMessagesValue();
+
+    const inputIsNotEmpty = message.trim() ? true : false;
+
+    if (event.keyCode === enterKey && inputIsNotEmpty && !event.shiftKey) {
+        await sendMessage(message);
+        indexView.clearInputToSendMessages();
+    }
+});
+
 
 elements.sendMessageButton.addEventListener('click', async () => {
     const message = indexView.getInputToSendMessagesValue();
@@ -84,36 +153,11 @@ elements.friendsContainer.addEventListener('click', async e => {
         await openRelationShip(e);
         indexView.slideOutSideMenu();
         indexView.scrollMessagesContainerToBottom();  
+
+        addEventListeningToAllRemoveMessageButtons();
+        addEventListeningToAllEditMessageButtons();
     }
 });
-
-elements.inputToSendMessages.addEventListener('keypress', async () => {
-    const enterKey = 13;
-    const message = indexView.getInputToSendMessagesValue();
-
-    const inputIsNotEmpty = message.trim() ? true : false;
-
-    if (event.keyCode === enterKey && inputIsNotEmpty && !event.shiftKey) {       
-       await sendMessage(message);      
-       indexView.clearInputToSendMessages();             
-    }
-});
-
-window.addEventListener('resize', indexView.scrollMessagesContainerToBottom);
-
-elements.displayEmojisButton.addEventListener('click', () => {
-    indexView.displayEmojisContainer();
-});
-
-
-async function sendMessage(message) {
-    const relationShipId = indexView.getRelationShipId();
-
-    const convertedMessage = EmojisConverter.convertTextToEmojis(message);
-
-    const resultMessage = await Index.addMessage(convertedMessage, relationShipId);
-    await messengerHub.sendMessage(resultMessage);    
-};
 
 async function acceptFriendRequest(e) {
     const friendContainer = e.target.parentNode.parentNode;
@@ -138,60 +182,40 @@ async function rejectFriendRequest(e) {
     indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
 }
 
-async function trySendFriendRequest() {
-    const friendName = prompt('Friend name:');
-
-    if (doesNotInvitingHimSelf(friendName) && doesNotHaveThisFriend(friendName)) {
-        const result = await Index.sendFriendRequest(friendName);
-
-        if (result.userExist) {
-            toastr.success('The friend request has been sent');
-            indexView.setRelationShipsDataset(JSON.stringify(result.relationShips));
-            indexView.setFriendDataset(JSON.stringify(result.friends));
-            messengerHub.sendFriendRequest(friendName);
-        }
-        else {
-            toastr.info('There is no such user');
-        }
-    }
-    else {
-        console.log('error');
-    }
-}
-
-function searchFriendsByUserName() {
-    const friends = indexView.getFriends();
-    const userName = indexView.getSearchingUserName().toLowerCase();
-
-    const filteredFriends = friends.filter(x => x.userName.toLowerCase().includes(userName));
-
-    if (filteredFriends) {
-        indexView.clearFriendsContainer();
-        indexView.renderFriends(filteredFriends);
-    }  
-}
-
-const openRelationShip = async e => {  
+const openRelationShip = async e => {
     const friendDetails = indexView.getFriendDetails(e);
 
     const result = await Index.getMessagesOfCurrentRelationShipAndRelationShipId(friendDetails.id);
 
-    indexView.setRelationShipIdDataset(result.relationShipId);
-    indexView.renderRelationShip(result.messages, friendDetails.userName);
-
     await messengerHub.joinGroup(result.relationShipId);
+
+    indexView.setRelationShipIdDataset(result.relationShipId);
+    await indexView.renderRelationShip(result.messages, friendDetails.userName);
 };
 
-const doesNotHaveThisFriend = friendName => {
-    const friends = indexView.getFriends();
 
-    const result = friends.filter(x => x.userName === friendName);
+const addEventListeningToAllRemoveMessageButtons = () => {
+    const removeMessageButtons = document.querySelectorAll(`.${elementStrings.removeMessageButton}`);
 
-    return result.length === 0 ? true : false;
+    Array.from(removeMessageButtons).forEach(removeMessageButton => {
+        removeMessageButton.addEventListener('click', e => {
+            console.log("remove");
+        });
+    });
 };
 
-const doesNotInvitingHimSelf = friendName => {
-    const currentUserId = indexView.getUserName();
+const addEventListeningToAllEditMessageButtons = () => {
+    const editMessageButtons = document.querySelectorAll(`.${elementStrings.editMessageButton}`);
 
-    return friendName === currentUserId ? false : true;
+    Array.from(editMessageButtons).forEach(editMessageButton => {
+        editMessageButton.addEventListener('click', e => {
+            console.log("message");
+        });
+    });
 };
+
+window.addEventListener('resize', indexView.scrollMessagesContainerToBottom);
+
+elements.displayEmojisButton.addEventListener('click', () => {
+    indexView.displayEmojisContainer();
+});

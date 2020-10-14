@@ -119,13 +119,15 @@ html {
     display: flex;
     flex-direction: column;
     overflow: auto;
+    width: 96%;
 }
 
 .input-to-send-messages__container {
-    width: 90%;
+    flex-grow: 1;
     height: auto;
-    align-self: center;
+    margin-left: 2%;
     display: none;
+    margin-right: 2%;
 }
 
     .input-to-send-messages__container.active {
@@ -142,7 +144,7 @@ html {
 }
 
 
-    .input-to-send-messages::-webkit-scrollbar {
+    .input-to-send-messages::-webkit-scrollbar, .messages__container::-webkit-scrollbar {
         display: none;
     }
 
@@ -226,14 +228,14 @@ html {
 }
 
 .message__profile-picture {
-    width: 15%;
+    width: 13%;
     height: auto;
-    align-self: center;
+    align-self: flex-start;
     justify-self: center;
 }
 
 .message {
-    margin-left: 5%;
+    margin-left: 2%;
     display: flex;
 }
 
