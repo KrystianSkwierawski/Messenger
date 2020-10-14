@@ -133,6 +133,18 @@ namespace Messenger.Areas.User.Controllers
             return new JsonResult(message);
         }
 
+        [HttpPost]
+        public async Task<ActionResult> RemoveMessage(int messageId)
+        {
+            base.Ok(await Mediator.Send(new RemoveMessageCommand
+            {
+                MessageId = messageId
+            }));
+
+            return new JsonResult(new EmptyResult());
+        }
+
+
 
         [HttpPost]
         public async Task<ActionResult> AcceptFriendRequest(string invitingUserId)

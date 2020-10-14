@@ -14,6 +14,13 @@ hub.on('RenderAcceptedFriend', async invitedUser => {
     indexView.setFriendDataset(JSON.stringify(result.friends));
 });
 
+hub.on('RemoveMessage', messageId => {
+    const message = document.getElementById(messageId);
+    if (message) {
+        indexView.removeMessage(message);
+    }
+});
+
 hub.on('RenderNotAcceptedFriend', async invitingUser => {
     indexView.renderNotAcceptedFriend(invitingUser);
 
@@ -52,4 +59,8 @@ export const tryToRenderAFriendToTheSender = async invitingUserId => {
 
 export const sendFriendRequest = async invitedUserName => {
     await hub.invoke('SendFriendRequest', invitedUserName);
+};
+
+export const tryRemoveMessage = async messageId => {
+    await hub.invoke('TryRemoveMessage', messageId);
 };

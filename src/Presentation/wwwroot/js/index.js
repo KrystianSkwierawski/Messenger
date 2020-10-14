@@ -198,8 +198,14 @@ const addEventListeningToAllRemoveMessageButtons = () => {
     const removeMessageButtons = document.querySelectorAll(`.${elementStrings.removeMessageButton}`);
 
     Array.from(removeMessageButtons).forEach(removeMessageButton => {
-        removeMessageButton.addEventListener('click', e => {
-            console.log("remove");
+        removeMessageButton.addEventListener('click', async e => {
+            const messageId = indexView.getMessageId(e);
+
+            if (messageId) {
+                await Index.removeMessage(messageId);
+
+                await messengerHub.tryRemoveMessage(messageId);
+            }
         });
     });
 };
@@ -209,7 +215,14 @@ const addEventListeningToAllEditMessageButtons = () => {
 
     Array.from(editMessageButtons).forEach(editMessageButton => {
         editMessageButton.addEventListener('click', e => {
-            console.log("message");
+            //const messageId = indexView.getMessageId(e);
+
+            //if (messageId) {
+
+            //    // odpal input do wpisywania wiadomosci
+
+            //    // await Index.editMessage(messageId);
+            //}
         });
     });
 };

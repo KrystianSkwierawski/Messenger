@@ -125,6 +125,7 @@ html {
 .input-to-send-messages__container {
     flex-grow: 1;
     height: auto;
+    max-height: 58px;
     margin-left: 2%;
     display: none;
     margin-right: 2%;
@@ -141,6 +142,7 @@ html {
     height: auto;
     resize: none;
     color: white;
+    
 }
 
 

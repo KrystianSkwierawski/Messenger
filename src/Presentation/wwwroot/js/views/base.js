@@ -14,7 +14,8 @@
     emojisContainer: document.querySelector('.emojis__container'),
     sendMessageButton: document.querySelector('.send-message__button'),
     emojis: document.querySelector('.emojis'),
-    emojiTypeButton: document.querySelectorAll('.emoji-type__button')
+    emojiTypeButton: document.querySelectorAll('.emoji-type__button'),
+    menuFriendName: document.querySelector('.menu__friend-name')
 };
 
 export const elementStrings = {
@@ -26,5 +27,6 @@ export const elementStrings = {
     emojiTypeButtonActive: 'emoji-type__button_active',
     emojiButton: 'emoji__button',
     removeMessageButton: 'remove-message__button',
-    editMessageButton: 'edit-message__button'
+    editMessageButton: 'edit-message__button',
+    message: 'message',
 };

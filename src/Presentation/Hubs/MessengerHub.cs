@@ -82,6 +82,16 @@ namespace Presentation.Hubs
             await LeaveGroupIfGroupsContainsConnectionId();
         } 
 
+        public async Task TryRemoveMessage(string messageId)
+        {
+            if (_groups.ContainsKey(Context.ConnectionId))
+            {
+                string groupName = _groups[Context.ConnectionId];
+
+                await Clients.Group(groupName).SendAsync("RemoveMessage", messageId);
+            }
+        }
+
         private async Task LeaveGroupIfGroupsContainsConnectionId()
         {          
             if (_groups.ContainsKey(Context.ConnectionId))

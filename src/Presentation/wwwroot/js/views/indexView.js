@@ -228,4 +228,16 @@ export const changeActiveEmojiTypeButton = currentTypeButton => {
     currentTypeButton.classList.toggle(elementStrings.emojiTypeButtonActive);
 };
 
+export const getMessageId = e => {
+    return e.target.closest(`.${elementStrings.message}`).id;
+};
+
+export const removeMessage = message => {   
+    message.parentNode.removeChild(message);
+};
+
+export const getCurrentRelationShipFriendName = () => {
+    return elements.menuFriendName.innerHTML;
+};
+
 

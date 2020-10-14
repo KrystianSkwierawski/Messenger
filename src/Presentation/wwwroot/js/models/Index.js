@@ -85,6 +85,21 @@ export async function addMessage(messageContent, relationShipId) {
     }
 }
 
+export async function removeMessage(messageId) {
+    try {
+        await $.ajax({
+            url: '/User/Home/RemoveMessage',
+            type: 'POST',
+            data: {
+                messageId: messageId
+            },
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export async function getFriendsAndRelationShips() {
     try {
         const result = await $.ajax({
