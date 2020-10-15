@@ -215,16 +215,17 @@ export const addEventListeningToAllEditMessageButtons = () => {
 
     Array.from(editMessageButtons).forEach(editMessageButton => {
         editMessageButton.addEventListener('click', e => {
-            console.log('edit');
 
-            //const messageId = indexView.getMessageId(e);
+            const messageId = indexView.getMessageId(e);
 
-            //if (messageId) {
+            if (messageId) {
 
-            //    // odpal input do wpisywania wiadomosci
+                console.log(e.target.closest(`.${elementStrings.messageContentContainer}`));
 
-            //    // await Index.editMessage(messageId);
-            //}
+                // odpal input do wpisywania wiadomosci
+
+                // await Index.editMessage(messageId, content);
+            }
         });
     });
 };

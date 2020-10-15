@@ -29,4 +29,14 @@ export const elementStrings = {
     removeMessageButton: 'remove-message__button',
     editMessageButton: 'edit-message__button',
     message: 'message',
+    messageContentContainer: 'message-content__container',
+    messageSettingsButton: 'message-settings__button',
+    messageProfileName: 'message__profile-name',
+    messageDateSended: 'message__date-sended',
+    informationAboutTheMessageContainer: 'information-about-the-message__container',
+    messageTextContainer: 'message__text-container',
+    messageProfilePicture: 'message__profile-picture',
+    messageDropdownMenu: 'message-dropdown-menu',
+    friendImage: 'friend__image',
+    friendName: 'friend__name'
 };

@@ -37,10 +37,10 @@ export const clearFriendsContainer = () => {
 
 export const renderAcceptedFriend = friend => {
     const markup = `
-                        <div class="friend__container" id="${friend.id}">
-                            <button class="friend__details ml-3 mb-4">
-                                <img src="./images/avatar.jpg" class="friend__image rounded-circle" alt="friend avatar"/>
-                                <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
+                        <div class="${elementStrings.friendContainer}" id="${friend.id}">
+                            <button class="${elementStrings.friendDetails} ml-3 mb-4">
+                                <img src="./images/avatar.jpg" class="${elementStrings.friendImage} rounded-circle" alt="friend avatar"/>
+                                <h2 class="${elementStrings.friendName} text-white ml-2 text-break">${friend.userName}</h2>
                             </button>
                         </div>
     `;
@@ -50,14 +50,14 @@ export const renderAcceptedFriend = friend => {
 
 export const renderNotAcceptedFriend = friend => {
     const markup = `
-                        <div class="friend__container" id="${friend.id}">
-                            <div class="friend__request ml-3 mb-1">
-                                <button class="fas fa-check text-success p-0 friend__accept-request btn btn-link"></button>
-                                <button class="fas fa-times ml-2 text-danger p-0 friend__reject-request btn btn-link"></button>
+                        <div class="${elementStrings.friendContainer}" id="${friend.id}">
+                            <div class="${elementStrings.friendRequest} ml-3 mb-1">
+                                <button class="fas fa-check text-success p-0 ${elementStrings.friendAcceptRequest} btn btn-link"></button>
+                                <button class="fas fa-times ml-2 text-danger p-0 ${elementStrings.friendRejectRequest} btn btn-link"></button>
                             </div>
-                            <button disabled class="friend__details ml-3 mb-4">
-                                <img src="./images/avatar.jpg" class="friend__image rounded-circle" alt="friend avatar"/>
-                                <h2 class="friend__name text-white ml-2 text-break">${friend.userName}</h2>
+                            <button disabled class="${elementStrings.friendDetails} ml-3 mb-4">
+                                <img src="./images/avatar.jpg" class="${elementStrings.friendImage} rounded-circle" alt="friend avatar"/>
+                                <h2 class="${elementStrings.friendName} text-white ml-2 text-break">${friend.userName}</h2>
                             </button>
                         </div>
     `;
@@ -124,26 +124,26 @@ const showInputToSendMessagesContainer = () => {
 
 export const renderMessage = message => {
     const markup = `
-                <div class="message mt-3" id="${message.id}">
-                    <img src="./images/avatar.jpg" class="message__profile-picture rounded-circle" alt="friend avatar"/>
-                    <div class="message__text-container">
-                        <div class="information-about-the-message__container">
-                            <h3 class="message__profile-name text-white ml-3 mb-0 text-primary">${message.applicationUser.userName}</h3>
-                            <p class="message__date-sended ml-1 text-secondary">${message.dateSended}</p>
+                <div class="${elementStrings.message} mt-3" id="${message.id}">
+                    <img src="./images/avatar.jpg" class="${elementStrings.messageProfilePicture} rounded-circle" alt="friend avatar"/>
+                    <div class="${elementStrings.messageTextContainer}">
+                        <div class="${elementStrings.informationAboutTheMessageContainer}">
+                            <h3 class="${elementStrings.messageProfileName} text-white ml-3 mb-0 text-primary">${message.applicationUser.userName}</h3>
+                            <p class="${elementStrings.messageDateSended} ml-1 text-secondary">${message.dateSended}</p>
 
                             <div class="dropright ml-2">
-                              <button class="message-settings__button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <button class="${elementStrings.messageSettingsButton}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-h"></i>
                               </button>
-                              <div class="message-dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item text-white edit-message__button">Edit</button>
-                                <button class="dropdown-item text-white remove-message__button">Remove</button>
+                              <div class="${elementStrings.messageDropdownMenu} dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item text-white ${elementStrings.editMessageButton}">Edit</button>
+                                <button class="dropdown-item text-white ${elementStrings.removeMessageButton}">Remove</button>
                               </div>
                             </div>
 
                         </div>
 
-                        <div class="ml-3 text-white message-content__container text-break">
+                        <div class="ml-3 text-white ${elementStrings.messageContentContainer} text-break">
                             ${message.content}
                         </div>
 
@@ -215,7 +215,7 @@ export const renderEmojisToEmojisContainer = async emojis => {
     elements.emojis.innerHTML = "";
 
     await emojis.forEach(emoji => {
-        const markup = `<button class="emoji__button">${emoji}</button>`;
+        const markup = `<button class="${elementStrings.emojiButton}">${emoji}</button>`;
 
         elements.emojis.insertAdjacentHTML('beforeend', markup);
     });
