@@ -38,5 +38,9 @@ export const elementStrings = {
     messageProfilePicture: 'message__profile-picture',
     messageDropdownMenu: 'message-dropdown-menu',
     friendImage: 'friend__image',
-    friendName: 'friend__name'
+    friendName: 'friend__name',
+    editMessageInput: 'edit-message__input',
+    saveEditMessageButton: 'save-edit-message__button',
+    cancelEditMessageButton: 'cancel-edit-message__button',
+    editMessageContainer: 'edit-message__container'
 };

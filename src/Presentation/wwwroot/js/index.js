@@ -199,12 +199,13 @@ export const addEventListeningToAllRemoveMessageButtons = () => {
 
     Array.from(removeMessageButtons).forEach(removeMessageButton => {
         removeMessageButton.addEventListener('click', async e => {
-            const messageId = indexView.getMessageId(e);
 
-            if (messageId) {
-                await Index.removeMessage(messageId);
+            const message = e.target.closest(`.${elementStrings.message}`)
 
-                await messengerHub.tryRemoveMessage(messageId);
+            if (message.id) {
+                await Index.removeMessage(message.id);
+
+                await messengerHub.tryRemoveMessage(message.id);
             }
         });
     });
@@ -216,17 +217,36 @@ export const addEventListeningToAllEditMessageButtons = () => {
     Array.from(editMessageButtons).forEach(editMessageButton => {
         editMessageButton.addEventListener('click', e => {
 
-            const messageId = indexView.getMessageId(e);
+            const message = e.target.closest(`.${elementStrings.message}`)
 
-            if (messageId) {
+            if (message.id) {
 
-                console.log(e.target.closest(`.${elementStrings.messageContentContainer}`));
+                const anyEditMessageContainer = document.querySelector(`.${elementStrings.editMessageContainer}`);
+                if (anyEditMessageContainer) {
+                    indexView.messageContentContainerChangeToText(anyEditMessageContainer);
+                }
 
-                // odpal input do wpisywania wiadomosci
+                indexView.messageContentContainerChangeToInput(message);
 
-                // await Index.editMessage(messageId, content);
+                addEventListeningToSaveEditMessage();
+                addEventListeningToCancelEditMessage();
             }
         });
+    });
+};
+
+export const addEventListeningToSaveEditMessage = () => {
+    document.querySelector(`.${elementStrings.saveEditMessageButton}`).addEventListener('click', e => {
+        console.log('save');
+    });
+};
+
+export const addEventListeningToCancelEditMessage = () => {
+    document.querySelector(`.${elementStrings.cancelEditMessageButton}`).addEventListener('click', e => {
+        const message = e.target.closest(`.${elementStrings.message}`);
+        
+        const editMessageContainer = e.target.closest(`.${elementStrings.editMessageContainer}`);
+        indexView.messageContentContainerChangeToText(editMessageContainer);      
     });
 };
 

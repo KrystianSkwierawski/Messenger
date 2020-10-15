@@ -228,10 +228,6 @@ export const changeActiveEmojiTypeButton = currentTypeButton => {
     currentTypeButton.classList.toggle(elementStrings.emojiTypeButtonActive);
 };
 
-export const getMessageId = e => {
-    return e.target.closest(`.${elementStrings.message}`).id;
-};
-
 export const removeMessage = message => {   
     message.parentNode.removeChild(message);
 };
@@ -239,6 +235,31 @@ export const removeMessage = message => {
 export const getCurrentRelationShipFriendName = () => {
     return elements.menuFriendName.innerHTML;
 };
+
+export const messageContentContainerChangeToInput = message => {
+    const messageContentContainer = message.querySelector(`.${elementStrings.messageContentContainer}`);
+    const content = messageContentContainer.innerText;
+
+    const markup =
+       `
+        <div class="edit-message__container">
+            <textarea class="${elementStrings.editMessageInput} p-2" >${content}</textarea>
+            <button class="${elementStrings.saveEditMessageButton}">Save</button>
+            <button class="${elementStrings.cancelEditMessageButton} pl-2">Cancel</button
+        </div>
+        `;
+
+    messageContentContainer.innerHTML = markup;
+};
+
+export const messageContentContainerChangeToText = editMessageContainer => {
+    const content = editMessageContainer.querySelector(`.${elementStrings.editMessageInput}`).innerHTML;
+
+    const messageContentContainer = editMessageContainer.parentNode;
+
+    messageContentContainer.innerHTML = content;
+};
+
 
 
 

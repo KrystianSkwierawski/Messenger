@@ -333,6 +333,20 @@ html {
         background-color: #484C52 !important;
     }
 
+.edit-message__input {
+    background-color: #40444B;
+    border-radius: 8px;
+    color: white;
+    width: 100%;
+    min-height: 100px;
+}
+
+.save-edit-message__button, .cancel-edit-message__button {
+    border: none;
+    background-color: transparent;
+    color: #4671C1;
+}
+
 @media (min-width: 992px) {
     .emojis__container {
         height: 30%;
