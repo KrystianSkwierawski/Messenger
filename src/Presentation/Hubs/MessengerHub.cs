@@ -38,7 +38,14 @@ namespace Presentation.Hubs
 
         public async Task SendMessage(Message message)
         {
-            await Clients.Group(message.RelationShipId.ToString()).SendAsync("ReceiveMessage", message);
+            bool groupExist = CheckIfGroupExist(Context.ConnectionId);
+
+            if (groupExist)
+            {
+                string groupName = _groups[Context.ConnectionId];
+
+                await Clients.Group(groupName).SendAsync("ReceiveMessage", message);
+            }         
         }
 
         public async Task TryToRenderAFriendToTheSender(string invitingUserId)
@@ -84,7 +91,9 @@ namespace Presentation.Hubs
 
         public async Task TryRemoveMessage(string messageId)
         {
-            if (_groups.ContainsKey(Context.ConnectionId))
+            bool groupExist = CheckIfGroupExist(Context.ConnectionId);
+
+            if (groupExist)
             {
                 string groupName = _groups[Context.ConnectionId];
 
@@ -93,14 +102,21 @@ namespace Presentation.Hubs
         }
 
         private async Task LeaveGroupIfGroupsContainsConnectionId()
-        {          
-            if (_groups.ContainsKey(Context.ConnectionId))
+        {
+            bool groupExist = CheckIfGroupExist(Context.ConnectionId);
+
+            if (groupExist)
             {
                 string groupName = _groups[Context.ConnectionId];
                 _groups.Remove(Context.ConnectionId);
 
                 await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
             }
+        }
+
+        private bool CheckIfGroupExist(string connectionId)
+        {
+            return _groups.ContainsKey(connectionId) ? true : false;
         }
 
         private void TryRemoveConnection()
