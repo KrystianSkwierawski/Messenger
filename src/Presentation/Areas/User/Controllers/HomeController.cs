@@ -134,6 +134,18 @@ namespace Messenger.Areas.User.Controllers
         }
 
         [HttpPost]
+        public async Task<ActionResult> EditMessage(int messageId, string content)
+        {
+            base.Ok(await Mediator.Send(new UpdateMessageCommand
+            {
+                Content = content,
+                MessageId = messageId
+            }));
+
+            return new JsonResult(new EmptyResult());
+        }
+
+        [HttpPost]
         public async Task<ActionResult> RemoveMessage(int messageId)
         {
             base.Ok(await Mediator.Send(new RemoveMessageCommand
