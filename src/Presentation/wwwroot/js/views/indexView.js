@@ -123,6 +123,23 @@ const showInputToSendMessagesContainer = () => {
 };
 
 export const renderMessage = message => {
+    let editOrRemoveMarkup = "";
+    const userName = getUserName();
+
+    if (userName === message.applicationUser.userName) {
+        editOrRemoveMarkup = `
+                  <div class="dropright ml-2">
+                    <button class="${elementStrings.messageSettingsButton}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+
+                    <div class="${elementStrings.messageDropdownMenu} dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button class="dropdown-item text-white ${elementStrings.editMessageButton}">Edit</button>
+                        <button class="dropdown-item text-white ${elementStrings.removeMessageButton}">Remove</button>
+                    </div>
+                   </div>
+        `;
+    }
     const markup = `
                 <div class="${elementStrings.message} mt-3" id="${message.id}">
                     <img src="./images/avatar.jpg" class="${elementStrings.messageProfilePicture} rounded-circle" alt="friend avatar"/>
@@ -130,23 +147,12 @@ export const renderMessage = message => {
                         <div class="${elementStrings.informationAboutTheMessageContainer}">
                             <h3 class="${elementStrings.messageProfileName} text-white ml-3 mb-0 text-primary">${message.applicationUser.userName}</h3>
                             <p class="${elementStrings.messageDateSended} ml-1 text-secondary">${message.dateSended}</p>
-
-                            <div class="dropright ml-2">
-                              <button class="${elementStrings.messageSettingsButton}" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-h"></i>
-                              </button>
-                              <div class="${elementStrings.messageDropdownMenu} dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <button class="dropdown-item text-white ${elementStrings.editMessageButton}">Edit</button>
-                                <button class="dropdown-item text-white ${elementStrings.removeMessageButton}">Remove</button>
-                              </div>
-                            </div>
-
+                            ${editOrRemoveMarkup}
                         </div>
 
                         <div class="ml-3 text-white ${elementStrings.messageContentContainer} text-break">
                             ${message.content}
                         </div>
-
                         
                     </div>
                 </div>
@@ -263,6 +269,7 @@ export const messageContentContainerChangeToText = editMessageContainer => {
 export const editMessage = (messageId, content) => {
     const message = document.getElementById(messageId);
     const messageContentContainer = message.querySelector(`.${elementStrings.messageContentContainer}`);
+
     messageContentContainer.innerHTML = content;
 };
 
