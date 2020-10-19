@@ -236,8 +236,14 @@ export const addEventListeningToAllEditMessageButtons = () => {
 };
 
 export const addEventListeningToSaveEditMessage = () => {
-    document.querySelector(`.${elementStrings.saveEditMessageButton}`).addEventListener('click', e => {
-        console.log('save');
+    document.querySelector(`.${elementStrings.saveEditMessageButton}`).addEventListener('click', async e => {
+        const editMessageContainer = e.target.closest(`.${elementStrings.editMessageContainer}`);
+
+        const content = editMessageContainer.querySelector(`.${elementStrings.editMessageInput}`).value;
+        const messageId = e.target.closest(`.${elementStrings.message}`).id;
+
+        await messengerHub.tryEditMessage(messageId, content);
+        await Index.editMessage(messageId, content);
     });
 };
 

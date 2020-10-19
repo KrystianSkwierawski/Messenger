@@ -113,3 +113,19 @@ export async function getFriendsAndRelationShips() {
         console.log(error);
     }
 }
+
+export async function editMessage(messageId, content) {
+    try {
+        await $.ajax({
+            url: '/User/Home/EditMessage',
+            type: 'POST',
+            data: {
+                messageId: messageId,
+                content: content
+            }
+        });
+    }
+    catch (error) {
+        console.log(error);
+    }
+}

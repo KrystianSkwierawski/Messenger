@@ -15,6 +15,12 @@ hub.on('RenderAcceptedFriend', async invitedUser => {
     indexView.setFriendDataset(JSON.stringify(result.friends));
 });
 
+
+hub.on('EditMessage', async (messageId, content) => {
+    console.log(messageId, content);
+    indexView.editMessage(messageId, content);
+});
+
 hub.on('RemoveMessage', messageId => {
     const message = document.getElementById(messageId);
     if (message) {
@@ -66,4 +72,8 @@ export const sendFriendRequest = async invitedUserName => {
 
 export const tryRemoveMessage = async messageId => {
     await hub.invoke('TryRemoveMessage', messageId);
+};
+
+export const tryEditMessage = async (messageId, content) => {
+    await hub.invoke('TryEditMessage', messageId, content);
 };

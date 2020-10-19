@@ -260,6 +260,12 @@ export const messageContentContainerChangeToText = editMessageContainer => {
     messageContentContainer.innerHTML = content;
 };
 
+export const editMessage = (messageId, content) => {
+    const message = document.getElementById(messageId);
+    const messageContentContainer = message.querySelector(`.${elementStrings.messageContentContainer}`);
+    messageContentContainer.innerHTML = content;
+};
+
 
 
 

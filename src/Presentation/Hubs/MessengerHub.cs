@@ -89,6 +89,17 @@ namespace Presentation.Hubs
             await LeaveGroupIfGroupsContainsConnectionId();
         } 
 
+        public async Task TryEditMessage(string messageId, string content)
+        {
+            bool groupExist = CheckIfGroupExist(Context.ConnectionId);
+
+            if (groupExist)
+            {
+                string groupName = _groups[Context.ConnectionId];
+                await Clients.Group(groupName).SendAsync("EditMessage", messageId, content);
+            }
+        }
+
         public async Task TryRemoveMessage(string messageId)
         {
             bool groupExist = CheckIfGroupExist(Context.ConnectionId);
