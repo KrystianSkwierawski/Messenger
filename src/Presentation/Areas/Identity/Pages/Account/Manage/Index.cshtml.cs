@@ -1,28 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Application;
+using Application.ApplicationUsers.Command;
+using Domain.Interfaces;
+using Domain.Model;
+using MediatR;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Messenger.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        readonly IWebHostEnvironment _hostEnvironment;
+        readonly IMediator _mediator;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> signInManager,
+            IWebHostEnvironment hostEnvironment,
+            IContext context,
+            IMediator mediator)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _hostEnvironment = hostEnvironment;
+            _mediator = mediator;
         }
 
         public string Username { get; set; }
+        public string ImageUrl { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -35,6 +49,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            public string ImageUrl { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -42,11 +57,15 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+            ApplicationUser applicationUser = user as ApplicationUser;
+
             Username = userName;
+            ImageUrl = applicationUser.ImageUrl;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                ImageUrl = applicationUser.ImageUrl
             };
         }
 
@@ -64,7 +83,32 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            ApplicationUser user = await _userManager.GetUserAsync(User) as ApplicationUser;
+
+            IFormFileCollection files = HttpContext.Request.Form.Files;
+            bool imageExist = ImageFileManagment.CheckIfTheImageExists(files.Count);
+
+            if (imageExist)
+            {
+                string webRootPath = _hostEnvironment.WebRootPath;
+                string fileName = user.UserName;
+                string avatarsPath = Path.Combine(webRootPath, @"images\avatars\");
+                string extenstion = Path.GetExtension(files[0].FileName);
+
+                if (user.ImageUrl != null && user.ImageUrl != ImageFileManagment.DefaultAvatarPath)
+                {
+                    ImageFileManagment.RemoveOldImage(webRootPath, user.ImageUrl);
+                }
+
+                ImageFileManagment.ConvertAndCopyImageToWebRoot(avatarsPath, fileName, extenstion, files[0]);
+
+                await _mediator.Send(new UpdateImageUrlCommand
+                {
+                    UserId = user.Id,
+                    ImageUrl = @"\images\avatars\" + fileName + extenstion,
+                });
+            }
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
