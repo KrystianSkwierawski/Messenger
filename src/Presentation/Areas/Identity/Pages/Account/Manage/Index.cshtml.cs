@@ -1,6 +1,5 @@
 ﻿using Application;
 using Application.ApplicationUsers.Command;
-using Domain.Interfaces;
 using Domain.Model;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
@@ -10,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Messenger.Areas.Identity.Pages.Account.Manage
@@ -26,7 +24,6 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             IWebHostEnvironment hostEnvironment,
-            IContext context,
             IMediator mediator)
         {
             _userManager = userManager;
@@ -92,15 +89,15 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             {
                 string webRootPath = _hostEnvironment.WebRootPath;
                 string fileName = user.UserName;
-                string avatarsPath = Path.Combine(webRootPath, @"images\avatars\");
                 string extenstion = Path.GetExtension(files[0].FileName);
+                ImageFileManagment imageFileManagment = new ImageFileManagment(fileName, extenstion, files[0], webRootPath, user.ImageUrl);
 
                 if (user.ImageUrl != null && user.ImageUrl != ImageFileManagment.DefaultAvatarPath)
                 {
-                    ImageFileManagment.RemoveOldImage(webRootPath, user.ImageUrl);
+                    imageFileManagment.RemoveOldImage();
                 }
 
-                ImageFileManagment.ConvertAndCopyImageToWebRoot(avatarsPath, fileName, extenstion, files[0]);
+                imageFileManagment.ConvertAndCopyImageToWebRoot();
 
                 await _mediator.Send(new UpdateImageUrlCommand
                 {

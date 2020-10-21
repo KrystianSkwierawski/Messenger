@@ -10,25 +10,42 @@ using System.Text.RegularExpressions;
 
 namespace Application
 {
-    public static class ImageFileManagment
+    public class ImageFileManagment
     {
         public static string DefaultAvatarPath = @"\images\avatars\default_avatar.jpg";
 
-        private static void CopyImageToWebRoot(string imagePath, string fileName, string extenstion, MemoryStream image)
+        private string _avatarsPath { get; set; }
+        private string _fileName { get; set; }
+        private string _extenstion { get; set; }
+        private IFormFile _file { get; set; }
+        private string _webRootPath { get; set; }
+        private string  _imageUrl { get; set; }
+
+        public ImageFileManagment(string fileName, string extenstion, IFormFile file, string webRootPath, string imageUrl)
         {
-            using (var filesStreams = new FileStream(Path.Combine(imagePath, fileName + extenstion), FileMode.Create))
+            _avatarsPath = Path.Combine(webRootPath, @"images\avatars\");
+            _fileName = fileName;
+            _extenstion = extenstion.ToLower();
+            _file = file;
+            _webRootPath = webRootPath;
+            _imageUrl = imageUrl;
+        }
+
+        private void CopyImageToWebRoot(MemoryStream Image)
+        {
+            using (var filesStreams = new FileStream(Path.Combine(_avatarsPath, _fileName + _extenstion), FileMode.Create))
             {
-                image.CopyTo(filesStreams);
+                Image.CopyTo(filesStreams);
             }
         }
 
-        public static void ConvertAndCopyImageToWebRoot(string imagePath, string fileName, string extenstion, IFormFile file)
+        public void ConvertAndCopyImageToWebRoot()
         {
-            var encoder = GetEncoder(extenstion);
+            var encoder = GetEncoder();
             if (encoder != null)
             {
                 using (var output = new MemoryStream())
-                using (Image image = Image.Load(file.OpenReadStream()))
+                using (Image image = Image.Load(_file.OpenReadStream()))
                 {
                     int width = 256;
                     int height = 256;
@@ -37,7 +54,7 @@ namespace Application
                     image.Save(output, encoder);
                     output.Position = 0;
 
-                    CopyImageToWebRoot(imagePath, fileName, extenstion, output);
+                    CopyImageToWebRoot(output);
                 }
             }
         }
@@ -47,17 +64,18 @@ namespace Application
             return filesCount > 0 ? true : false;
         }
 
-        public static void RemoveOldImage(string webRootPath, string imageUrl)
+        public void RemoveOldImage()
         {
-            string imagePath = Path.Combine(webRootPath, imageUrl.TrimStart('\\'));
+            string imagePath = Path.Combine(_webRootPath, _imageUrl.TrimStart('\\'));
             if (File.Exists(imagePath))
             {
                 File.Delete(imagePath);
             }
         }
 
-        private static IImageEncoder GetEncoder(string extension)
+        private IImageEncoder GetEncoder()
         {
+            string extension = _extenstion;
             IImageEncoder encoder = null;
 
             extension = extension.Replace(".", "");
