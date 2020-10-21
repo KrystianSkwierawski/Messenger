@@ -72,7 +72,7 @@
                     {
                         <div class="friend__container" id="@friend.Id">
                             <button class="friend__details ml-3 mb-4">
-                                <img src="~/images/avatar.jpg" class="friend__image rounded-circle" alt="friend avatar" />
+                                <img src="@friend.ImageUrl" class="friend__image rounded-circle" alt="friend avatar" />
                                 <h2 class="friend__name text-white ml-2 text-break">@friend.UserName</h2>
                             </button>
                         </div>
@@ -85,7 +85,7 @@
                                 <button class="fas fa-times ml-2 text-danger p-0 friend__reject-request btn btn-link"></button>
                             </div>
                             <button disabled class="friend__details ml-3 mb-4">
-                                <img src="~/images/avatar.jpg" class="friend__image rounded-circle" alt="friend avatar" />
+                                <img src="@friend.ImageUrl" class="friend__image rounded-circle" alt="friend avatar" />
                                 <h2 class="friend__name text-white ml-2 text-break">@friend.UserName</h2>
                             </button>
                         </div>
@@ -103,7 +103,7 @@
                 <button type="submit" class="text-danger my-0 logout__button">Logout</button>
             </form>
 
-            <button class="fas fa-user-cog settings__button mr-1 p-0"></button>
+            <a asp-area="Identity" asp-page="/Account/Manage/Index" class="fas fa-user-cog settings__button mr-1 p-0 "></a>
         </div>
     </div>
 

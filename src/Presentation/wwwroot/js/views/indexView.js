@@ -39,7 +39,7 @@ export const renderAcceptedFriend = friend => {
     const markup = `
                         <div class="${elementStrings.friendContainer}" id="${friend.id}">
                             <button class="${elementStrings.friendDetails} ml-3 mb-4">
-                                <img src="./images/avatar.jpg" class="${elementStrings.friendImage} rounded-circle" alt="friend avatar"/>
+                                <img src="${friend.imageUrl}" class="${elementStrings.friendImage} rounded-circle" alt="friend avatar"/>
                                 <h2 class="${elementStrings.friendName} text-white ml-2 text-break">${friend.userName}</h2>
                             </button>
                         </div>
@@ -56,7 +56,7 @@ export const renderNotAcceptedFriend = friend => {
                                 <button class="fas fa-times ml-2 text-danger p-0 ${elementStrings.friendRejectRequest} btn btn-link"></button>
                             </div>
                             <button disabled class="${elementStrings.friendDetails} ml-3 mb-4">
-                                <img src="./images/avatar.jpg" class="${elementStrings.friendImage} rounded-circle" alt="friend avatar"/>
+                                <img src="${friend.imageUrl}" class="${elementStrings.friendImage} rounded-circle" alt="friend avatar"/>
                                 <h2 class="${elementStrings.friendName} text-white ml-2 text-break">${friend.userName}</h2>
                             </button>
                         </div>
@@ -142,11 +142,11 @@ export const renderMessage = message => {
     }
     const markup = `
                 <div class="${elementStrings.message} mt-3" id="${message.id}">
-                    <img src="./images/avatar.jpg" class="${elementStrings.messageProfilePicture} rounded-circle" alt="friend avatar"/>
+                    <img src="${message.applicationUser.imageUrl}" class="${elementStrings.messageProfilePicture} rounded-circle" alt="friend avatar"/>
                     <div class="${elementStrings.messageTextContainer}">
                         <div class="${elementStrings.informationAboutTheMessageContainer}">
-                            <h3 class="${elementStrings.messageProfileName} text-white ml-3 mb-0 text-primary">${message.applicationUser.userName}</h3>
-                            <p class="${elementStrings.messageDateSended} ml-1 text-secondary">${message.dateSended}</p>
+                            <h3 class="${elementStrings.messageProfileName} text-white ml-3 mb-0 ">${message.applicationUser.userName}</h3>
+                            <p class="${elementStrings.messageDateSended} ml-1">${message.dateSended}</p>
                             ${editOrRemoveMarkup}
                         </div>
 
