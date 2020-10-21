@@ -55,7 +55,7 @@ export const sendMessage = async message => {
 
 export const joinGroup = async relationShipId => {
     await tryLeaveGroup(relationShipId);
-   await hub.invoke('JoinGroup', relationShipId);
+    await hub.invoke('JoinGroup', relationShipId);
 };
 
 const tryLeaveGroup = async () => {

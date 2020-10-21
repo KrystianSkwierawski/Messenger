@@ -1,12 +1,12 @@
-﻿using Domain.Interfaces;
-using Domain.Model;
+﻿using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.RelationShips.Query
+namespace Application.RelationShips.Queries
 {
     public class GetRelationShipsByUserIdQuery : IRequest<IQueryable<RelationShip>>
     {

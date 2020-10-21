@@ -1,5 +1,5 @@
-﻿using Domain.Interfaces;
-using Domain.Model;
+﻿using Domain.Entities;
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;

@@ -1,10 +1,10 @@
-﻿using Application.Friends.Query;
-using Application.Messages.Command;
-using Application.Messages.Query;
-using Application.RelationShips.Command;
-using Application.RelationShips.Query;
+﻿using Application.Friends.Queries;
+using Application.Messages.Commands;
+using Application.Messages.Queries;
+using Application.RelationShips.Commands;
+using Application.RelationShips.Queries;
 using Application.ViewModel;
-using Domain.Model;
+using Domain.Entities;
 using Messenger.Application.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

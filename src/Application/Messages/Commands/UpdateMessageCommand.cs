@@ -1,13 +1,10 @@
-﻿using Domain.Interfaces;
-using Domain.Model;
+﻿using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Messages.Command
+namespace Application.Messages.Commands
 {
     public class UpdateMessageCommand : IRequest
     {

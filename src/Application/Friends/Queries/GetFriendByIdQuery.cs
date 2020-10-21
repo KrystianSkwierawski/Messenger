@@ -1,11 +1,11 @@
-﻿using Domain.Interfaces;
-using Domain.Model;
+﻿using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.ApplicationUsers.Query
+namespace Application.ApplicationUsers.Queries
 {
     public class GetFriendByIdQuery : IRequest<ApplicationUser>
     {

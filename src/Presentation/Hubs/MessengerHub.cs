@@ -1,5 +1,5 @@
-﻿using Application.ApplicationUsers.Query;
-using Domain.Model;
+﻿using Application.ApplicationUsers.Queries;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.SignalR;
 using System;

@@ -1,11 +1,11 @@
-﻿using Domain.Interfaces;
-using Domain.Model;
+﻿using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Messages.Command
+namespace Application.Messages.Commands
 {
     public class AddMessageCommand : IRequest<Message>
     {

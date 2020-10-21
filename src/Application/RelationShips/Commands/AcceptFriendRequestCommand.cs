@@ -1,28 +1,27 @@
-﻿using Domain.Interfaces;
-using Domain.Model;
+﻿using Domain.Entities;
+using Domain.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.RelationShips.Command
+namespace Application.RelationShips.Commands
 {
-    public class RejectFriendRequestCommand : IRequest
+    public class AcceptFriendRequestCommand : IRequest
     {
         public string InvitedUserId { get; set; }
         public string InvitingUserId { get; set; }
 
-        public class RejectFriendRequestCommandHandler : IRequestHandler<RejectFriendRequestCommand>
+        public class AcceptFriendRequestCommandHandler : IRequestHandler<AcceptFriendRequestCommand>
         {
             private readonly IContext _context;
 
-            public RejectFriendRequestCommandHandler(IContext context)
+            public AcceptFriendRequestCommandHandler(IContext context)
             {
                 _context = context;
             }
 
-            public async Task<Unit> Handle(RejectFriendRequestCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(AcceptFriendRequestCommand request, CancellationToken cancellationToken)
             {
                 RelationShip relationShip = await _context.RelationShips.FirstOrDefaultAsync(
                     x => x.InvitedUserId == request.InvitedUserId &&
@@ -31,7 +30,7 @@ namespace Application.RelationShips.Command
 
                 if (relationShip != null)
                 {
-                    _context.RelationShips.Remove(relationShip);
+                    relationShip.IsAccepted = true;
                     await _context.SaveChangesAsync();
                 }
 

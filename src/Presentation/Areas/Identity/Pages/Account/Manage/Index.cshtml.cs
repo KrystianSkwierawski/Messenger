@@ -1,6 +1,6 @@
 ﻿using Application;
-using Application.ApplicationUsers.Command;
-using Domain.Model;
+using Application.ApplicationUsers.Commands;
+using Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
