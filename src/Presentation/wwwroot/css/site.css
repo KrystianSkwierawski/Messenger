@@ -287,8 +287,8 @@ html {
     position: absolute;
     background-color: #2F3136;
     bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 50%;
+    transform: translateX(50%);
     height: 30%;
     border-radius: 12px;
     width: 90%;
@@ -352,8 +352,8 @@ html {
     .emojis__container {
         height: 30%;
         width: 40%;
-        right: 0;
-        transform: translate(0);
+        right: 4%;
+        transform: translateX(0);
     }
 }
 
