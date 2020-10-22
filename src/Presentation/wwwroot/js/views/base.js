@@ -43,5 +43,5 @@ export const elementStrings = {
     saveEditMessageButton: 'save-edit-message__button',
     cancelEditMessageButton: 'cancel-edit-message__button',
     editMessageContainer: 'edit-message__container',
-    oryginalEmojiButton: 'oryginal-emoji__button' 
+    originalEmojiButton: 'original-emoji__button' 
 };

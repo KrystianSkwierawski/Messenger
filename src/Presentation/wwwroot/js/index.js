@@ -7,17 +7,17 @@ import * as messengerHub from './messengerHub.js';
 
 addEmojisToEmojisContainer(Emojis.smileys);
 
-async function addOryginalEmojisToEmojisContainer() {
-    await indexView.renderOrygianlEmojisToEmojisContainer(Emojis.oryginalEmojis);
+async function addOriginalEmojisToEmojisContainer() {
+    await indexView.renderOriginalEmojisToEmojisContainer(Emojis.originalEmojis);
 
-    addEventListenersToOryginalEmojiButtons();
+    addEventListenersToOriginalEmojiButtons();
 }
 
-const addEventListenersToOryginalEmojiButtons = () => {
-    const oryginalEmojiButtons = document.querySelectorAll(`.${elementStrings.oryginalEmojiButton}`);
+const addEventListenersToOriginalEmojiButtons = () => {
+    const originalEmojiButtons = document.querySelectorAll(`.${elementStrings.originalEmojiButton}`);
 
-    Array.from(oryginalEmojiButtons).forEach(oryginalEmojiButton => {
-        oryginalEmojiButton.addEventListener('click', async e => {           
+    Array.from(originalEmojiButtons).forEach(originalEmojiButton => {
+        originalEmojiButton.addEventListener('click', async e => {           
             const relationShipId = indexView.getRelationShipId();
             const content = e.target.outerHTML;
 
@@ -44,38 +44,38 @@ const addEventListenersToEmojiButtons = () => {
 };
 
 Array.from(elements.emojiTypeButton).forEach(emojiTypeButton => {
-    emojiTypeButton.addEventListener('click', e => {
+    emojiTypeButton.addEventListener('click', async e => {
         indexView.changeActiveEmojiTypeButton(e.target);
 
         const emojiType = e.target.id;
 
         switch (emojiType) {
             case 'smileys':
-                addEmojisToEmojisContainer(Emojis.smileys);
+                await addEmojisToEmojisContainer(Emojis.smileys);
                 break;
 
             case 'gesturesAndBodyParts':
-                addEmojisToEmojisContainer(Emojis.gesturesAndBodyParts);
+                await addEmojisToEmojisContainer(Emojis.gesturesAndBodyParts);
                 break;
 
             case 'peopleAndFantasy':
-                addEmojisToEmojisContainer(Emojis.peopleAndFantasy);
+                await addEmojisToEmojisContainer(Emojis.peopleAndFantasy);
                 break;
 
             case 'activityAndSports':
-                addEmojisToEmojisContainer(Emojis.activityAndSports);
+                await addEmojisToEmojisContainer(Emojis.activityAndSports);
                 break;
 
             case 'foodAndDrink':
-                addEmojisToEmojisContainer(Emojis.foodAndDrink);
+                await addEmojisToEmojisContainer(Emojis.foodAndDrink);
                 break;
 
             case 'animalsAndNature':
-                addEmojisToEmojisContainer(Emojis.animalsAndNature);
+                await addEmojisToEmojisContainer(Emojis.animalsAndNature);
                 break;
 
-            case 'oryginalEmojis':
-                addOryginalEmojisToEmojisContainer();
+            case 'originalEmojis':
+                await addOriginalEmojisToEmojisContainer();
                 break;
         }
     });

@@ -227,11 +227,11 @@ export const renderEmojisToEmojisContainer = async emojis => {
     });
 };
 
-export const renderOrygianlEmojisToEmojisContainer = async emojis => {
+export const renderOriginalEmojisToEmojisContainer = async emojis => {
     elements.emojis.innerHTML = "";
 
     await emojis.forEach(emoji => {
-        const markup = `<button class="${elementStrings.oryginalEmojiButton}"><img src="./images/oryginal-emojis/${emoji}" width="60" height="60"/></button>`;
+        const markup = `<button class="${elementStrings.originalEmojiButton}"><img src="./images/original-emojis/${emoji}" width="60" height="60"/></button>`;
 
         elements.emojis.insertAdjacentHTML('beforeend', markup);
     });
