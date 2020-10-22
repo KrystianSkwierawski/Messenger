@@ -7,8 +7,33 @@ import * as messengerHub from './messengerHub.js';
 
 addEmojisToEmojisContainer(Emojis.smileys);
 
+async function addOryginalEmojisToEmojisContainer() {
+    await indexView.renderOrygianlEmojisToEmojisContainer(Emojis.oryginalEmojis);
+
+    addEventListenersToOryginalEmojiButtons();
+}
+
+const addEventListenersToOryginalEmojiButtons = () => {
+    const oryginalEmojiButtons = document.querySelectorAll(`.${elementStrings.oryginalEmojiButton}`);
+
+    Array.from(oryginalEmojiButtons).forEach(oryginalEmojiButton => {
+        oryginalEmojiButton.addEventListener('click', async e => {           
+            const relationShipId = indexView.getRelationShipId();
+            const content = e.target.outerHTML;
+
+            const message = await Index.addMessage(content, relationShipId);
+            await messengerHub.sendMessage(message);
+        });
+    });
+};
+
 async function addEmojisToEmojisContainer(emojis) {   
     await indexView.renderEmojisToEmojisContainer(emojis);
+   
+    addEventListenersToEmojiButtons();
+}
+
+const addEventListenersToEmojiButtons = () => {
     const emojiButtons = document.querySelectorAll(`.${elementStrings.emojiButton}`);
 
     Array.from(emojiButtons).forEach(emojiButton => {
@@ -47,6 +72,10 @@ Array.from(elements.emojiTypeButton).forEach(emojiTypeButton => {
 
             case 'animalsAndNature':
                 addEmojisToEmojisContainer(Emojis.animalsAndNature);
+                break;
+
+            case 'oryginalEmojis':
+                addOryginalEmojisToEmojisContainer();
                 break;
         }
     });

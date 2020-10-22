@@ -227,6 +227,16 @@ export const renderEmojisToEmojisContainer = async emojis => {
     });
 };
 
+export const renderOrygianlEmojisToEmojisContainer = async emojis => {
+    elements.emojis.innerHTML = "";
+
+    await emojis.forEach(emoji => {
+        const markup = `<button class="${elementStrings.oryginalEmojiButton}"><img src="./images/oryginal-emojis/${emoji}" width="60" height="60"/></button>`;
+
+        elements.emojis.insertAdjacentHTML('beforeend', markup);
+    });
+};
+
 export const changeActiveEmojiTypeButton = currentTypeButton => {
     const previousEmojiTypeButton = document.querySelector(`.${elementStrings.emojiTypeButtonActive}`);
     previousEmojiTypeButton.classList.toggle(elementStrings.emojiTypeButtonActive);
