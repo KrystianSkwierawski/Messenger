@@ -1,4 +1,5 @@
-﻿using Application.Friends.Queries;
+﻿using Application;
+using Application.Friends.Queries;
 using Application.Messages.Commands;
 using Application.Messages.Queries;
 using Application.RelationShips.Commands;
@@ -6,6 +7,7 @@ using Application.RelationShips.Queries;
 using Application.ViewModel;
 using Domain.Entities;
 using Messenger.Application.ViewModel;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Presentation.Areas.User.Controllers;
@@ -21,9 +23,11 @@ namespace Messenger.Areas.User.Controllers
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+        readonly IWebHostEnvironment _hostEnvironment;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment hostEnvironment)
         {
+            _hostEnvironment = hostEnvironment;
             _logger = logger;
         }
 
@@ -180,8 +184,26 @@ namespace Messenger.Areas.User.Controllers
                 RelationShips = relationShips
             })).Value;
 
-            return new JsonResult(new { relationShips = relationShips, friends = friends});
+            return new JsonResult(new { relationShips = relationShips, friends = friends });
         }
+
+        [HttpPost]
+        public async Task<ActionResult> AddVoiceMessage(string chunks)
+        {
+            string fileNameWithExtenstion = await AudioFileManagment.CopyAudioToWebRoot(_hostEnvironment.WebRootPath, chunks);
+
+            return new JsonResult(fileNameWithExtenstion);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> RemoveVoiceMessage(string fileNameWithExtenstion)
+        {
+            await AudioFileManagment.RemoveAudio(_hostEnvironment.WebRootPath, fileNameWithExtenstion);
+
+            return new JsonResult(new EmptyResult());
+        }
+
+
 
         [HttpPost]
         public async Task<ActionResult> RejectFriendRequest(string invitingUserId)

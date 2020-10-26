@@ -17,7 +17,6 @@ hub.on('RenderAcceptedFriend', async invitedUser => {
 
 
 hub.on('EditMessage', async (messageId, content) => {
-    console.log(messageId, content);
     indexView.editMessage(messageId, content);
 });
 

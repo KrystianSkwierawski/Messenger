@@ -12,7 +12,7 @@ namespace Application
 {
     public class ImageFileManagment
     {
-        public static string DefaultAvatarPath = @"\images\avatars\default_avatar.jpg";
+        public static string DefaultAvatarPath = @"\images\avatars\default-avatar.png";
 
         private string _avatarsPath { get; set; }
         private string _fileName { get; set; }
@@ -24,16 +24,18 @@ namespace Application
         public ImageFileManagment(string fileName, string extenstion, IFormFile file, string webRootPath, string imageUrl)
         {
             _avatarsPath = Path.Combine(webRootPath, @"images\avatars\");
-            _fileName = fileName;
             _extenstion = extenstion.ToLower();
             _file = file;
             _webRootPath = webRootPath;
             _imageUrl = imageUrl;
+            _fileName = fileName;
         }
 
         private void CopyImageToWebRoot(MemoryStream Image)
         {
-            using (var filesStreams = new FileStream(Path.Combine(_avatarsPath, _fileName + _extenstion), FileMode.Create))
+            string fileNameWithPath = Path.Combine(_avatarsPath, _fileName + _extenstion);
+
+            using (var filesStreams = new FileStream(fileNameWithPath, FileMode.Create))
             {
                 Image.CopyTo(filesStreams);
             }
@@ -66,10 +68,10 @@ namespace Application
 
         public void RemoveOldImage()
         {
-            string imagePath = Path.Combine(_webRootPath, _imageUrl.TrimStart('\\'));
-            if (File.Exists(imagePath))
+            string filePath = Path.Combine(_webRootPath, _imageUrl.TrimStart('\\'));
+            if (File.Exists(filePath))
             {
-                File.Delete(imagePath);
+                File.Delete(filePath);
             }
         }
 

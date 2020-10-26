@@ -17,19 +17,17 @@ const addEventListenersToOriginalEmojiButtons = () => {
     const originalEmojiButtons = document.querySelectorAll(`.${elementStrings.originalEmojiButton}`);
 
     Array.from(originalEmojiButtons).forEach(originalEmojiButton => {
-        originalEmojiButton.addEventListener('click', async e => {           
-            const relationShipId = indexView.getRelationShipId();
+        originalEmojiButton.addEventListener('click', async e => {
             const content = e.target.outerHTML;
 
-            const message = await Index.addMessage(content, relationShipId);
-            await messengerHub.sendMessage(message);
+            await sendMessage(content);
         });
     });
 };
 
-async function addEmojisToEmojisContainer(emojis) {   
+async function addEmojisToEmojisContainer(emojis) {
     await indexView.renderEmojisToEmojisContainer(emojis);
-   
+
     addEventListenersToEmojiButtons();
 }
 
@@ -81,6 +79,40 @@ Array.from(elements.emojiTypeButton).forEach(emojiTypeButton => {
     });
 });
 
+elements.voiceMessageButton.addEventListener('click', () => {
+    indexView.showOrHideVoiceMessageContainer();
+
+    const device = navigator.mediaDevices.getUserMedia({ audio: true });
+    let items = [];
+    device.then(stream => {
+        const recorder = new MediaRecorder(stream);
+        recorder.ondataavailable = async e => {
+            items.push(e.data);
+            if (recorder.state == "inactive") {
+                const blob = new Blob(items, { type: 'audio/ogg' });
+
+                const reader = new window.FileReader();
+                reader.readAsDataURL(blob);
+
+                reader.onloadend = async () => {
+                    var base64 = reader.result;
+                    base64 = base64.split(',')[1];
+
+                    const fileNameWithExtenstion = await Index.addVoiceMessage(base64);
+                    const content = `<audio class="${elementStrings.voiceMessage}" controls><source src="./audios/${fileNameWithExtenstion}" type="video/webm"/></audio>`;
+                    await sendMessage(content);
+                };
+            }
+        }
+
+        recorder.start();
+
+        elements.stopRecordingVoiceMessageButton.onclick = () => {
+            recorder.stop();
+            indexView.showOrHideVoiceMessageContainer();
+        }
+    });
+});
 
 function searchFriendsByUserName() {
     const friends = indexView.getFriends();
@@ -138,9 +170,7 @@ elements.addFriendButton.addEventListener('click', trySendFriendRequest);
 async function sendMessage(message) {
     const relationShipId = indexView.getRelationShipId();
 
-    const convertedMessage = EmojisConverter.convertTextToEmojis(message);
-
-    const resultMessage = await Index.addMessage(convertedMessage, relationShipId);
+    const resultMessage = await Index.addMessage(message, relationShipId);
     await messengerHub.sendMessage(resultMessage);
 };
 
@@ -151,7 +181,8 @@ elements.inputToSendMessages.addEventListener('keypress', async () => {
     const inputIsNotEmpty = message.trim() ? true : false;
 
     if (event.keyCode === enterKey && inputIsNotEmpty && !event.shiftKey) {
-        await sendMessage(message);
+        const convertedMessage = EmojisConverter.convertTextToEmojis(message);
+        await sendMessage(convertedMessage);
         indexView.clearInputToSendMessages();
     }
 });
@@ -162,16 +193,17 @@ elements.sendMessageButton.addEventListener('click', async () => {
     const inputIsNotEmpty = message.trim() ? true : false;
 
     if (inputIsNotEmpty) {
-        await sendMessage(message);
+        const convertedMessage = EmojisConverter.convertTextToEmojis(message);
+        await sendMessage(convertedMessage);
     }
-    
+
     indexView.clearInputToSendMessages();
 });
 
 elements.friendsContainer.addEventListener('click', async e => {
 
     if (e.target.matches(`.${elementStrings.friendAcceptRequest}`)) {
-        await acceptFriendRequest(e);        
+        await acceptFriendRequest(e);
     }
 
     if (e.target.matches(`.${elementStrings.friendRejectRequest}`)) {
@@ -181,7 +213,7 @@ elements.friendsContainer.addEventListener('click', async e => {
     if (e.target.matches(`.${elementStrings.friendDetails}, .${elementStrings.friendDetails} *`)) {
         await openRelationShip(e);
         indexView.slideOutSideMenu();
-        indexView.scrollMessagesContainerToBottom();  
+        indexView.scrollMessagesContainerToBottom();
 
         addEventListeningToAllRemoveMessageButtons();
         addEventListeningToAllEditMessageButtons();
@@ -232,6 +264,13 @@ export const addEventListeningToAllRemoveMessageButtons = () => {
             const message = e.target.closest(`.${elementStrings.message}`)
 
             if (message.id) {
+
+                const voiceMessage = message.querySelector(`.${elementStrings.voiceMessage}`);
+                if (voiceMessage) {
+                    const fileNameWithExtenstion = voiceMessage.currentSrc.split('https://localhost:44394/audios/').pop();
+                    await Index.removeVoiceMessage(fileNameWithExtenstion);
+                }
+
                 await Index.removeMessage(message.id);
 
                 await messengerHub.tryRemoveMessage(message.id);
@@ -240,6 +279,7 @@ export const addEventListeningToAllRemoveMessageButtons = () => {
     });
 };
 
+
 export const addEventListeningToAllEditMessageButtons = () => {
     const editMessageButtons = document.querySelectorAll(`.${elementStrings.editMessageButton}`);
 
@@ -247,8 +287,10 @@ export const addEventListeningToAllEditMessageButtons = () => {
         editMessageButton.addEventListener('click', e => {
 
             const message = e.target.closest(`.${elementStrings.message}`)
+            const isNotVoiceMessage = message.querySelector(`.${elementStrings.voiceMessage}`) === null ? true : false;
+            const isNotOriginalEmoji = message.querySelector(`.${elementStrings.originalEmoji}`) === null ? true : false;
 
-            if (message.id) {
+            if (message.id && isNotVoiceMessage && isNotOriginalEmoji) {
 
                 const anyEditMessageContainer = document.querySelector(`.${elementStrings.editMessageContainer}`);
                 if (anyEditMessageContainer) {
@@ -279,9 +321,9 @@ export const addEventListeningToSaveEditMessage = () => {
 export const addEventListeningToCancelEditMessage = () => {
     document.querySelector(`.${elementStrings.cancelEditMessageButton}`).addEventListener('click', e => {
         const message = e.target.closest(`.${elementStrings.message}`);
-        
+
         const editMessageContainer = e.target.closest(`.${elementStrings.editMessageContainer}`);
-        indexView.messageContentContainerChangeToText(editMessageContainer);      
+        indexView.messageContentContainerChangeToText(editMessageContainer);
     });
 };
 

@@ -129,3 +129,36 @@ export async function editMessage(messageId, content) {
         console.log(error);
     }
 }
+
+export async function addVoiceMessage(chunks) {
+    try {
+        const result = await $.ajax({
+            url: '/User/Home/AddVoiceMessage',
+            type: 'POST',
+            data: {
+                chunks: chunks
+            }        
+        });
+
+        return result;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export async function removeVoiceMessage(fileNameWithExtenstion) {
+    try {
+        await $.ajax({
+            url: '/User/Home/RemoveVoiceMessage',
+            type: 'POST',
+            data: {
+                fileNameWithExtenstion: fileNameWithExtenstion
+            }
+        });
+
+    }
+    catch (error) {
+        console.log(error);
+    }
+}

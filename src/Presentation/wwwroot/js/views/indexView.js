@@ -231,7 +231,7 @@ export const renderOriginalEmojisToEmojisContainer = async emojis => {
     elements.emojis.innerHTML = "";
 
     await emojis.forEach(emoji => {
-        const markup = `<button class="${elementStrings.originalEmojiButton}"><img src="./images/original-emojis/${emoji}" width="60" height="60"/></button>`;
+        const markup = `<button class="${elementStrings.originalEmojiButton}"><img class="${elementStrings.originalEmoji}" src="./images/original-emojis/${emoji}" width="60" height="60"/></button>`;
 
         elements.emojis.insertAdjacentHTML('beforeend', markup);
     });
@@ -281,6 +281,10 @@ export const editMessage = (messageId, content) => {
     const messageContentContainer = message.querySelector(`.${elementStrings.messageContentContainer}`);
 
     messageContentContainer.innerHTML = content;
+};
+
+export const showOrHideVoiceMessageContainer = () => {
+    elements.voiceMessageContainer.classList.toggle('active');
 };
 
 

@@ -15,7 +15,11 @@
     sendMessageButton: document.querySelector('.send-message__button'),
     emojis: document.querySelector('.emojis'),
     emojiTypeButton: document.querySelectorAll('.emoji-type__button'),
-    menuFriendName: document.querySelector('.menu__friend-name')
+    menuFriendName: document.querySelector('.menu__friend-name'),
+    voiceMessageButton: document.querySelector('.voice-message__button'),
+    contentContainer: document.querySelector('.content__container'),
+    voiceMessageContainer: document.querySelector('.voice-message__container'),
+    stopRecordingVoiceMessageButton: document.querySelector('.stop-recording-voice-message__button')
 };
 
 export const elementStrings = {
@@ -43,5 +47,7 @@ export const elementStrings = {
     saveEditMessageButton: 'save-edit-message__button',
     cancelEditMessageButton: 'cancel-edit-message__button',
     editMessageContainer: 'edit-message__container',
-    originalEmojiButton: 'original-emoji__button' 
+    originalEmojiButton: 'original-emoji__button',
+    originalEmoji: 'original-emoji',
+    voiceMessage: 'voice-message'
 };

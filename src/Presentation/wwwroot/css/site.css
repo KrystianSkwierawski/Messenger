@@ -90,8 +90,6 @@ html {
     top: 50%;
     position: absolute;
     transform: translateY(-50%);
-    border: none;
-    background-color: transparent;
 }
 
 .menu__friend-name {
@@ -122,6 +120,11 @@ html {
     width: 96%;
 }
 
+.voice-message{
+    width: 100%;
+    max-width: 320px;
+}
+
 .input-to-send-messages__container {
     flex-grow: 1;
     height: auto;
@@ -142,7 +145,6 @@ html {
     height: auto;
     resize: none;
     color: white;
-    
 }
 
 
@@ -186,8 +188,6 @@ html {
 .friend__details {
     display: flex;
     cursor: pointer;
-    border: none;
-    background-color: transparent;
 }
 
 .friend__image {
@@ -220,8 +220,6 @@ html {
 .add-friend__button, .settings__button {
     font-size: 100%;
     color: white;
-    background-color: transparent;
-    border: none;
 }
 
 .logout__button {
@@ -266,10 +264,61 @@ html {
     font-size: 100%;
 }
 
-.display-emojis__button, .send-message__button {
+.display-emojis__button, .send-message__button, .voice-message__button, .stop-recording-voice-message__button, .emojis__container button, .message-settings__button, .save-edit-message__button, .cancel-edit-message__button, .add-friend__button, .settings__button, .friend__details, .menu__button {
     border: none;
     background-color: transparent;
 }
+
+.voice-message__container {
+    border-radius: 12px;
+    display: none;
+    z-index: 2;
+    height: 100px;
+    width: 96%;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+}
+
+    .voice-message__container.active{
+        display: flex;
+    }
+
+    .voice-message__container div {
+        align-self: center;
+        font-size: 20px;
+        font-weight: bold;
+        overflow: hidden;
+    }
+
+    .voice-message__container span{
+        position: relative;
+    }
+
+    .voice-message__container span::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        right: 0;
+        top: 0;
+        background-color: white;
+        animation: dots 2s steps(3, start) infinite;
+    }
+
+    @keyframes dots{
+        to{
+            right: -100%;
+        }
+    }
+
+    .stop-recording-voice-message__button {
+        align-self: center;
+        font-size: 25px;
+    }
 
 .display-emojis__button {
     font-size: 18px;
@@ -279,7 +328,11 @@ html {
     font-size: 30px;
 }
 
-.message-content__container{
+.voice-message__button {
+    font-size: 25px;
+}
+
+.message-content__container {
     font-size: 17px;
 }
 
@@ -297,10 +350,10 @@ html {
     font-size: 24px;
 }
 
-.emojis__container.active {
-    display: flex;
-    flex-direction: column;
-}
+    .emojis__container.active {
+        display: flex;
+        flex-direction: column;
+    }
 
 .emojis-types__container {
     display: flex;
@@ -310,20 +363,13 @@ html {
     background-color: #747579 !important;
 }
 
-.emojis{
+.emojis {
     flex-grow: 1;
-}
-
-.emojis__container button {
-    border: none;
-    background-color: transparent;
 }
 
 .message-settings__button {
     color: #DBDCDD;
-    background-color: transparent;
-    border: none;
-    font-size: 15px;    
+    font-size: 15px;
 }
 
 .message-dropdown-menu {
@@ -343,8 +389,6 @@ html {
 }
 
 .save-edit-message__button, .cancel-edit-message__button {
-    border: none;
-    background-color: transparent;
     color: #4671C1;
 }
 
@@ -391,5 +435,9 @@ html {
 
     .message__profile-picture {
         width: 5%;
+    }
+
+    .voice-message__container {
+      width: 40%;
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Threading.Tasks;
@@ -88,7 +89,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             if (imageExist)
             {
                 string webRootPath = _hostEnvironment.WebRootPath;
-                string fileName = user.UserName;
+                string fileName = Guid.NewGuid().ToString();
                 string extenstion = Path.GetExtension(files[0].FileName);
                 ImageFileManagment imageFileManagment = new ImageFileManagment(fileName, extenstion, files[0], webRootPath, user.ImageUrl);
 
