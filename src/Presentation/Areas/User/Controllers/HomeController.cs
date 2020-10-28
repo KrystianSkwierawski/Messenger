@@ -188,17 +188,17 @@ namespace Messenger.Areas.User.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddVoiceMessage(string chunks)
+        public ActionResult AddVoiceMessage(string chunks)
         {
-            string fileNameWithExtenstion = await AudioFileManagment.CopyAudioToWebRoot(_hostEnvironment.WebRootPath, chunks);
+            string fileNameWithExtenstion = AudioFileManagment.CopyAudioToWebRoot(_hostEnvironment.WebRootPath, chunks);
 
             return new JsonResult(fileNameWithExtenstion);
         }
 
         [HttpPost]
-        public async Task<ActionResult> RemoveVoiceMessage(string fileNameWithExtenstion)
+        public ActionResult RemoveVoiceMessage(string fileNameWithExtenstion)
         {
-            await AudioFileManagment.RemoveAudio(_hostEnvironment.WebRootPath, fileNameWithExtenstion);
+            AudioFileManagment.RemoveAudio(_hostEnvironment.WebRootPath, fileNameWithExtenstion);
 
             return new JsonResult(new EmptyResult());
         }

@@ -12,7 +12,7 @@ namespace Application
 {
     public class ImageFileManagment
     {
-        public static string DefaultAvatarPath = @"\images\avatars\default-avatar.png";
+        public static string DefaultAvatarPath = @"\images\avatars\default-avatar.jpg";
 
         private string _avatarsPath { get; set; }
         private string _fileName { get; set; }

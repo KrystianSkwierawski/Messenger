@@ -320,8 +320,6 @@ export const addEventListeningToSaveEditMessage = () => {
 
 export const addEventListeningToCancelEditMessage = () => {
     document.querySelector(`.${elementStrings.cancelEditMessageButton}`).addEventListener('click', e => {
-        const message = e.target.closest(`.${elementStrings.message}`);
-
         const editMessageContainer = e.target.closest(`.${elementStrings.editMessageContainer}`);
         indexView.messageContentContainerChangeToText(editMessageContainer);
     });

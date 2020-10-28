@@ -1,12 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Application
 {
     public static class AudioFileManagment
     {
-        public static async Task<string> CopyAudioToWebRoot(string webRootPath, string chunks)
+        public static string CopyAudioToWebRoot(string webRootPath, string chunks)
         {
             string extenstion = ".ogg";
             string fileNameWithExtenstion = Guid.NewGuid() + extenstion;
@@ -24,7 +23,7 @@ namespace Application
             return fileNameWithExtenstion;
         }
 
-        public static async Task RemoveAudio(string webRootPath, string fileNameWithExtenstion)
+        public static void RemoveAudio(string webRootPath, string fileNameWithExtenstion)
         {
             string filePath = Path.Combine(GetAudiosPath(webRootPath), fileNameWithExtenstion);
             if (File.Exists(filePath))
