@@ -23,15 +23,17 @@ namespace Application.RelationShips.Commands
 
             public async Task<bool> Handle(AddRelationShipCommand request, CancellationToken cancellationToken)
             {
-                ApplicationUser invitedUser = await _context.ApplicationUsers.FirstOrDefaultAsync(x => x.UserName == request.UserName);
-                ApplicationUser invitingUser = await _context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == request.CurrentUserId);
+                Task<ApplicationUser> invitedUserTask = _context.ApplicationUsers.FirstOrDefaultAsync(x => x.UserName == request.UserName);
+                Task<ApplicationUser> invitingUserTask = _context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == request.CurrentUserId);
 
-                if (invitedUser != null)
+                await Task.WhenAll(invitedUserTask, invitingUserTask);
+
+                if (invitedUserTask.Result != null)
                 {
                     RelationShip relationShip = new RelationShip()
                     {
-                        InvitedUserId = invitedUser.Id,
-                        InvitingUserId = invitingUser.Id,
+                        InvitedUserId = invitedUserTask.Result.Id,
+                        InvitingUserId = invitingUserTask.Result.Id,
                         IsAccepted = false
                     };
 
