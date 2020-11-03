@@ -265,8 +265,8 @@ html {
 }
 
 .display-emojis__button, .send-message__button, .voice-message__button, .stop-recording-voice-message__button, .emojis__container button, .message-settings__button, .save-edit-message__button, .cancel-edit-message__button, .add-friend__button, .settings__button, .friend__details, .menu__button {
-    border: none;
-    background-color: transparent;
+    border: 0;
+    background: none;
 }
 
 .voice-message__container {

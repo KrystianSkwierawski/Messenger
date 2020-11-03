@@ -18,7 +18,14 @@ const addEventListenersToOriginalEmojiButtons = () => {
 
     Array.from(originalEmojiButtons).forEach(originalEmojiButton => {
         originalEmojiButton.addEventListener('click', async e => {
-            const content = e.target.outerHTML;
+            let originalEmoji = e.target.closest(`.${elementStrings.originalEmoji}`);
+
+            //if user clicked originalEmojiButton by keyboard then originalEmoji is originalEmojiButton instead originalEmoji
+            if (!originalEmoji) {
+                originalEmoji = e.target.querySelector(`.${elementStrings.originalEmoji}`);
+            }
+          
+            const content = originalEmoji.outerHTML;
 
             await sendMessage(content);
         });
