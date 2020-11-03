@@ -182,15 +182,18 @@ async function sendMessage(message) {
 };
 
 elements.inputToSendMessages.addEventListener('keypress', async () => {
-    const enterKey = 13;
-    const message = indexView.getInputToSendMessagesValue();
+    const enterKey = 13; 
 
-    const inputIsNotEmpty = message.trim() ? true : false;
+    if (event.keyCode === enterKey && !event.shiftKey) {
+        const message = indexView.getInputToSendMessagesValue();
 
-    if (event.keyCode === enterKey && inputIsNotEmpty && !event.shiftKey) {
-        const convertedMessage = EmojisConverter.convertTextToEmojis(message);
-        await sendMessage(convertedMessage);
-        indexView.clearInputToSendMessages();
+        const inputIsNotEmpty = message.trim() ? true : false;
+
+        if (inputIsNotEmpty) {
+            const convertedMessage = EmojisConverter.convertTextToEmojis(message);
+            await sendMessage(convertedMessage);
+            indexView.clearInputToSendMessages();
+        }
     }
 });
 
