@@ -20,7 +20,7 @@ const addEventListenersToOriginalEmojiButtons = () => {
         originalEmojiButton.addEventListener('click', async e => {
             let originalEmoji = e.target.closest(`.${elementStrings.originalEmoji}`);
 
-            //if user clicked originalEmojiButton by keyboard then originalEmoji is originalEmojiButton instead originalEmoji
+            //if user clicked originalEmojiButton by keyboard then e.target is originalEmojiButton instead originalEmoji
             if (!originalEmoji) {
                 originalEmoji = e.target.querySelector(`.${elementStrings.originalEmoji}`);
             }
