@@ -23,6 +23,8 @@ namespace Application.RelationShips.Commands
 
             public async Task<bool> Handle(AddRelationShipCommand request, CancellationToken cancellationToken)
             {
+                bool userExist;
+
                 Task<ApplicationUser> invitedUserTask = _context.ApplicationUsers.FirstOrDefaultAsync(x => x.UserName == request.UserName);
                 Task<ApplicationUser> invitingUserTask = _context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == request.CurrentUserId);
 
@@ -41,12 +43,14 @@ namespace Application.RelationShips.Commands
 
                     await _context.SaveChangesAsync();
 
-                    return true; //user exist
+                    userExist = true;
                 }
                 else
                 {
-                    return false; //user doesn't exist
+                    userExist = false;
                 }
+
+                return userExist;
             }
         }
 
