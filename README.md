@@ -4,7 +4,7 @@
 
 ## Features
 
-### - Seven types of emotes <br>
+### - Emojis board <br>
 ![localhost_44394_ (1)](https://user-images.githubusercontent.com/52860350/98682836-a8c33800-2364-11eb-8c92-fae8f0307f4a.png)
 
 
