@@ -14,8 +14,6 @@ Messenger - Realtime chat communicator. The idea for this project arose while le
 
 ### - Voice messages <br>
 ![ezgif com-gif-maker](https://user-images.githubusercontent.com/52860350/98684180-289dd200-2366-11eb-8d87-6d236a1a4ce8.gif)
-
-### - The ability to change the avatar and other user data
  
 ## Tools
 
