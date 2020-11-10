@@ -3,11 +3,13 @@
 ![image](https://user-images.githubusercontent.com/52860350/98403497-5b478200-2069-11eb-876a-3d2ddb9f8284.png)
 
 ## Features
+
+### - Seven types of emotes <br>
+![localhost_44394_ (1)](https://user-images.githubusercontent.com/52860350/98682836-a8c33800-2364-11eb-8c92-fae8f0307f4a.png)
+
+
 ### - Original emojis <br>
 ![localhost_44394_](https://user-images.githubusercontent.com/52860350/98682277-086d1380-2364-11eb-8471-fe4c034ded13.png)
-
-### - Six types of emotes <br>
-![localhost_44394_ (1)](https://user-images.githubusercontent.com/52860350/98682836-a8c33800-2364-11eb-8c92-fae8f0307f4a.png)
 
 ### - Emojis converter (for example ":)" > "🙂")
 
