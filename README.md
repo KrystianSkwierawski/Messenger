@@ -1,5 +1,5 @@
-## Messenger - realtime chat communicator. The idea for this project arose while learning SignalR and willing to put it into practice.
- 
+## Messenger - realtime chat communicator. The idea for this project came up when I was learning SignalR, I wanted to put it into practice.
+
 ![image](https://user-images.githubusercontent.com/52860350/98403497-5b478200-2069-11eb-876a-3d2ddb9f8284.png)
 
 ## Features
