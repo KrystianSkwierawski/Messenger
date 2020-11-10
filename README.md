@@ -1,4 +1,4 @@
-## Messenger - realtime chat communicator using SignalR. The idea for this project came up when I was learning SignalR, I wanted to put it into practice. During this project i also learned MediatR and Sass.
+Messenger - realtime chat communicator using SignalR. The idea for this project came up when I was learning SignalR, I wanted to put it into practice. During this project i also learned MediatR and Sass.
 
 ![image](https://user-images.githubusercontent.com/52860350/98403497-5b478200-2069-11eb-876a-3d2ddb9f8284.png)
 
