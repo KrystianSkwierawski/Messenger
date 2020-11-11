@@ -25,17 +25,15 @@ namespace Application.RelationShips.Commands
             {
                 bool userExist;
 
-                Task<ApplicationUser> invitedUserTask = _context.ApplicationUsers.FirstOrDefaultAsync(x => x.UserName == request.UserName);
-                Task<ApplicationUser> invitingUserTask = _context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == request.CurrentUserId);
+                ApplicationUser invitedUser = await _context.ApplicationUsers.FirstOrDefaultAsync(x => x.UserName == request.UserName);
+                ApplicationUser invitingUser = await _context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == request.CurrentUserId);
 
-                await Task.WhenAll(invitedUserTask, invitingUserTask);
-
-                if (invitedUserTask.Result != null)
+                if (invitedUser != null)
                 {
                     RelationShip relationShip = new RelationShip()
                     {
-                        InvitedUserId = invitedUserTask.Result.Id,
-                        InvitingUserId = invitingUserTask.Result.Id,
+                        InvitedUserId = invitedUser.Id,
+                        InvitingUserId = invitingUser.Id,
                         IsAccepted = false
                     };
 

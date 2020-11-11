@@ -1,0 +1,45 @@
+﻿.emojis__container {
+    font-size: 24px;
+    position: absolute;
+    right: 50%;
+    bottom: 20%;
+    display: none;
+    overflow: auto;
+    width: 90%;
+    height: 30%;
+    transform: translateX(50%);
+    border-radius: 12px;
+    background-color: #2f3136;
+
+    &.active {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & button {
+        @include reset-button;
+    }
+
+    @include respond-to(large) {
+        right: 4%;
+        width: 40%;
+        height: 30%;
+        transform: translateX(0);
+    }
+}
+
+.emojis-types__container {
+    display: flex;
+}
+
+.emoji-type__button {
+    @include reset-button;
+
+    &_active {
+        background-color: #747579 !important;
+    }
+}
+
+.emojis {
+    flex-grow: 1;
+}

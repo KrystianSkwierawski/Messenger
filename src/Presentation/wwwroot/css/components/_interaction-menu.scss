@@ -1,0 +1,40 @@
+﻿.interaction-menu__container {
+    display: none;
+    height: auto;
+    max-height: 58px;
+    margin-right: 2%;
+    margin-left: 2%;
+    flex-grow: 1;
+
+    &.active {
+        display: flex;
+    }
+}
+
+.input-to-send-messages {
+    height: auto;
+    resize: none;
+    color: white;
+    border-radius: 8px;
+    background-color: #484c52;
+    flex-grow: 1;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.start-recording-voice-message__button {
+    @include reset-button;
+    font-size: 25px;
+}
+
+.send-message__button {
+    @include reset-button;
+    font-size: 30px;
+}
+
+.display-emojis__button {
+    @include reset-button;
+    font-size: 18px;
+}

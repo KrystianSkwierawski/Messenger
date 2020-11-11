@@ -86,7 +86,7 @@ Array.from(elements.emojiTypeButton).forEach(emojiTypeButton => {
     });
 });
 
-elements.voiceMessageButton.addEventListener('click', () => {
+elements.startRecordingVoiceMessageButton.addEventListener('click', () => {
     indexView.showOrHideVoiceMessageContainer();
 
     const device = navigator.mediaDevices.getUserMedia({ audio: true });

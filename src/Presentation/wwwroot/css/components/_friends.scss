@@ -1,0 +1,44 @@
+﻿.friends__container {
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    flex-grow: 1;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.friend__details {
+    @include reset-button;
+    display: flex;
+    cursor: pointer;
+}
+
+
+.friend__image {
+    width: 18%;
+    height: auto;
+    align-self: center;
+
+    @include respond-to(extra-large) {
+        width: 23%;
+        height: auto;
+    }
+}
+
+.friend__name {
+    font-size: 20px;
+    align-self: center;
+}
+
+.friend__request {
+    font-size: 28px;
+    display: flex;
+}
+
+.friend__reject-request,
+.friend__accept-request {
+    font-size: 100%;
+    cursor: pointer;
+}

@@ -1,0 +1,23 @@
+﻿.settings__container {
+    font-size: 25px;
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+}
+
+.add-friend__button,
+.settings__button,
+.logout__button {
+    @include reset-button;
+    cursor: pointer;
+    align-self: center;
+}
+
+.add-friend__button,
+.settings__button {
+    font-size: 100%;
+    color: white;
+}
+
+

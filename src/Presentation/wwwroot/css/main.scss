@@ -1,0 +1,7 @@
+﻿@import 'abstracts/_variables.scss', 'abstracts/_mixins.scss';
+
+@import 'vendors/_normalize.scss';
+
+@import 'layout/_content.scss', 'layout/_main.scss', 'layout/_menu.scss', 'layout/_side-menu.scss', 'layout/_settings.scss';
+
+@import 'components/_emojis.scss', 'components/_friends.scss', 'components/_interaction-menu.scss', 'components/_messages.scss', 'components/_voice-message.scss';

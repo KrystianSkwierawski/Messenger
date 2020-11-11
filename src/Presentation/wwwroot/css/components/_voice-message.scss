@@ -1,0 +1,56 @@
+﻿.voice-message__container {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    display: none;
+    width: 96%;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    border-radius: 12px;
+    background-color: white;
+    justify-content: center;
+
+    &.active {
+        display: flex;
+    }
+
+    & div {
+        font-size: 20px;
+        font-weight: bold;
+        overflow: hidden;
+        align-self: center;
+    }
+
+    & span {
+        position: relative;
+    }
+
+    & span::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        content: '';
+        animation: dots 2s steps(3, start) infinite;
+        background-color: white;
+    }
+
+
+    @include respond-to(extra-large) {
+        width: 40%;
+    }
+}
+
+@keyframes dots {
+    to {
+        right: -100%;
+    }
+}
+
+.stop-recording-voice-message__button {
+    @include reset-button;
+    font-size: 25px;
+    align-self: center;
+}

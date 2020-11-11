@@ -1,0 +1,10 @@
+﻿@mixin respond-to($breakpoint) {
+    @media screen and (min-width: map-get($breakpoints, $breakpoint)) {
+        @content;
+    }
+}
+
+@mixin reset-button {
+    border: 0;
+    background: none;
+}

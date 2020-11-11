@@ -1,0 +1,16 @@
+﻿.content__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #36393f;
+    flex-grow: 1;
+
+    @include respond-to(extra-large) {
+        position: absolute;
+        top: 50px;
+        left: 19vw;
+        width: calc(100% - 19vw);
+        height: calc(100% - 50px);
+    }
+}

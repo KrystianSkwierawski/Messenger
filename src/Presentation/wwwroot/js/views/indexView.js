@@ -119,7 +119,7 @@ export const getFriendDetails = e => {
 };
 
 const showInputToSendMessagesContainer = () => {
-    elements.inputToSendMessagesContainer.classList.add('active');
+    elements.interactionMenuContainer.classList.add('active');
 };
 
 export const renderMessage = message => {
