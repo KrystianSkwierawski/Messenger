@@ -1,0 +1,12 @@
+﻿@function font-scale($scale) {
+    $font-size: $base-fs;
+
+    @if($scale > 1) {
+        $font-size: font-scale($scale - 1) * $golden-ratio;
+    }
+    @else if($scale <= 1) {
+        $font-size: $base-fs;
+    }
+
+    @return $font-size;
+}

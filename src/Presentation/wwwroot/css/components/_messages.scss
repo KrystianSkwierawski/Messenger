@@ -36,7 +36,7 @@
 }
 
 .message__date-sended {
-    font-size: 12px;
+    font-size: font-scale(1);
     color: #9da3a8;
 }
 
@@ -48,12 +48,12 @@
 
 .message-settings__button {
     @include reset-button;
-    font-size: 15px;
+    font-size: font-scale(1);
     color: #dbdcdd;
 }
 
 .message-content__container {
-    font-size: 17px;
+    font-size: font-scale(1);
 }
 
 

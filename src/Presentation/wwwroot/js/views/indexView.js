@@ -145,7 +145,7 @@ export const renderMessage = message => {
                     <img src="${message.applicationUser.imageUrl}" class="${elementStrings.messageProfilePicture} rounded-circle" alt="friend avatar"/>
                     <div class="${elementStrings.messageTextContainer}">
                         <div class="${elementStrings.informationAboutTheMessageContainer}">
-                            <h3 class="${elementStrings.messageProfileName} text-white ml-3 mb-0 ">${message.applicationUser.userName}</h3>
+                            <h3 class="${elementStrings.messageProfileName} text-break text-white ml-3 mb-1 ">${message.applicationUser.userName}</h3>
                             <p class="${elementStrings.messageDateSended} ml-1">${message.dateSended}</p>
                             ${editOrRemoveMarkup}
                         </div>

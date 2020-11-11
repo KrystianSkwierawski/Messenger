@@ -1,5 +1,5 @@
 ﻿.settings__container {
-    font-size: 25px;
+    font-size: font-scale(2);
     display: flex;
     width: 100%;
     height: auto;
@@ -16,7 +16,7 @@
 
 .add-friend__button,
 .settings__button {
-    font-size: 100%;
+    font-size: font-scale(2);
     color: white;
 }
 

@@ -1,7 +1,5 @@
 ﻿.side-menu__container {
-    position: fixed;
-    top: 50px;
-    left: 0;
+    @include position(fixed, %left: 0, %top: 50px);
     display: flex;
     flex-direction: column;
     width: 100vw;

@@ -7,9 +7,7 @@
     flex-grow: 1;
 
     @include respond-to(extra-large) {
-        position: absolute;
-        top: 50px;
-        left: 19vw;
+        @include position(absolute, %left: 19vw, %top: 50px);
         width: calc(100% - 19vw);
         height: calc(100% - 50px);
     }

@@ -7,10 +7,8 @@
 
 .menu__button {
     @include reset-button;
-    font-size: 30px;
-    position: absolute;
-    top: 50%;
-    left: 5px;
+    @include position(absolute, %left: 5px, %top: 50%);
+    font-size: font-scale(2);
     transform: translateY(-50%);
     color: white;
 
@@ -20,10 +18,7 @@
 }
 
 .menu__friend-name {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    @include center-absolute;
 
     @include respond-to(extra-large) {
         display: block !important;

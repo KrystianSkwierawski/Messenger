@@ -17,28 +17,28 @@
 
 
 .friend__image {
-    width: 18%;
+    width: 15%;
     height: auto;
     align-self: center;
 
     @include respond-to(extra-large) {
-        width: 23%;
+        width: 21%;
         height: auto;
     }
 }
 
 .friend__name {
-    font-size: 20px;
+    font-size: font-scale(1);
     align-self: center;
 }
 
 .friend__request {
-    font-size: 28px;
+    font-size: font-scale(1);
     display: flex;
 }
 
 .friend__reject-request,
 .friend__accept-request {
-    font-size: 100%;
+    font-size: font-scale(1);
     cursor: pointer;
 }

@@ -26,15 +26,15 @@
 
 .start-recording-voice-message__button {
     @include reset-button;
-    font-size: 25px;
+    font-size: font-scale(2);
 }
 
 .send-message__button {
     @include reset-button;
-    font-size: 30px;
+    font-size: font-scale(2);
 }
 
 .display-emojis__button {
     @include reset-button;
-    font-size: 18px;
+    font-size: font-scale(2);
 }

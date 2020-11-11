@@ -1,12 +1,9 @@
 ﻿.voice-message__container {
-    position: absolute;
+    @include center-absolute;
     z-index: 2;
-    top: 50%;
-    left: 50%;
     display: none;
     width: 96%;
     height: 100px;
-    transform: translate(-50%, -50%);
     border-radius: 12px;
     background-color: white;
     justify-content: center;
@@ -16,7 +13,7 @@
     }
 
     & div {
-        font-size: 20px;
+        font-size: font-scale(2);
         font-weight: bold;
         overflow: hidden;
         align-self: center;
@@ -51,6 +48,6 @@
 
 .stop-recording-voice-message__button {
     @include reset-button;
-    font-size: 25px;
+    font-size: font-scale(3);
     align-self: center;
 }
