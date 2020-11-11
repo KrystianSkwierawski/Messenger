@@ -7,7 +7,9 @@
 
 .menu__button {
     @include reset-button;
-    @include position(absolute, %left: 5px, %top: 50%);
+    position: absolute;
+    left: 5px;
+    top: 50%;
     font-size: font-scale(2);
     transform: translateY(-50%);
     color: white;

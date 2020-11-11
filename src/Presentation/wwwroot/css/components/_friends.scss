@@ -33,12 +33,11 @@
 }
 
 .friend__request {
-    font-size: font-scale(1);
     display: flex;
 }
 
 .friend__reject-request,
 .friend__accept-request {
-    font-size: font-scale(1);
+    font-size: font-scale(2);
     cursor: pointer;
 }

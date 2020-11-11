@@ -9,14 +9,6 @@
     background: none;
 }
 
-@mixin position($type, $left: null, $right: null, $top: null, $bottom: null) {
-    position: $type;
-    left: $left;
-    right: $right;
-    top: $top;
-    bottom: $bottom;
-}
-
 @mixin center-absolute {
     position: absolute;
     top: 50%;
