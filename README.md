@@ -65,6 +65,8 @@ Messenger - realtime chat communicator using SignalR. The idea for this project 
 * Toastr
 
 * jQuery
+
+* Sass
  
 ## Status
 Project is in progress.
