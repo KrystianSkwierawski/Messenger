@@ -117,8 +117,11 @@
     <script type="module" src="~/js/messengerHub.js"></script>
     <script type="module" src="~/js/index.js"></script>
     <script>
-        //set theme
-        document.body.classList.add('@Model.Theme');
+        setTheme();
+
+        function setTheme() {
+            document.body.classList.add('@Model.Theme');
+        }
     </script>
 }
 else
