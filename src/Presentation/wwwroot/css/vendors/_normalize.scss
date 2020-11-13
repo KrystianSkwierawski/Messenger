@@ -62,3 +62,9 @@ html {
     position: relative;
     min-height: 100%;
 }
+
+.border-bottom {
+    @include themed() {
+        border-bottom: 1px solid t('text') !important;
+    }
+}

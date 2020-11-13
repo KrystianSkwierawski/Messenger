@@ -10,3 +10,7 @@
 
     @return $font-size;
 }
+
+@function t($key) {
+    @return map-get($theme-map, $key);
+}

@@ -1,18 +1,24 @@
 ﻿.menu__container {
+    @include themed() {
+        background-color: t('bg-menu-container');
+    }
+
     position: absolute;
     width: 100%;
     height: 50px;
-    background-color: #202225;
 }
 
 .menu__button {
+    @include themed(){
+        color: t('text');
+    }
     @include reset-button;
+
     position: absolute;
     left: 5px;
     top: 50%;
     font-size: font-scale(2);
     transform: translateY(-50%);
-    color: white;
 
     @include respond-to(extra-large) {
         display: none !important;
@@ -20,6 +26,9 @@
 }
 
 .menu__friend-name {
+    @include themed() {
+        color: t('text');
+    }
     @include center-absolute;
 
     @include respond-to(extra-large) {

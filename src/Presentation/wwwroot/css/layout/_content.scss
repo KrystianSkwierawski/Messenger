@@ -1,9 +1,12 @@
 ﻿.content__container {
+    @include themed() {
+        background-color: t('bg-content-container');
+    }
+
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background-color: #36393f;
     flex-grow: 1;
 
     @include respond-to(extra-large) {

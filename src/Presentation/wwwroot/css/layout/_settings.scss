@@ -1,4 +1,8 @@
 ﻿.settings__container {
+    @include themed(){
+        color: t('text');
+    }
+
     font-size: font-scale(2);
     display: flex;
     width: 100%;
@@ -16,8 +20,11 @@
 
 .add-friend__button,
 .settings__button {
+    @include themed(){
+        color: t('text');
+    }
+
     font-size: font-scale(2);
-    color: white;
 }
 
 

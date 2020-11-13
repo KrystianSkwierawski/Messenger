@@ -50,13 +50,22 @@ html {
   position: relative;
   min-height: 100%; }
 
+.theme--default .border-bottom {
+  border-bottom: 1px solid white !important; }
+
+.theme--light .border-bottom {
+  border-bottom: 1px solid black !important; }
+
 .content__container {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: #36393f;
   flex-grow: 1; }
+  .theme--default .content__container {
+    background-color: #36393f; }
+  .theme--light .content__container {
+    background-color: #FFFFFF; }
   @media screen and (min-width: 1200px) {
     .content__container {
       position: absolute;
@@ -75,8 +84,11 @@ html {
 .menu__container {
   position: absolute;
   width: 100%;
-  height: 50px;
-  background-color: #202225; }
+  height: 50px; }
+  .theme--default .menu__container {
+    background-color: #202225; }
+  .theme--light .menu__container {
+    background-color: #E3E5E8; }
 
 .menu__button {
   border: 0;
@@ -85,8 +97,11 @@ html {
   left: 5px;
   top: 50%;
   font-size: 1.618rem;
-  transform: translateY(-50%);
-  color: white; }
+  transform: translateY(-50%); }
+  .theme--default .menu__button {
+    color: white; }
+  .theme--light .menu__button {
+    color: black; }
   @media screen and (min-width: 1200px) {
     .menu__button {
       display: none !important; } }
@@ -96,6 +111,10 @@ html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); }
+  .theme--default .menu__friend-name {
+    color: white; }
+  .theme--light .menu__friend-name {
+    color: black; }
   @media screen and (min-width: 1200px) {
     .menu__friend-name {
       display: block !important; } }
@@ -107,8 +126,11 @@ html {
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: calc(100% - 50px);
-  background-color: #2f3136; }
+  height: calc(100% - 50px); }
+  .theme--default .side-menu__container {
+    background-color: #2f3136; }
+  .theme--light .side-menu__container {
+    background-color: #F2F3F5; }
   @media screen and (min-width: 1200px) {
     .side-menu__container {
       display: flex !important;
@@ -117,9 +139,12 @@ html {
 .search-friends__input {
   width: 90%;
   height: auto;
-  color: white;
   border-radius: 5px;
   align-self: center; }
+  .theme--default .search-friends__input {
+    color: white; }
+  .theme--light .search-friends__input {
+    color: black; }
 
 .settings__container {
   font-size: 1.618rem;
@@ -127,6 +152,10 @@ html {
   width: 100%;
   height: auto;
   justify-content: space-between; }
+  .theme--default .settings__container {
+    color: white; }
+  .theme--light .settings__container {
+    color: black; }
 
 .add-friend__button,
 .settings__button,
@@ -138,8 +167,13 @@ html {
 
 .add-friend__button,
 .settings__button {
-  font-size: 1.618rem;
-  color: white; }
+  font-size: 1.618rem; }
+  .theme--default .add-friend__button, .theme--default
+  .settings__button {
+    color: white; }
+  .theme--light .add-friend__button, .theme--light
+  .settings__button {
+    color: black; }
 
 .emojis__container {
   font-size: 1.618rem;
@@ -151,8 +185,11 @@ html {
   width: 90%;
   height: 30%;
   transform: translateX(50%);
-  border-radius: 12px;
-  background-color: #2f3136; }
+  border-radius: 12px; }
+  .theme--default .emojis__container {
+    background-color: #2f3136; }
+  .theme--light .emojis__container {
+    background-color: #E3E5E8; }
   .emojis__container.active {
     display: flex;
     flex-direction: column; }
@@ -177,6 +214,12 @@ html {
 
 .emojis {
   flex-grow: 1; }
+
+.theme--default .original-emoji-type__button {
+  color: white; }
+
+.theme--light .original-emoji-type__button {
+  color: black; }
 
 .friends__container {
   display: flex;
@@ -204,6 +247,10 @@ html {
 .friend__name {
   font-size: 1rem;
   align-self: center; }
+  .theme--default .friend__name {
+    color: white; }
+  .theme--light .friend__name {
+    color: black; }
 
 .friend__request {
   display: flex; }
@@ -226,10 +273,14 @@ html {
 .input-to-send-messages {
   height: auto;
   resize: none;
-  color: white;
   border-radius: 8px;
-  background-color: #484c52;
   flex-grow: 1; }
+  .theme--default .input-to-send-messages {
+    color: white;
+    background-color: #484c52; }
+  .theme--light .input-to-send-messages {
+    color: black;
+    background-color: #EBEDEF; }
   .input-to-send-messages::-webkit-scrollbar {
     display: none; }
 
@@ -237,6 +288,10 @@ html {
   border: 0;
   background: none;
   font-size: 1.618rem; }
+  .theme--default .start-recording-voice-message__button {
+    color: white; }
+  .theme--light .start-recording-voice-message__button {
+    color: black; }
 
 .send-message__button {
   border: 0;
@@ -247,6 +302,10 @@ html {
   border: 0;
   background: none;
   font-size: 1.618rem; }
+  .theme--default .display-emojis__button {
+    color: white; }
+  .theme--light .display-emojis__button {
+    color: black; }
 
 .messages__container {
   display: flex;
@@ -268,6 +327,12 @@ html {
 .information-about-the-message__container {
   display: flex; }
 
+.theme--default .message__profile-name {
+  color: white; }
+
+.theme--light .message__profile-name {
+  color: black; }
+
 .message__profile-picture {
   width: 13%;
   height: auto;
@@ -278,8 +343,11 @@ html {
       width: 5%; } }
 
 .message__date-sended {
-  font-size: 1rem;
-  color: #9da3a8; }
+  font-size: 1rem; }
+  .theme--default .message__date-sended {
+    color: #A2A3A3; }
+  .theme--light .message__date-sended {
+    color: #A2A3A3; }
 
 .message__text-container {
   display: flex;
@@ -289,11 +357,18 @@ html {
 .message-settings__button {
   border: 0;
   background: none;
-  font-size: 1rem;
-  color: #dbdcdd; }
+  font-size: 1rem; }
+  .theme--default .message-settings__button {
+    color: white; }
+  .theme--light .message-settings__button {
+    color: black; }
 
 .message-content__container {
   font-size: 1rem; }
+  .theme--default .message-content__container {
+    color: white; }
+  .theme--light .message-content__container {
+    color: black; }
 
 .message-dropdown-menu {
   background-color: #484c52; }
@@ -303,9 +378,13 @@ html {
 .edit-message__input {
   width: 100%;
   min-height: 100px;
-  color: white;
-  border-radius: 8px;
-  background-color: #40444b; }
+  border-radius: 8px; }
+  .theme--default .edit-message__input {
+    background-color: #40444b;
+    color: white; }
+  .theme--light .edit-message__input {
+    background-color: #EBEDEF;
+    color: black; }
 
 .save-edit-message__button,
 .cancel-edit-message__button {
@@ -327,8 +406,11 @@ html {
   width: 96%;
   height: 100px;
   border-radius: 12px;
-  background-color: white;
   justify-content: center; }
+  .theme--default .voice-message__container {
+    background-color: white; }
+  .theme--light .voice-message__container {
+    background-color: #E3E5E8; }
   .voice-message__container.active {
     display: flex; }
   .voice-message__container div {
@@ -345,8 +427,11 @@ html {
     width: 100%;
     height: 100%;
     content: '';
-    animation: dots 2s steps(3, start) infinite;
-    background-color: white; }
+    animation: dots 2s steps(3, start) infinite; }
+    .theme--default .voice-message__container span::before {
+      background-color: white; }
+    .theme--light .voice-message__container span::before {
+      background-color: #E3E5E8; }
   @media screen and (min-width: 1200px) {
     .voice-message__container {
       width: 40%; } }
@@ -358,5 +443,5 @@ html {
 .stop-recording-voice-message__button {
   border: 0;
   background: none;
-  font-size: 2.61792rem;
+  font-size: 1.618rem;
   align-self: center; }

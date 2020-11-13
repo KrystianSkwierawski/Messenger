@@ -40,7 +40,7 @@ export const renderAcceptedFriend = friend => {
                         <div class="${elementStrings.friendContainer}" id="${friend.id}">
                             <button class="${elementStrings.friendDetails} ml-3 mb-4">
                                 <img src="${friend.imageUrl}" class="${elementStrings.friendImage} rounded-circle" alt="friend avatar"/>
-                                <h2 class="${elementStrings.friendName} text-white ml-2 text-break">${friend.userName}</h2>
+                                <h2 class="${elementStrings.friendName} ml-2 text-break">${friend.userName}</h2>
                             </button>
                         </div>
     `;
@@ -57,7 +57,7 @@ export const renderNotAcceptedFriend = friend => {
                             </div>
                             <button disabled class="${elementStrings.friendDetails} ml-3 mb-4">
                                 <img src="${friend.imageUrl}" class="${elementStrings.friendImage} rounded-circle" alt="friend avatar"/>
-                                <h2 class="${elementStrings.friendName} text-white ml-2 text-break">${friend.userName}</h2>
+                                <h2 class="${elementStrings.friendName} ml-2 text-break">${friend.userName}</h2>
                             </button>
                         </div>
     `;
@@ -145,12 +145,12 @@ export const renderMessage = message => {
                     <img src="${message.applicationUser.imageUrl}" class="${elementStrings.messageProfilePicture} rounded-circle" alt="friend avatar"/>
                     <div class="${elementStrings.messageTextContainer}">
                         <div class="${elementStrings.informationAboutTheMessageContainer}">
-                            <h3 class="${elementStrings.messageProfileName} text-break text-white ml-3 mb-1 ">${message.applicationUser.userName}</h3>
+                            <h3 class="${elementStrings.messageProfileName} text-break ml-3 mb-1 ">${message.applicationUser.userName}</h3>
                             <p class="${elementStrings.messageDateSended} ml-1">${message.dateSended}</p>
                             ${editOrRemoveMarkup}
                         </div>
 
-                        <div class="ml-3 text-white ${elementStrings.messageContentContainer} text-break">
+                        <div class="ml-3 ${elementStrings.messageContentContainer} text-break">
                             ${message.content}
                         </div>
                         

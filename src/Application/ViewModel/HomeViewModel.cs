@@ -8,5 +8,6 @@ namespace Application.ViewModel
     {
         public IQueryable<RelationShip> RelationShips { get; set; }
         public List<ApplicationUser> Friends { get; set; }
+        public string Theme { get; set; }
     }
 }

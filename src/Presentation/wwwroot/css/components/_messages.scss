@@ -24,6 +24,12 @@
     display: flex;
 }
 
+.message__profile-name{
+    @include themed(){
+        color: t('text');
+    }
+}
+
 .message__profile-picture {
     width: 13%;
     height: auto;
@@ -36,8 +42,11 @@
 }
 
 .message__date-sended {
+    @include themed(){
+        color: t('text-secondary');
+    }
+
     font-size: font-scale(1);
-    color: #9da3a8;
 }
 
 .message__text-container {
@@ -47,12 +56,18 @@
 }
 
 .message-settings__button {
+    @include themed(){
+        color: t('text');
+    }
     @include reset-button;
     font-size: font-scale(1);
-    color: #dbdcdd;
 }
 
 .message-content__container {
+    @include themed(){
+        color: t('text');
+    }
+
     font-size: font-scale(1);
 }
 
@@ -66,11 +81,14 @@
 }
 
 .edit-message__input {
+    @include themed() {
+        background-color: t('bg-edit-message-input');
+        color: t('text');
+    }
+
     width: 100%;
     min-height: 100px;
-    color: white;
     border-radius: 8px;
-    background-color: #40444b;
 }
 
 .save-edit-message__button,

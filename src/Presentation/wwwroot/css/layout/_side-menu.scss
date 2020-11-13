@@ -1,4 +1,8 @@
 ﻿.side-menu__container {
+    @include themed() {
+        background-color: t('bg-side-menu-container');
+    }
+
     position: fixed;
     left: 0;
     top: 50px;
@@ -6,7 +10,6 @@
     flex-direction: column;
     width: 100vw;
     height: calc(100% - 50px);
-    background-color: #2f3136;
 
     @include respond-to(extra-large) {
         display: flex !important;
@@ -15,9 +18,12 @@
 }
 
 .search-friends__input {
+    @include themed(){
+        color: t('text');
+    }
+
     width: 90%;
     height: auto;
-    color: white;
     border-radius: 5px;
     align-self: center;
 }

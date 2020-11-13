@@ -12,11 +12,14 @@
 }
 
 .input-to-send-messages {
+    @include themed() {
+        color: t('text');
+        background-color: t('bg-input-to-send-message');
+    }
+
     height: auto;
     resize: none;
-    color: white;
     border-radius: 8px;
-    background-color: #484c52;
     flex-grow: 1;
 
     &::-webkit-scrollbar {
@@ -25,6 +28,10 @@
 }
 
 .start-recording-voice-message__button {
+    @include themed(){
+        color: t('text');
+    }
+
     @include reset-button;
     font-size: font-scale(2);
 }
@@ -35,6 +42,10 @@
 }
 
 .display-emojis__button {
+    @include themed() {
+        color: t('text');
+    }
+
     @include reset-button;
     font-size: font-scale(2);
 }

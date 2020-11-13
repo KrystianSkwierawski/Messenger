@@ -1,0 +1,24 @@
+﻿$themes: ( 
+    default: ( 
+        text: white,
+        text-secondary: #A2A3A3,
+        bg-menu-container: #202225,
+        bg-side-menu-container: #2f3136,
+        bg-content-container: #36393f,
+        bg-input-to-send-message: #484c52,
+        bg-emojis-container: #2f3136,
+        bg-voice-message-container: white,
+        bg-edit-message-input: #40444b,
+    ),
+    light: ( 
+        text: black,
+        text-secondary: #A2A3A3,
+        bg-menu-container: #E3E5E8,
+        bg-side-menu-container: #F2F3F5,
+        bg-content-container: #FFFFFF,
+        bg-input-to-send-message: #EBEDEF,
+        bg-emojis-container: #E3E5E8,
+        bg-voice-message-container: #E3E5E8,
+        bg-edit-message-input: #EBEDEF
+    ), 
+);

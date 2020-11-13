@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Application.ApplicationUsers.Commands
 {
-    public class UpdateImageUrlCommand : IRequest
+    public class UpdateImageUrlByUserIdCommand : IRequest
     {
         public string ImageUrl { get; set; }
         public string UserId { get; set; }
 
-        public class UpdateImageUrlCommandHandler : IRequestHandler<UpdateImageUrlCommand>
+        public class UpdateImageUrlByUserIdCommandHandler : IRequestHandler<UpdateImageUrlByUserIdCommand>
         {
             readonly IContext _context;
 
-            public UpdateImageUrlCommandHandler(IContext context)
+            public UpdateImageUrlByUserIdCommandHandler(IContext context)
             {
                 _context = context;
             }
 
-            public async Task<Unit> Handle(UpdateImageUrlCommand request, CancellationToken cancellationToken)
+            public async Task<Unit> Handle(UpdateImageUrlByUserIdCommand request, CancellationToken cancellationToken)
             {
                 ApplicationUser user = await _context.ApplicationUsers.FindAsync(request.UserId);
 

@@ -1,11 +1,15 @@
 ﻿.voice-message__container {
+    @include themed() {
+        color: t('text-voice-message');
+        background-color: t('bg-voice-message-container');
+    }
+
     @include center-absolute;
     z-index: 2;
     display: none;
     width: 96%;
     height: 100px;
     border-radius: 12px;
-    background-color: white;
     justify-content: center;
 
     &.active {
@@ -24,6 +28,10 @@
     }
 
     & span::before {
+        @include themed() {
+            background-color: t('bg-voice-message-container');
+        }
+
         position: absolute;
         top: 0;
         right: 0;
@@ -31,7 +39,6 @@
         height: 100%;
         content: '';
         animation: dots 2s steps(3, start) infinite;
-        background-color: white;
     }
 
 
@@ -48,6 +55,6 @@
 
 .stop-recording-voice-message__button {
     @include reset-button;
-    font-size: font-scale(3);
+    font-size: font-scale(2);
     align-self: center;
 }

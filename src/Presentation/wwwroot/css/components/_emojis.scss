@@ -1,4 +1,8 @@
 ﻿.emojis__container {
+    @include themed() {
+        background-color: t('bg-emojis-container');
+    }
+
     font-size: font-scale(2);
     position: absolute;
     right: 50%;
@@ -9,7 +13,6 @@
     height: 30%;
     transform: translateX(50%);
     border-radius: 12px;
-    background-color: #2f3136;
 
     &.active {
         display: flex;
@@ -42,4 +45,10 @@
 
 .emojis {
     flex-grow: 1;
+}
+
+.original-emoji-type__button{
+    @include themed(){
+        color: t('text');
+    }
 }

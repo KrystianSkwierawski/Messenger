@@ -34,6 +34,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
         }
 
         public string Username { get; set; }
+        public string Theme { get; set; }
         public string ImageUrl { get; set; }
 
         [TempData]
@@ -48,6 +49,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
             public string ImageUrl { get; set; }
+            public string Theme { get; set; }
         }
 
         private async Task LoadAsync(IdentityUser user)
@@ -59,11 +61,13 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
 
             Username = userName;
             ImageUrl = applicationUser.ImageUrl;
+            Theme = applicationUser.Theme;
 
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                ImageUrl = applicationUser.ImageUrl
+                ImageUrl = applicationUser.ImageUrl,
+                Theme = applicationUser.Theme
             };
         }
 
@@ -83,6 +87,17 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
         {
             ApplicationUser user = await _userManager.GetUserAsync(User) as ApplicationUser;
 
+            string theme = HttpContext.Request.Form["theme"];
+
+            if(theme != user.Theme)
+            {
+                await _mediator.Send(new UpdateThemeByUserIdCommand
+                {
+                    Theme = theme,
+                    UserId = user.Id
+                });
+            }
+            
             IFormFileCollection files = HttpContext.Request.Form.Files;
             bool imageExist = ImageFileManagment.CheckIfTheImageExists(files.Count);
 
@@ -100,7 +115,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
 
                 imageFileManagment.ConvertAndCopyImageToWebRoot();
 
-                await _mediator.Send(new UpdateImageUrlCommand
+                await _mediator.Send(new UpdateImageUrlByUserIdCommand
                 {
                     UserId = user.Id,
                     ImageUrl = @"\images\avatars\" + fileName + extenstion,
@@ -118,6 +133,8 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+            
+
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
@@ -128,6 +145,9 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+
+
+
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

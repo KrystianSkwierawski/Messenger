@@ -1,4 +1,5 @@
 ﻿using Application;
+using Application.ApplicationUsers.Queries;
 using Application.Friends.Queries;
 using Application.Messages.Commands;
 using Application.Messages.Queries;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Presentation.Areas.User.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -36,7 +38,7 @@ namespace Messenger.Areas.User.Controllers
         {
             string userId = GetUserId();
 
-            if (userId != null)
+            if (!String.IsNullOrEmpty(userId))
             {
                 IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
                 {
@@ -49,10 +51,16 @@ namespace Messenger.Areas.User.Controllers
                     RelationShips = relationShips
                 })).Value;
 
+                string theme = (string)base.Ok(await Mediator.Send(new GetThemeByUserIdQuery
+                {
+                    UserId = userId
+                })).Value;
+
                 HomeViewModel homeViewModel = new HomeViewModel()
                 {
                     RelationShips = relationShips,
-                    Friends = friends
+                    Friends = friends,
+                    Theme = theme
                 };
 
                 return View(homeViewModel);

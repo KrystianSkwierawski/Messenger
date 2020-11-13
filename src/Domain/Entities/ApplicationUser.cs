@@ -7,5 +7,6 @@ namespace Domain.Entities
         //public List<RelationShip> RelationShips { get; set; }
 
         public string ImageUrl { get; set; }
+        public string Theme { get; set; }
     }
 }

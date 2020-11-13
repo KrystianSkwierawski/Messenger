@@ -28,6 +28,10 @@
 }
 
 .friend__name {
+    @include themed(){
+        color: t('text');
+    }
+
     font-size: font-scale(1);
     align-self: center;
 }

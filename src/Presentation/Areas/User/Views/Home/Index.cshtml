@@ -17,7 +17,7 @@
 
         <div class="menu__container">
             <button class="fas fa-bars menu__button"></button>
-            <h1 class="text-white menu__friend-name"></h1>
+            <h1 class="menu__friend-name"></h1>
         </div>
 
         <div class="content__container">
@@ -34,8 +34,8 @@
             <div class="interaction-menu__container mb-2 mt-3">
                 <textarea class="input-to-send-messages p-1"></textarea>
                 <button class="ml-2 send-message__button text-primary"><i class="fab fa-telegram-plane"></i></button>
-                <button class="ml-3 start-recording-voice-message__button text-white"><i class="fas fa-microphone"></i></button>
-                <button class="ml-3 display-emojis__button text-white"><i class="fas fa-smile-beam"></i></button>
+                <button class="ml-3 start-recording-voice-message__button"><i class="fas fa-microphone"></i></button>
+                <button class="ml-3 display-emojis__button"><i class="fas fa-smile-beam"></i></button>
             </div>
 
             <div class="emojis__container p-2">
@@ -46,7 +46,7 @@
                     <button class="emoji-type__button" id="activityAndSports">⚽️</button>
                     <button class="emoji-type__button" id="foodAndDrink">🍏</button>
                     <button class="emoji-type__button" id="animalsAndNature">🐻</button>
-                    <button class="emoji-type__button text-white fas fa-image" id="originalEmojis"></button>
+                    <button class="emoji-type__button original-emoji-type__button fas fa-image" id="originalEmojis"></button>
                 </div>
 
                 <div class="emojis pt-3">
@@ -79,7 +79,7 @@
                         <div class="friend__container" id="@friend.Id">
                             <button class="friend__details ml-3 mb-4">
                                 <img src="@friend.ImageUrl" class="friend__image rounded-circle" alt="friend avatar" />
-                                <h2 class="friend__name text-white ml-2 text-break">@friend.UserName</h2>
+                                <h2 class="friend__name ml-2 text-break">@friend.UserName</h2>
                             </button>
                         </div>
                     }
@@ -92,7 +92,7 @@
                             </div>
                             <button disabled class="friend__details ml-3 mb-4">
                                 <img src="@friend.ImageUrl" class="friend__image rounded-circle" alt="friend avatar" />
-                                <h2 class="friend__name text-white ml-2 text-break">@friend.UserName</h2>
+                                <h2 class="friend__name ml-2 text-break">@friend.UserName</h2>
                             </button>
                         </div>
                     }
@@ -101,7 +101,7 @@
 
         </div>
 
-        <div class="settings__container text-white">
+        <div class="settings__container">
             <button class="fas fa-user-plus add-friend__button ml-1 p-0" data-friends='@Json.Serialize(Model.Friends)' data-username="@_user.UserName"></button>
 
 
@@ -116,6 +116,10 @@
     <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
     <script type="module" src="~/js/messengerHub.js"></script>
     <script type="module" src="~/js/index.js"></script>
+    <script>
+        //set theme
+        document.body.classList.add('@Model.Theme');
+    </script>
 }
 else
 {
