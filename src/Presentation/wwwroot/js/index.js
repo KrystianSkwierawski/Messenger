@@ -181,32 +181,29 @@ async function sendMessage(message) {
     await messengerHub.sendMessage(resultMessage);
 };
 
-elements.inputToSendMessages.addEventListener('keypress', async () => {
-    const enterKey = 13; 
-
-    if (event.keyCode === enterKey && !event.shiftKey) {
-        const message = indexView.getInputToSendMessagesValue();
-
-        const inputIsNotEmpty = message.trim() ? true : false;
-
-        if (inputIsNotEmpty) {
-            const convertedMessage = EmojisConverter.convertTextToEmojis(message);
-            await sendMessage(convertedMessage);
-            indexView.clearInputToSendMessages();
-        }
-    }
-});
-
-
-elements.sendMessageButton.addEventListener('click', async () => {
+const sendMessageIfInputIsNotEmpty = async () => {
     const message = indexView.getInputToSendMessagesValue();
     const inputIsNotEmpty = message.trim() ? true : false;
 
     if (inputIsNotEmpty) {
         const convertedMessage = EmojisConverter.convertTextToEmojis(message);
-        await sendMessage(convertedMessage);
+        await sendMessage(convertedMessage);      
     }
+};
 
+elements.inputToSendMessages.addEventListener('keypress', async () => {
+    const enterKey = 13; 
+    const clickedEnterKey = (event.keyCode === enterKey && !event.shiftKey) ? true : false;
+
+    if (clickedEnterKey) {
+        sendMessageIfInputIsNotEmpty();
+        indexView.clearInputToSendMessages();
+    }
+});
+
+
+elements.sendMessageButton.addEventListener('click', async () => {
+    sendMessageIfInputIsNotEmpty();
     indexView.clearInputToSendMessages();
 });
 
