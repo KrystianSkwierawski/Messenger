@@ -1,13 +1,12 @@
-﻿using Application;
-using Application.ApplicationUsers.Queries;
+﻿using Application.ApplicationUsers.Queries;
+using Application.Common.Interfaces;
+using Application.Common.ViewModel;
 using Application.Friends.Queries;
 using Application.Messages.Commands;
 using Application.Messages.Queries;
 using Application.RelationShips.Commands;
 using Application.RelationShips.Queries;
-using Application.ViewModel;
 using Domain.Entities;
-using Messenger.Application.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -26,11 +25,13 @@ namespace Messenger.Areas.User.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         readonly IWebHostEnvironment _hostEnvironment;
+        private IAudioFileBulider _audioFileBulider;
 
-        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment hostEnvironment)
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment hostEnvironment, IAudioFileBulider audioFileBulider)
         {
-            _hostEnvironment = hostEnvironment;
             _logger = logger;
+            _hostEnvironment = hostEnvironment;
+            _audioFileBulider = audioFileBulider;
         }
 
         [HttpGet]
@@ -198,7 +199,7 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> AddVoiceMessage(string chunks)
         {
-            string fileNameWithExtenstion = await AudioFileManagment.CopyAudioToWebRoot(_hostEnvironment.WebRootPath, chunks);
+            string fileNameWithExtenstion = await _audioFileBulider.CopyAudioToWebRoot(_hostEnvironment.WebRootPath, chunks);
 
             return new JsonResult(fileNameWithExtenstion);
         }
@@ -206,7 +207,7 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> RemoveVoiceMessage(string fileNameWithExtenstion)
         {
-            await AudioFileManagment.RemoveAudio(_hostEnvironment.WebRootPath, fileNameWithExtenstion);
+            await _audioFileBulider.RemoveAudio(_hostEnvironment.WebRootPath, fileNameWithExtenstion);
 
             return new JsonResult(new EmptyResult());
         }
@@ -245,7 +246,6 @@ namespace Messenger.Areas.User.Controllers
         }
 
 
-        //sprobuj wywalic do osobnej klasy
         private string GetUserId()
         {
             string o_userId = string.Empty;

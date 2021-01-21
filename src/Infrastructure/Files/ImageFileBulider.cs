@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.Common.Interfaces;
+using Application.Common.Models;
+using Microsoft.AspNetCore.Http;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Gif;
@@ -8,22 +10,20 @@ using SixLabors.ImageSharp.Processing;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace Application
+namespace Infrastructure.Files
 {
-    public class ImageFileManagment
+    public class ImageFileBulider : IImageFileBulider
     {
-        public static string DefaultAvatarPath = @"\images\avatars\default-avatar.png";
-
         private string _avatarsPath { get; set; }
         private string _fileName { get; set; }
         private string _extenstion { get; set; }
         private IFormFile _file { get; set; }
         private string _webRootPath { get; set; }
-        private string  _imageUrl { get; set; }
-
-        public ImageFileManagment(string fileName, string extenstion, IFormFile file, string webRootPath, string imageUrl)
+        private string _imageUrl { get; set; }
+       
+        public ImageFileBulider(string fileName, string extenstion, IFormFile file, string webRootPath, string imageUrl)
         {
-            _avatarsPath = Path.Combine(webRootPath, @"images\avatars\");
+            _avatarsPath = AvatarPath.GetAvatarsPath(webRootPath);
             _extenstion = extenstion.ToLower();
             _file = file;
             _webRootPath = webRootPath;
@@ -59,11 +59,6 @@ namespace Application
                     CopyImageToWebRoot(output);
                 }
             }
-        }
-
-        public static bool CheckIfTheImageExists(int filesCount)
-        {
-            return filesCount > 0 ? true : false;
         }
 
         public void RemoveOldImage()
@@ -109,4 +104,3 @@ namespace Application
         }
     }
 }
-

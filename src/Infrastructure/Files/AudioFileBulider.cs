@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Application.Common.Interfaces;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace Application
 {
-    public static class AudioFileManagment
+    public class AudioFileBulider : IAudioFileBulider
     {
-        public static async Task<string> CopyAudioToWebRoot(string webRootPath, string chunks)
+        public async Task<string> CopyAudioToWebRoot(string webRootPath, string chunks)
         {
             string extenstion = ".ogg";
             string fileNameWithExtenstion = Guid.NewGuid() + extenstion;
@@ -24,7 +25,7 @@ namespace Application
             return fileNameWithExtenstion;
         }
 
-        public static async Task RemoveAudio(string webRootPath, string fileNameWithExtenstion)
+        public async Task RemoveAudio(string webRootPath, string fileNameWithExtenstion)
         {
             string filePath = Path.Combine(GetAudiosPath(webRootPath), fileNameWithExtenstion);
             if (File.Exists(filePath))
@@ -33,7 +34,7 @@ namespace Application
             }
         }
 
-        private static string GetAudiosPath(string webRootPath)
+        private string GetAudiosPath(string webRootPath)
         {
             return Path.Combine(webRootPath, @"audios\");
         }

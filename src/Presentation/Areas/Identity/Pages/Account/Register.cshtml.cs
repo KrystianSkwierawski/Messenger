@@ -1,5 +1,8 @@
 ﻿using Application;
+using Application.Common.Interfaces;
+using Application.Common.Models;
 using Domain.Entities;
+using Infrastructure.Files;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -88,7 +91,7 @@ namespace Messenger.Areas.Identity.Pages.Account
                 ApplicationUser user = new ApplicationUser { 
                     UserName = Input.UserName, 
                     Email = Input.Email, 
-                    ImageUrl = ImageFileManagment.DefaultAvatarPath,
+                    ImageUrl = AvatarPath.DefaultAvatarPath,
                     Theme = defaultTheme
                 };
 

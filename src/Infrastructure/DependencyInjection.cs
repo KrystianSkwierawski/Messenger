@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces;
+﻿using Application;
+using Application.Common.Interfaces;
+using Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
@@ -7,6 +9,7 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddTransient<IAudioFileBulider, AudioFileBulider>();
             services.AddTransient<IDateTime, MachineDateTime>();
             services.AddScoped<IContext, Context>();
 

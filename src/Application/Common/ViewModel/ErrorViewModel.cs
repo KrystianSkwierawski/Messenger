@@ -1,6 +1,4 @@
-using System;
-
-namespace Messenger.Application.ViewModel
+namespace Application.Common.ViewModel
 {
     public class ErrorViewModel
     {

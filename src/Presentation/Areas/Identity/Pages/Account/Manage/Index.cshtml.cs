@@ -1,6 +1,8 @@
-﻿using Application;
-using Application.ApplicationUsers.Commands;
+﻿using Application.ApplicationUsers.Commands;
+using Application.Common.Interfaces;
+using Application.Common.Models;
 using Domain.Entities;
+using Infrastructure.Files;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -20,6 +22,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<IdentityUser> _signInManager;
         readonly IWebHostEnvironment _hostEnvironment;
         readonly IMediator _mediator;
+        private IImageFileBulider _imageFileBulider;
 
         public IndexModel(
             Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
@@ -99,21 +102,21 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             }
             
             IFormFileCollection files = HttpContext.Request.Form.Files;
-            bool imageExist = ImageFileManagment.CheckIfTheImageExists(files.Count);
+            bool imageExist = files.Count > 0 ? true : false;
 
             if (imageExist)
             {
                 string webRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Guid.NewGuid().ToString();
                 string extenstion = Path.GetExtension(files[0].FileName);
-                ImageFileManagment imageFileManagment = new ImageFileManagment(fileName, extenstion, files[0], webRootPath, user.ImageUrl);
+                _imageFileBulider = new ImageFileBulider(fileName, extenstion, files[0], webRootPath, user.ImageUrl);
 
-                if (user.ImageUrl != null && user.ImageUrl != ImageFileManagment.DefaultAvatarPath)
+                if (user.ImageUrl != null && user.ImageUrl != AvatarPath.DefaultAvatarPath)
                 {
-                    imageFileManagment.RemoveOldImage();
+                    _imageFileBulider.RemoveOldImage();
                 }
 
-                imageFileManagment.ConvertAndCopyImageToWebRoot();
+                _imageFileBulider.ConvertAndCopyImageToWebRoot();
 
                 await _mediator.Send(new UpdateImageUrlByUserIdCommand
                 {
