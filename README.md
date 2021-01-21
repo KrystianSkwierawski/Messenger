@@ -73,7 +73,7 @@ Messenger - realtime chat communicator using SignalR. The idea for this project 
 * Sass
  
 ## Status
-Project is in progress.
+Project is finished.
  
  
 
