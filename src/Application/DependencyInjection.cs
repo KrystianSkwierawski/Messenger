@@ -9,7 +9,6 @@ namespace Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            //services.AddTransient<IImageFileManagment, ImageFileManagment>();
 
             return services;
         }

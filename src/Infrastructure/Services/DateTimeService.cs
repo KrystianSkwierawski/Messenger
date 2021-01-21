@@ -1,9 +1,9 @@
 ﻿using Domain.Interfaces;
 using System;
 
-namespace Infrastructure
+namespace Infrastructure.Services
 {
-    public class MachineDateTime : IDateTime
+    public class DateTimeService : IDateTime
     {
         public string Now => DateTime.UtcNow.ToString();
     }
