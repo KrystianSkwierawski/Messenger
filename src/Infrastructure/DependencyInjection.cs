@@ -19,6 +19,7 @@ namespace Infrastructure
             services.AddTransient<IAudioFileBulider, AudioFileBulider>();
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddScoped<IContext, Context>();
+            services.AddSingleton<AvatarPathService>();
 
             return services;
         }

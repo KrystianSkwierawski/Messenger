@@ -1,8 +1,6 @@
-﻿using Application;
-using Application.Common.Interfaces;
-using Application.Common.Models;
+﻿using Application.Common.Interfaces;
 using Domain.Entities;
-using Infrastructure.Files;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +27,7 @@ namespace Messenger.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         readonly IWebHostEnvironment _hostEnvironment;
+        private IAvatarPath _avatarPath;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -42,6 +41,7 @@ namespace Messenger.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _hostEnvironment = hostEnvironment;
+            _avatarPath = new AvatarPathService();
         }
 
         [BindProperty]
@@ -91,7 +91,7 @@ namespace Messenger.Areas.Identity.Pages.Account
                 ApplicationUser user = new ApplicationUser { 
                     UserName = Input.UserName, 
                     Email = Input.Email, 
-                    ImageUrl = AvatarPath.DefaultAvatarPath,
+                    ImageUrl = _avatarPath.DefaultAvatarPath,
                     Theme = defaultTheme
                 };
 

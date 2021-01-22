@@ -1,5 +1,5 @@
 ﻿using Application.Common.Interfaces;
-using Application.Common.Models;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Http;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -14,16 +14,16 @@ namespace Infrastructure.Files
 {
     public class ImageFileBulider : IImageFileBulider
     {
-        private string _avatarsPath { get; set; }
         private string _fileName { get; set; }
         private string _extenstion { get; set; }
         private IFormFile _file { get; set; }
         private string _webRootPath { get; set; }
         private string _imageUrl { get; set; }
+        private IAvatarPath _avatarPath;
        
         public ImageFileBulider(string fileName, string extenstion, IFormFile file, string webRootPath, string imageUrl)
         {
-            _avatarsPath = AvatarPath.GetAvatarsPath(webRootPath);
+            _avatarPath = new AvatarPathService();
             _extenstion = extenstion.ToLower();
             _file = file;
             _webRootPath = webRootPath;
@@ -33,7 +33,7 @@ namespace Infrastructure.Files
 
         private void CopyImageToWebRoot(MemoryStream Image)
         {
-            string fileNameWithPath = Path.Combine(_avatarsPath, _fileName + _extenstion);
+            string fileNameWithPath = Path.Combine(_avatarPath.GetAvatarsPath(_webRootPath), _fileName + _extenstion);
 
             using (var filesStreams = new FileStream(fileNameWithPath, FileMode.Create))
             {

@@ -1,8 +1,8 @@
 ﻿using Application.ApplicationUsers.Commands;
 using Application.Common.Interfaces;
-using Application.Common.Models;
 using Domain.Entities;
 using Infrastructure.Files;
+using Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,6 +23,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
         readonly IWebHostEnvironment _hostEnvironment;
         readonly IMediator _mediator;
         private IImageFileBulider _imageFileBulider;
+        private IAvatarPath _avatarPath;
 
         public IndexModel(
             Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
@@ -34,6 +35,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
             _hostEnvironment = hostEnvironment;
             _mediator = mediator;
+            _avatarPath = new AvatarPathService();
         }
 
         public string Username { get; set; }
@@ -111,7 +113,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
                 string extenstion = Path.GetExtension(files[0].FileName);
                 _imageFileBulider = new ImageFileBulider(fileName, extenstion, files[0], webRootPath, user.ImageUrl);
 
-                if (user.ImageUrl != null && user.ImageUrl != AvatarPath.DefaultAvatarPath)
+                if (user.ImageUrl != null && user.ImageUrl != _avatarPath.DefaultAvatarPath)
                 {
                     _imageFileBulider.RemoveOldImage();
                 }
