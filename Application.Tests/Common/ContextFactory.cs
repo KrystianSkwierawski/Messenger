@@ -17,8 +17,6 @@ namespace Application.IntegrationTests.Common
 
             context.Database.EnsureCreated();
 
-            context.SaveChanges();
-
             return context;
         }
 
