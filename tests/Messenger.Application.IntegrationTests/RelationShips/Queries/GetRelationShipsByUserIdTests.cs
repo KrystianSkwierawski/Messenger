@@ -26,7 +26,14 @@ namespace Messenger.Application.IntegrationTests.RelationShips.Queries
                 InvitingUserId = invitingUser.Id,
             });
 
-          var result = 
+            var query = new GetRelationShipsByUserIdQuery()
+            {
+                Id = invitedUser.Id
+            };
+
+            // Act
+
+            var result = await SendAsync(query);
 
             // Assert
             result.Should().NotBeNull();

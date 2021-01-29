@@ -24,37 +24,37 @@ namespace Messenger.Application.IntegrationTests
         private static Checkpoint _checkpoint;
         private static ApplicationUser _currentUser;
 
-        [OneTimeSetUp]
-        public void RunBeforeAnyTests()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true, true)
-                .AddEnvironmentVariables();
+        //[OneTimeSetUp]
+        //public void RunBeforeAnyTests()
+        //{
+        //    var builder = new ConfigurationBuilder()
+        //        .SetBasePath(Directory.GetCurrentDirectory())
+        //        .AddJsonFile("appsettings.json", true, true)
+        //        .AddEnvironmentVariables();
 
-            _configuration = builder.Build();
+        //    _configuration = builder.Build();
 
-            var startup = new Startup(_configuration);
+        //    var startup = new Startup(_configuration);
 
-            var services = new ServiceCollection();
+        //    var services = new ServiceCollection();
 
-            services.AddSingleton(Mock.Of<IWebHostEnvironment>(w =>
-              w.EnvironmentName == "Development" &&
-              w.ApplicationName == "Presentation"));
+        //    services.AddSingleton(Mock.Of<IWebHostEnvironment>(w =>
+        //      w.EnvironmentName == "Development" &&
+        //      w.ApplicationName == "Presentation"));
 
-            services.AddLogging();
+        //    services.AddLogging();
 
-            startup.ConfigureServices(services);
+        //    startup.ConfigureServices(services);
 
-            _scopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
+        //    _scopeFactory = services.BuildServiceProvider().GetService<IServiceScopeFactory>();
 
-            _checkpoint = new Checkpoint
-            {
-                TablesToIgnore = new[] { "__EFMigrationsHistory" }
-            };
+        //    _checkpoint = new Checkpoint
+        //    {
+        //        TablesToIgnore = new[] { "__EFMigrationsHistory" }
+        //    };
 
-            EnsureDatabase();
-        }
+        //    EnsureDatabase();
+        //}
 
         private static void EnsureDatabase()
         {
