@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Application.RelationShips.Queries
 {
-    public class GetRelationShipIdByUserIdAndFriendId : IRequest<int>
+    public class GetRelationShipIdByUserIdAndFriendIdQuery : IRequest<int>
     {
         public string CurrentUserId { get; set; }
         public string FriendId { get; set; }
 
-        public class GetRelationShipIdByUserIdAndFriendIdHandler : IRequestHandler<GetRelationShipIdByUserIdAndFriendId, int>
+        public class GetRelationShipIdByUserIdAndFriendIdQueryHandler : IRequestHandler<GetRelationShipIdByUserIdAndFriendIdQuery, int>
         {
             readonly IContext _context;
 
-            public GetRelationShipIdByUserIdAndFriendIdHandler(IContext context)
+            public GetRelationShipIdByUserIdAndFriendIdQueryHandler(IContext context)
             {
                 _context = context;
             }
 
-            public async Task<int> Handle(GetRelationShipIdByUserIdAndFriendId request, CancellationToken cancellationToken)
+            public async Task<int> Handle(GetRelationShipIdByUserIdAndFriendIdQuery request, CancellationToken cancellationToken)
             {
                  int relationShipId = _context.RelationShips.FirstOrDefault(x =>
                      (x.InvitedUserId == request.CurrentUserId || x.InvitingUserId == request.CurrentUserId) &&

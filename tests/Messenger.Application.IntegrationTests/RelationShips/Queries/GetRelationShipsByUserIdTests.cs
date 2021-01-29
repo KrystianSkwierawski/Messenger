@@ -1,36 +1,36 @@
 ﻿using Application.RelationShips.Queries;
-using System.Threading.Tasks;
-using FluentAssertions;
 using Domain.Entities;
+using FluentAssertions;
 using NUnit.Framework;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Messenger.Application.IntegrationTests.RelationShips.Queries
 {
     using static Testing;
-
-    public class GetRelationShipsByUserIdTests
+    public class GetRelationShipsByUserIdTests : TestBase
     {
         [Test]
         public async Task ShouldReturnRelationShip()
         {
-            // Arrange
+            //Arrange
+            ApplicationUser invitingUser = await CreateUserAsync("InvitingUser", "Testing1234!", new string[] { });
+            ApplicationUser invitedUser = await CreateUserAsync("InvitedUser", "Testing1234!", new string[] { });
+
+            //await SignInAsUserAsync(invitingUser);
+
             await AddAsync(new RelationShip
             {
                 IsAccepted = true,
-                InvitedUserId = "4e716ce2-b28a-4b9a-83b1-c5fc9486ce08",
-                InvitingUserId = "90b7fb31-3edf-45e6-9c13-d9697d39b384"
+                InvitedUserId = invitedUser.Id,
+                InvitingUserId = invitingUser.Id,
             });
 
-            var query = new GetRelationShipsByUserIdQuery()
-            {
-                Id = "90b7fb31-3edf-45e6-9c13-d9697d39b384"
-            };
-
-            // Act
-            var result = await SendAsync(query);
+          var result = 
 
             // Assert
             result.Should().NotBeNull();
+            result.FirstOrDefault(x => x.InvitedUserId == invitedUser.Id).Should().NotBeNull();
         }
     }
 }

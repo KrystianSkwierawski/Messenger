@@ -92,7 +92,7 @@ namespace Messenger.Areas.User.Controllers
         [HttpGet]
         public async Task<ActionResult> GetMessagesFromCurrentRelationShipAndRelationShipId(string friendId)
         {
-            int relationShipId = (int)base.Ok(await Mediator.Send(new GetRelationShipIdByUserIdAndFriendId
+            int relationShipId = (int)base.Ok(await Mediator.Send(new GetRelationShipIdByUserIdAndFriendIdQuery
             {
                 FriendId = friendId,
                 CurrentUserId = GetUserId()

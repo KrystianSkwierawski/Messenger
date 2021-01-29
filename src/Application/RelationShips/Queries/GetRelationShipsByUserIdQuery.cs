@@ -23,11 +23,11 @@ namespace Application.RelationShips.Queries
 
             public async Task<IQueryable<RelationShip>> Handle(GetRelationShipsByUserIdQuery request, CancellationToken cancellationToken)
             {
-                IQueryable<RelationShip> relationShips = Enumerable.Empty<RelationShip>().AsQueryable();
+                IQueryable<RelationShip> relationShips = null;
 
                 relationShips = _context.RelationShips.Include(x => x.InvitedUser).Include(x => x.InvitingUser).Where(x => x.InvitedUserId == request.Id || x.InvitingUserId == request.Id);
 
-                return relationShips;
+                 return relationShips;
             }
         }
     }
