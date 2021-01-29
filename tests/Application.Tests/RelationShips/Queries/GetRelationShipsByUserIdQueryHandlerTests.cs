@@ -55,7 +55,7 @@ namespace Application.IntegrationTests.RelationShips.Queries
             //Act 
             var result = await handler.Handle(new GetRelationShipsByUserIdQuery
             {
-                Id = relationShip.InvitingUserId
+                Id = invitedUser.Id
 
             }, CancellationToken.None);
 
@@ -65,6 +65,32 @@ namespace Application.IntegrationTests.RelationShips.Queries
             result.First().InvitedUserId.Should().Be(invitedUser.Id);
             result.First().InvitingUserId.Should().Be(invitingUser.Id);
             result.Should().HaveCount(1);
+        }
+
+        [Fact]
+        public async Task ShouldReturnEmpty()
+        {
+            //Arrange
+            ApplicationUser user = new ApplicationUser
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserName = "User1"
+            };
+
+            await _context.ApplicationUsers.AddAsync(user);
+            await _context.SaveChangesAsync();
+
+            var handler = new GetRelationShipsByUserIdQuery.GetRelationShipsByUserIdQueryHandler(_context);
+
+            //Act 
+            var result = await handler.Handle(new GetRelationShipsByUserIdQuery
+            {
+                Id = user.Id
+
+            }, CancellationToken.None);
+
+            //Assert
+            result.Should().BeEmpty();
         }
     }
 }

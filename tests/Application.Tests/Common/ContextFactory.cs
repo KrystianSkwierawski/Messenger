@@ -1,8 +1,7 @@
 ﻿using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
 
-namespace Messenger.Application.IntegrationTests.Common
+namespace Application.IntegrationTests.Common
 {
     public static class ContextFactory
     {
@@ -16,16 +15,26 @@ namespace Messenger.Application.IntegrationTests.Common
 
             var context = new Context(options);
 
-            context.Database.EnsureCreated();
-
-            context.SaveChanges();
+            try
+            {
+                context.Database.EnsureCreated();
+            }
+            catch 
+            {
+            }
 
             return context;
         }
 
         public static void Destroy(Context context)
         {
-            context.Database.EnsureDeleted();
+            try
+            {
+                context.Database.EnsureDeleted();
+            }
+            catch{
+
+            }
 
             context.Dispose();
         }

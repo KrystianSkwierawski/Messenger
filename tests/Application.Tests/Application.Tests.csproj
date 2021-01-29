@@ -20,8 +20,8 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\src\Presentation\Presentation.csproj" />
+  <ItemGroup>    
+    <ProjectReference Include="..\..\src\Presentation\Presentation.csproj" />
   </ItemGroup>
 
 </Project>
