@@ -34,12 +34,11 @@ namespace Application.Tests.Messages.Queries
                 UserName = "invitingUser"
             };
 
-              await _context.ApplicationUsers.AddAsync(invitedUser);
+            await _context.ApplicationUsers.AddAsync(invitedUser);
             await _context.ApplicationUsers.AddAsync(invitingUser);
-            await _context.SaveChangesAsync();
 
-            RelationShip relationShip = new RelationShip 
-            { 
+            RelationShip relationShip = new RelationShip
+            {
                 InvitedUserId = invitedUser.Id,
                 InvitingUserId = invitingUser.Id
             };
@@ -49,7 +48,6 @@ namespace Application.Tests.Messages.Queries
 
             Message message = new Message
             {
-                Id = new Random().Next(),
                 RelationShipId = relationShip.Id
             };
 

@@ -26,20 +26,16 @@ namespace Application.Tests.RelationShips.Queries
             //Arrange
             ApplicationUser currentUser = new ApplicationUser
             {
-                Id = Guid.NewGuid().ToString(),
                 UserName = "invitedUser"
             };
 
             ApplicationUser friendUser = new ApplicationUser
             {
-                Id = Guid.NewGuid().ToString(),
                 UserName = "invitingUser"
             };
 
             await _context.ApplicationUsers.AddAsync(currentUser);
             await _context.ApplicationUsers.AddAsync(friendUser);
-            await _context.SaveChangesAsync();
-
 
             RelationShip relationShip = new RelationShip
             {

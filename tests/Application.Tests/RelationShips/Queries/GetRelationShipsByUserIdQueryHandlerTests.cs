@@ -36,7 +36,6 @@ namespace Application.IntegrationTests.RelationShips.Queries
 
             await _context.ApplicationUsers.AddAsync(invitedUser);
             await _context.ApplicationUsers.AddAsync(invitingUser);
-            await _context.SaveChangesAsync();
 
             RelationShip relationShip = new RelationShip
             {
