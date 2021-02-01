@@ -3,7 +3,7 @@ using Application.RelationShips.Queries;
 using Domain.Entities;
 using FluentAssertions;
 using Infrastructure.Persistence;
-using System;
+using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,18 +26,17 @@ namespace Application.IntegrationTests.RelationShips.Queries
             //Arrange
             ApplicationUser invitedUser = new ApplicationUser
             {
-                Id = Guid.NewGuid().ToString(),
                 UserName = "invitedUser"
             };
 
             ApplicationUser invitingUser = new ApplicationUser
             {
-                Id = Guid.NewGuid().ToString(),
                 UserName = "invitingUser"
             };
 
             await _context.ApplicationUsers.AddAsync(invitedUser);
             await _context.ApplicationUsers.AddAsync(invitingUser);
+            await _context.SaveChangesAsync();
 
             RelationShip relationShip = new RelationShip
             {
@@ -46,14 +45,14 @@ namespace Application.IntegrationTests.RelationShips.Queries
                 InvitingUserId = invitingUser.Id,
             };
 
-            await _context.AddAsync(relationShip);
+            await _context.RelationShips.AddAsync(relationShip);
 
             await _context.SaveChangesAsync();
 
             var handler = new GetRelationShipsByUserIdQuery.GetRelationShipsByUserIdQueryHandler(_context);
 
             //Act 
-            var result = await handler.Handle(new GetRelationShipsByUserIdQuery
+            var relationShips = await handler.Handle(new GetRelationShipsByUserIdQuery
             {
                 Id = invitedUser.Id
 
@@ -61,10 +60,10 @@ namespace Application.IntegrationTests.RelationShips.Queries
 
 
             //Assert
-            result.Should().NotBeNull();
-            result.First().InvitedUserId.Should().Be(invitedUser.Id);
-            result.First().InvitingUserId.Should().Be(invitingUser.Id);
-            result.Should().HaveCount(1);
+            relationShips.Should().NotBeNull();
+            relationShips.First().InvitedUserId.Should().Be(invitedUser.Id);
+            relationShips.First().InvitingUserId.Should().Be(invitingUser.Id);
+            relationShips.Should().HaveCount(1);
         }
 
         [Fact]
@@ -73,7 +72,6 @@ namespace Application.IntegrationTests.RelationShips.Queries
             //Arrange
             ApplicationUser user = new ApplicationUser
             {
-                Id = Guid.NewGuid().ToString(),
                 UserName = "User1"
             };
 
@@ -83,14 +81,14 @@ namespace Application.IntegrationTests.RelationShips.Queries
             var handler = new GetRelationShipsByUserIdQuery.GetRelationShipsByUserIdQueryHandler(_context);
 
             //Act 
-            var result = await handler.Handle(new GetRelationShipsByUserIdQuery
+            var relationShips = await handler.Handle(new GetRelationShipsByUserIdQuery
             {
                 Id = user.Id
 
             }, CancellationToken.None);
 
             //Assert
-            result.Should().BeEmpty();
+            relationShips.Should().BeEmpty();
         }
     }
 }

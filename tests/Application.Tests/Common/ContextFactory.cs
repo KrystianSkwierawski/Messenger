@@ -19,7 +19,7 @@ namespace Application.IntegrationTests.Common
             {
                 context.Database.EnsureCreated();
             }
-            catch 
+            catch
             {
             }
 
@@ -32,7 +32,8 @@ namespace Application.IntegrationTests.Common
             {
                 context.Database.EnsureDeleted();
             }
-            catch{
+            catch
+            {
 
             }
 
