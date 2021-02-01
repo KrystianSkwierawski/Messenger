@@ -5,6 +5,7 @@ using FluentAssertions;
 using Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -23,7 +24,7 @@ namespace Application.Tests.Messages.Queries
         [Fact]
         public async Task ShouldReturnMessageByRelationShipId()
         {
-            //Assert
+            //Arrange
             ApplicationUser invitedUser = new ApplicationUser
             {
                 UserName = "invitedUser"
@@ -57,7 +58,7 @@ namespace Application.Tests.Messages.Queries
             var handler = new GetMessagesByRelationShipIdQuery.GetMessagesByRelationShipIdQueryHandler(_context);
 
             //Act
-            var messages = await handler.Handle(new GetMessagesByRelationShipIdQuery
+            List<Message> messages = await handler.Handle(new GetMessagesByRelationShipIdQuery
             {
                 RelationShipId = relationShip.Id
             }, CancellationToken.None);

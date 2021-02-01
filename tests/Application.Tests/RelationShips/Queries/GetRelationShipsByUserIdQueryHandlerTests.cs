@@ -51,7 +51,7 @@ namespace Application.IntegrationTests.RelationShips.Queries
             var handler = new GetRelationShipsByUserIdQuery.GetRelationShipsByUserIdQueryHandler(_context);
 
             //Act 
-            var relationShips = await handler.Handle(new GetRelationShipsByUserIdQuery
+            IQueryable<RelationShip> relationShips = await handler.Handle(new GetRelationShipsByUserIdQuery
             {
                 Id = invitedUser.Id
 
@@ -80,7 +80,7 @@ namespace Application.IntegrationTests.RelationShips.Queries
             var handler = new GetRelationShipsByUserIdQuery.GetRelationShipsByUserIdQueryHandler(_context);
 
             //Act 
-            var relationShips = await handler.Handle(new GetRelationShipsByUserIdQuery
+            IQueryable<RelationShip> relationShips = await handler.Handle(new GetRelationShipsByUserIdQuery
             {
                 Id = user.Id
 

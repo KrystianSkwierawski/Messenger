@@ -51,7 +51,7 @@ namespace Application.Tests.RelationShips.Queries
             var handler = new GetRelationShipIdByUserIdAndFriendIdQuery.GetRelationShipIdByUserIdAndFriendIdQueryHandler(_context);
 
             //Act
-            var relationShipId = await handler.Handle(new GetRelationShipIdByUserIdAndFriendIdQuery
+            int relationShipId = await handler.Handle(new GetRelationShipIdByUserIdAndFriendIdQuery
             {
                 CurrentUserId = currentUser.Id,
                 FriendId = friendUser.Id
