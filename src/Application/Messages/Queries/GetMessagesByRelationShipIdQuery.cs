@@ -2,6 +2,7 @@
 using Domain.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -13,11 +14,11 @@ namespace Application.Messages.Queries
     {
         public int RelationShipId { get; set; }
 
-        public class GetMessagesByCurrentUserIdAndFriendIdQueryHandler : IRequestHandler<GetMessagesByRelationShipIdQuery, List<Message>>
+        public class GetMessagesByRelationShipIdQueryHandler : IRequestHandler<GetMessagesByRelationShipIdQuery, List<Message>>
         {
             readonly IContext _context;
 
-            public GetMessagesByCurrentUserIdAndFriendIdQueryHandler(IContext context)
+            public GetMessagesByRelationShipIdQueryHandler(IContext context)
             {
                 _context = context;
             }
