@@ -24,15 +24,8 @@ namespace Application.IntegrationTests.RelationShips.Queries
         public async Task ShouldReturnRelationShips()
         {
             //Arrange
-            ApplicationUser invitedUser = new ApplicationUser
-            {
-                UserName = "invitedUser"
-            };
-
-            ApplicationUser invitingUser = new ApplicationUser
-            {
-                UserName = "invitingUser"
-            };
+            ApplicationUser invitedUser = new ApplicationUser();
+            ApplicationUser invitingUser = new ApplicationUser();
 
             await _context.ApplicationUsers.AddAsync(invitedUser);
             await _context.ApplicationUsers.AddAsync(invitingUser);
@@ -47,7 +40,7 @@ namespace Application.IntegrationTests.RelationShips.Queries
             await _context.RelationShips.AddAsync(relationShip);
 
             await _context.SaveChangesAsync();
-
+             
             var handler = new GetRelationShipsByUserIdQueryHandler(_context);
 
             //Act 
@@ -69,10 +62,7 @@ namespace Application.IntegrationTests.RelationShips.Queries
         public async Task ShouldReturnEmpty()
         {
             //Arrange
-            ApplicationUser user = new ApplicationUser
-            {
-                UserName = "User1"
-            };
+            ApplicationUser user = new ApplicationUser();
 
             await _context.ApplicationUsers.AddAsync(user);
             await _context.SaveChangesAsync();
