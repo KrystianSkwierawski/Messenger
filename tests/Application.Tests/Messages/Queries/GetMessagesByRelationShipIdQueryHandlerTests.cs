@@ -3,12 +3,12 @@ using Application.Messages.Queries;
 using Domain.Entities;
 using FluentAssertions;
 using Infrastructure.Persistence;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using static Application.Messages.Queries.GetMessagesByRelationShipIdQuery;
 
 namespace Application.Tests.Messages.Queries
 {
@@ -45,7 +45,6 @@ namespace Application.Tests.Messages.Queries
             };
 
             await _context.RelationShips.AddAsync(relationShip);
-            await _context.SaveChangesAsync();
 
             Message message = new Message
             {
@@ -55,7 +54,7 @@ namespace Application.Tests.Messages.Queries
             await _context.Messages.AddAsync(message);
             await _context.SaveChangesAsync();
 
-            var handler = new GetMessagesByRelationShipIdQuery.GetMessagesByRelationShipIdQueryHandler(_context);
+            var handler = new GetMessagesByRelationShipIdQueryHandler(_context);
 
             //Act
             List<Message> messages = await handler.Handle(new GetMessagesByRelationShipIdQuery
@@ -64,8 +63,8 @@ namespace Application.Tests.Messages.Queries
             }, CancellationToken.None);
 
             //Assert
-            message.Should().NotBeNull();
-            message.RelationShipId.Should().Be(relationShip.Id);
+            messages.Should().NotBeNull();
+            messages.FirstOrDefault(x => x.RelationShipId == relationShip.Id).Should().NotBeNull();
         }
     }
 }

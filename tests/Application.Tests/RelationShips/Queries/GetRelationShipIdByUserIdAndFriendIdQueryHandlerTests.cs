@@ -3,11 +3,10 @@ using Application.RelationShips.Queries;
 using Domain.Entities;
 using FluentAssertions;
 using Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using static Application.RelationShips.Queries.GetRelationShipIdByUserIdAndFriendIdQuery;
 
 namespace Application.Tests.RelationShips.Queries
 {
@@ -48,7 +47,7 @@ namespace Application.Tests.RelationShips.Queries
 
             await _context.SaveChangesAsync();
 
-            var handler = new GetRelationShipIdByUserIdAndFriendIdQuery.GetRelationShipIdByUserIdAndFriendIdQueryHandler(_context);
+            var handler = new GetRelationShipIdByUserIdAndFriendIdQueryHandler(_context);
 
             //Act
             int relationShipId = await handler.Handle(new GetRelationShipIdByUserIdAndFriendIdQuery

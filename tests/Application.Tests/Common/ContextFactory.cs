@@ -1,41 +1,27 @@
 ﻿using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Application.IntegrationTests.Common
 {
     public static class ContextFactory
     {
-        static string _connectionString = "Server=(LocalDB)\\MSSQLLocalDB;Database=MessengerTestDb;Trusted_Connection=True;MultipleActiveResultSets=true";
-
         public static Context Create()
         {
             var options = new DbContextOptionsBuilder<Context>()
-                     .UseSqlServer(_connectionString)
+                      .UseInMemoryDatabase(Guid.NewGuid().ToString())
                      .Options;
 
             var context = new Context(options);
 
-            try
-            {
-                context.Database.EnsureCreated();
-            }
-            catch
-            {
-            }
+            context.Database.EnsureCreated();
 
             return context;
         }
 
         public static void Destroy(Context context)
         {
-            try
-            {
-                context.Database.EnsureDeleted();
-            }
-            catch
-            {
-
-            }
+            context.Database.EnsureDeleted();
 
             context.Dispose();
         }

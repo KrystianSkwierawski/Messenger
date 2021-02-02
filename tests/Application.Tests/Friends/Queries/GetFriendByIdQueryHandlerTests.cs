@@ -7,10 +7,11 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using static Application.ApplicationUsers.Queries.GetFriendByIdQuery;
 
 namespace Application.Tests.Friends.Queries
 {
-     [Collection("QueryCollection")]
+    [Collection("QueryCollection")]
     public class GetFriendByIdQueryHandlerTests
     {
         private readonly Context _context;
@@ -31,10 +32,10 @@ namespace Application.Tests.Friends.Queries
             await _context.ApplicationUsers.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            var handler = new GetFriendByIdQuery.GetFriendByIdQueryHandler(_context);
+            var handler = new GetFriendByIdQueryHandler(_context);
 
             //Act
-            var friend = await handler.Handle(new GetFriendByIdQuery
+            ApplicationUser friend = await handler.Handle(new GetFriendByIdQuery
             {
                 Id = user.Id
             }, CancellationToken.None);
@@ -45,10 +46,10 @@ namespace Application.Tests.Friends.Queries
         }
 
         [Fact]
-        public async Task ShouldReturnEmpty()
+        public async Task ShouldReturnNull()
         {
             //Arrange
-            var handler = new GetFriendByIdQuery.GetFriendByIdQueryHandler(_context);
+            var handler = new GetFriendByIdQueryHandler(_context);
 
             //Act
             ApplicationUser friend = await handler.Handle(new GetFriendByIdQuery

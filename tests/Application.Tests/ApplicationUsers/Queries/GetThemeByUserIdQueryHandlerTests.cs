@@ -3,12 +3,10 @@ using Application.IntegrationTests.Common;
 using Domain.Entities;
 using FluentAssertions;
 using Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using static Application.ApplicationUsers.Queries.GetThemeByUserIdQuery;
 
 namespace Application.Tests.ApplicationUsers.Queries
 {
@@ -29,7 +27,7 @@ namespace Application.Tests.ApplicationUsers.Queries
             await _context.ApplicationUsers.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            var handler = new GetThemeByUserIdQuery.GetThemeByUserIdQueryHandler(_context);
+            var handler = new GetThemeByUserIdQueryHandler(_context);
 
             //Act
             string userTheme = await handler.Handle(new GetThemeByUserIdQuery

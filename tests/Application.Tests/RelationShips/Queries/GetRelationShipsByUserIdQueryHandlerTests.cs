@@ -3,11 +3,11 @@ using Application.RelationShips.Queries;
 using Domain.Entities;
 using FluentAssertions;
 using Infrastructure.Persistence;
-using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+using static Application.RelationShips.Queries.GetRelationShipsByUserIdQuery;
 
 namespace Application.IntegrationTests.RelationShips.Queries
 {
@@ -41,19 +41,19 @@ namespace Application.IntegrationTests.RelationShips.Queries
             {
                 IsAccepted = true,
                 InvitedUserId = invitedUser.Id,
-                InvitingUserId = invitingUser.Id,
+                InvitingUserId = invitingUser.Id
             };
 
             await _context.RelationShips.AddAsync(relationShip);
 
             await _context.SaveChangesAsync();
 
-            var handler = new GetRelationShipsByUserIdQuery.GetRelationShipsByUserIdQueryHandler(_context);
+            var handler = new GetRelationShipsByUserIdQueryHandler(_context);
 
             //Act 
             IQueryable<RelationShip> relationShips = await handler.Handle(new GetRelationShipsByUserIdQuery
             {
-                Id = invitedUser.Id
+                Id = invitingUser.Id
 
             }, CancellationToken.None);
 
