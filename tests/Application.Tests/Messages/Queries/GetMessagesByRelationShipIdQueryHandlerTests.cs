@@ -25,15 +25,8 @@ namespace Application.Tests.Messages.Queries
         public async Task ShouldReturnMessageByRelationShipId()
         {
             //Arrange
-            ApplicationUser invitedUser = new ApplicationUser
-            {
-                UserName = "invitedUser"
-            };
-
-            ApplicationUser invitingUser = new ApplicationUser
-            {
-                UserName = "invitingUser"
-            };
+            ApplicationUser invitedUser = new ApplicationUser();
+            ApplicationUser invitingUser = new ApplicationUser();
 
             await _context.ApplicationUsers.AddAsync(invitedUser);
             await _context.ApplicationUsers.AddAsync(invitingUser);

@@ -77,7 +77,7 @@ namespace Application.IntegrationTests.RelationShips.Queries
             await _context.ApplicationUsers.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            var handler = new GetRelationShipsByUserIdQuery.GetRelationShipsByUserIdQueryHandler(_context);
+            var handler = new GetRelationShipsByUserIdQueryHandler(_context);
 
             //Act 
             IQueryable<RelationShip> relationShips = await handler.Handle(new GetRelationShipsByUserIdQuery

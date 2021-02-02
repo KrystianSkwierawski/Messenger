@@ -23,15 +23,8 @@ namespace Application.Tests.RelationShips.Queries
         public async Task ShouldReturnRelationShip()
         {
             //Arrange
-            ApplicationUser currentUser = new ApplicationUser
-            {
-                UserName = "invitedUser"
-            };
-
-            ApplicationUser friendUser = new ApplicationUser
-            {
-                UserName = "invitingUser"
-            };
+            ApplicationUser currentUser = new ApplicationUser();
+            ApplicationUser friendUser = new ApplicationUser();
 
             await _context.ApplicationUsers.AddAsync(currentUser);
             await _context.ApplicationUsers.AddAsync(friendUser);

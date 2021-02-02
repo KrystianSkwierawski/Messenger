@@ -18,32 +18,16 @@ namespace Application.Tests.Messages.Commands
         public async Task ShouldAddMessage()
         {
             // Arrange
-            ApplicationUser invitedUser = new ApplicationUser();
-            ApplicationUser invitingUser = new ApplicationUser();
-
-            await _context.ApplicationUsers.AddAsync(invitedUser);
-            await _context.ApplicationUsers.AddAsync(invitingUser);
-
-            RelationShip relationShip = new RelationShip { InvitedUserId = invitedUser.Id, InvitingUserId = invitingUser.Id };
-
-            await _context.RelationShips.AddAsync(relationShip);
-
-            await _context.SaveChangesAsync();
-
             Mock<IDateTime> dateTimeMock = new Mock<IDateTime>();
 
             var handler = new AddMessageCommandHandler(_context, dateTimeMock.Object);
 
             // Act
-            var result = await handler.Handle(new AddMessageCommand
-            {
-                MessageContent = "123",
-                RelationShipId = 1,
-                UserId = "1"
-            }, CancellationToken.None);
-
+            Message message = await handler.Handle(new AddMessageCommand(), CancellationToken.None);
 
             // Assert
+            message.Should().NotBeNull();
+
             IQueryable<Message> messages = _context.Messages;
             messages.Should().NotBeNull();
             messages.Should().HaveCount(1);

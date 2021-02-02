@@ -24,10 +24,7 @@ namespace Application.Tests.Friends.Queries
         public async Task ShouldReturnApplicationUser()
         {
             //Arrange
-            ApplicationUser user = new ApplicationUser()
-            {
-                UserName = "User1"
-            };
+            ApplicationUser user = new ApplicationUser();
 
             await _context.ApplicationUsers.AddAsync(user);
             await _context.SaveChangesAsync();
