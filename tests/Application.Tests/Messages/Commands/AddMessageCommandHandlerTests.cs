@@ -15,7 +15,7 @@ namespace Application.Tests.Messages.Commands
     public class AddMessageCommandHandlerTests : CommandTestBase
     {
         [Fact]
-        public async Task ShouldAddMessage()
+        public async Task ShouldAddAndReturnMessage()
         {
             // Arrange
             Mock<IDateTime> dateTimeMock = new Mock<IDateTime>();

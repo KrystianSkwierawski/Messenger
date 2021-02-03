@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.ApplicationUsers;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
@@ -86,13 +87,11 @@ namespace Messenger.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                string defaultTheme = "theme--default";
-
                 ApplicationUser user = new ApplicationUser { 
                     UserName = Input.UserName, 
                     Email = Input.Email, 
                     ImageUrl = _avatarPath.DefaultAvatarPath,
-                    Theme = defaultTheme
+                    Theme = Theme.Default
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
