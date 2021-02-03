@@ -1,4 +1,4 @@
-﻿namespace Application.ApplicationUsers
+﻿namespace Domain
 {
     public static class Theme
     {

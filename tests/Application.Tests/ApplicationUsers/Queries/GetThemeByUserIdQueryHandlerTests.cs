@@ -1,5 +1,6 @@
 ﻿using Application.ApplicationUsers.Queries;
 using Application.IntegrationTests.Common;
+using Domain;
 using Domain.Entities;
 using FluentAssertions;
 using Infrastructure.Persistence;
@@ -23,7 +24,7 @@ namespace Application.Tests.ApplicationUsers.Queries
         public async Task ShouldReturnThemeByUserId()
         {
             //Arrange
-            ApplicationUser user = new ApplicationUser { Theme = "theme--default" };
+            ApplicationUser user = new ApplicationUser { Theme = Theme.Default };
             await _context.ApplicationUsers.AddAsync(user);
             await _context.SaveChangesAsync();
 

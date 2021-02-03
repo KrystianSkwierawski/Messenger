@@ -1,6 +1,6 @@
-﻿using Application.ApplicationUsers;
-using Application.ApplicationUsers.Commands;
+﻿using Application.ApplicationUsers.Commands;
 using Application.Tests.Common;
+using Domain;
 using Domain.Entities;
 using FluentAssertions;
 using System.Threading;

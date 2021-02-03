@@ -1,5 +1,5 @@
-﻿using Application.ApplicationUsers;
-using Application.Common.Interfaces;
+﻿using Application.Common.Interfaces;
+using Domain;
 using Domain.Entities;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
