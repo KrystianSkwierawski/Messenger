@@ -1,5 +1,5 @@
 ﻿using Application.ApplicationUsers.Queries;
-using Application.IntegrationTests.Common;
+using Application.UnitTests.Common;
 using Domain;
 using Domain.Entities;
 using FluentAssertions;

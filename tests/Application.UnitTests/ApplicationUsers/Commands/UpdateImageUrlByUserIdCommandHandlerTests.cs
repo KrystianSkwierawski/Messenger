@@ -1,5 +1,5 @@
 ﻿using Application.ApplicationUsers.Commands;
-using Application.Tests.Common;
+using Application.UnitTests.Common;
 using Domain.Entities;
 using FluentAssertions;
 using System.Threading;

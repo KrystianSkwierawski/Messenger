@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace Application.IntegrationTests.Common
+namespace Application.UnitTests.Common
 {
     public class QueryTestFixture : IDisposable
     {

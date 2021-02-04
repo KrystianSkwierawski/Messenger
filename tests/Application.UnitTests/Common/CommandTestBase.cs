@@ -1,8 +1,7 @@
-﻿using Application.IntegrationTests.Common;
-using Infrastructure.Persistence;
+﻿using Infrastructure.Persistence;
 using System;
 
-namespace Application.Tests.Common
+namespace Application.UnitTests.Common
 {
     public class CommandTestBase : IDisposable
     {

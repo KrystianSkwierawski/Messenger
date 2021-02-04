@@ -1,5 +1,5 @@
 ﻿using Application.Friends.Queries;
-using Application.IntegrationTests.Common;
+using Application.UnitTests.Common;
 using Domain.Entities;
 using FluentAssertions;
 using Infrastructure.Persistence;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Xunit;
 using static Application.Friends.Queries.GetFriendsByUserIdAndRelationShipsQuery;
 
-namespace Application.Tests.Friends.Queries
+namespace Application.UnitTests.Friends.Queries
 {
     [Collection("QueryCollection")]
     public class GetFriendsByUserIdAndRelationShipsQueryHandlerTests

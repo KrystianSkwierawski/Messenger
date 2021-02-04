@@ -1,5 +1,5 @@
 ﻿using Application.RelationShips.Commands;
-using Application.Tests.Common;
+using Application.UnitTests.Common;
 using Domain.Entities;
 using FluentAssertions;
 using System.Threading;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xunit;
 using static Application.RelationShips.Commands.RejectFriendRequestCommand;
 
-namespace Application.Tests.RelationShips.Commands
+namespace Application.UnitTests.RelationShips.Commands
 {
     public class RejectFriendRequestCommandHandlerTests : CommandTestBase
     {

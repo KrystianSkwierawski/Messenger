@@ -1,5 +1,5 @@
 ﻿using Application.Messages.Commands;
-using Application.Tests.Common;
+using Application.UnitTests.Common;
 using Domain.Entities;
 using Domain.Interfaces;
 using FluentAssertions;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Xunit;
 using static Application.Messages.Commands.AddMessageCommand;
 
-namespace Application.Tests.Messages.Commands
+namespace Application.UnitTests.Messages.Commands
 {
     public class AddMessageCommandHandlerTests : CommandTestBase
     {

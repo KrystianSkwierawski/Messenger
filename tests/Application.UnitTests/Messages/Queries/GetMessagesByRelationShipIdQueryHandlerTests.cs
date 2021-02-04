@@ -1,5 +1,5 @@
-﻿using Application.IntegrationTests.Common;
-using Application.Messages.Queries;
+﻿using Application.Messages.Queries;
+using Application.UnitTests.Common;
 using Domain.Entities;
 using FluentAssertions;
 using Infrastructure.Persistence;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Xunit;
 using static Application.Messages.Queries.GetMessagesByRelationShipIdQuery;
 
-namespace Application.Tests.Messages.Queries
+namespace Application.UnitTests.Messages.Queries
 {
     [Collection("QueryCollection")]
     public class GetMessagesByRelationShipIdQueryHandlerTests

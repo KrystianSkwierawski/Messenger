@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace Application.IntegrationTests.Common
+namespace Application.UnitTests.Common
 {
     public static class ContextFactory
     {
