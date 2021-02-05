@@ -213,7 +213,6 @@ namespace Messenger.Areas.User.Controllers
         }
 
 
-
         [HttpPost]
         public async Task<ActionResult> RejectFriendRequest(string invitingUserId)
         {

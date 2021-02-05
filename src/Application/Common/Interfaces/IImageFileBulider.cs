@@ -1,10 +1,12 @@
-﻿namespace Application.Common.Interfaces
+﻿using Application.Common.Models;
+
+namespace Application.Common.Interfaces
 {
     public interface IImageFileBulider
     {   
-        public void ConvertAndCopyImageToWebRoot();
+        public void ConvertAndCopyImageToWebRoot(ImageFile imageFile);
 
-        public void RemoveOldImage();
+        public void RemoveOldImage(ImageFile ImageFile);
 
     }
 }

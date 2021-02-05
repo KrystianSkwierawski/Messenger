@@ -1,5 +1,6 @@
 ﻿using Application.ApplicationUsers.Commands;
 using Application.Common.Interfaces;
+using Application.Common.Models;
 using Domain.Entities;
 using Infrastructure.Files;
 using Infrastructure.Services;
@@ -22,8 +23,6 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<IdentityUser> _signInManager;
         readonly IWebHostEnvironment _hostEnvironment;
         readonly IMediator _mediator;
-        private IImageFileBulider _imageFileBulider;
-        private IAvatarPath _avatarPath;
 
         public IndexModel(
             Microsoft.AspNetCore.Identity.UserManager<IdentityUser> userManager,
@@ -35,7 +34,6 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
             _hostEnvironment = hostEnvironment;
             _mediator = mediator;
-            _avatarPath = new AvatarPathService();
         }
 
         public string Username { get; set; }
@@ -108,22 +106,19 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
 
             if (imageExist)
             {
-                string webRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Guid.NewGuid().ToString();
-                string extenstion = Path.GetExtension(files[0].FileName);
-                _imageFileBulider = new ImageFileBulider(fileName, extenstion, files[0], webRootPath, user.ImageUrl);
-
-                if (user.ImageUrl != null && user.ImageUrl != _avatarPath.DefaultAvatarPath)
+                ImageFile imageFile = new ImageFile
                 {
-                    _imageFileBulider.RemoveOldImage();
-                }
+                    WebRootPath = _hostEnvironment.WebRootPath,
+                    FileName = Guid.NewGuid().ToString(),
+                    Extenstion = Path.GetExtension(files[0].FileName),
+                    ImageUrl = user.ImageUrl,
+                    FormFile = files[0]
+                };
 
-                _imageFileBulider.ConvertAndCopyImageToWebRoot();
-
-                await _mediator.Send(new UpdateImageUrlByUserIdCommand
+                await _mediator.Send(new UpdateImageByUserIdCommand
                 {
                     UserId = user.Id,
-                    ImageUrl = @"\images\avatars\" + fileName + extenstion,
+                    ImageFile = imageFile
                 });
             }
 

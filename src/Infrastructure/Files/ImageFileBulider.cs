@@ -1,6 +1,5 @@
 ﻿using Application.Common.Interfaces;
-using Infrastructure.Services;
-using Microsoft.AspNetCore.Http;
+using Application.Common.Models;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Formats.Gif;
@@ -14,40 +13,24 @@ namespace Infrastructure.Files
 {
     public class ImageFileBulider : IImageFileBulider
     {
-        private string _fileName { get; set; }
-        private string _extenstion { get; set; }
-        private IFormFile _file { get; set; }
-        private string _webRootPath { get; set; }
-        private string _imageUrl { get; set; }
-        private IAvatarPath _avatarPath;
-       
-        public ImageFileBulider(string fileName, string extenstion, IFormFile file, string webRootPath, string imageUrl)
+        private void CopyImageToWebRoot(ImageFile imageFile)
         {
-            _avatarPath = new AvatarPathService();
-            _extenstion = extenstion.ToLower();
-            _file = file;
-            _webRootPath = webRootPath;
-            _imageUrl = imageUrl;
-            _fileName = fileName;
-        }
-
-        private void CopyImageToWebRoot(MemoryStream Image)
-        {
-            string fileNameWithPath = Path.Combine(_avatarPath.GetAvatarsPath(_webRootPath), _fileName + _extenstion);
+            string avatarsPath = Path.Combine(imageFile.WebRootPath, @"images\avatars\");
+            string fileNameWithPath = Path.Combine(avatarsPath, imageFile.FileName + imageFile.Extenstion);
 
             using (var filesStreams = new FileStream(fileNameWithPath, FileMode.Create))
             {
-                Image.CopyTo(filesStreams);
+                imageFile.FormFile.CopyTo(filesStreams);
             }
         }
 
-        public void ConvertAndCopyImageToWebRoot()
+        public void ConvertAndCopyImageToWebRoot(ImageFile imageFile)
         {
-            var encoder = GetEncoder();
+            var encoder = GetEncoder(imageFile.Extenstion);
             if (encoder != null)
             {
                 using (var output = new MemoryStream())
-                using (Image image = Image.Load(_file.OpenReadStream()))
+                using (Image image = Image.Load(imageFile.FormFile.OpenReadStream()))
                 {
                     int width = 256;
                     int height = 256;
@@ -56,23 +39,23 @@ namespace Infrastructure.Files
                     image.Save(output, encoder);
                     output.Position = 0;
 
-                    CopyImageToWebRoot(output);
+                    CopyImageToWebRoot(imageFile);
                 }
             }
         }
 
-        public void RemoveOldImage()
+        public void RemoveOldImage(ImageFile ImageFile)
         {
-            string filePath = Path.Combine(_webRootPath, _imageUrl.TrimStart('\\'));
+            string filePath = Path.Combine(ImageFile.WebRootPath, ImageFile.ImageUrl.TrimStart('\\'));
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
         }
 
-        private IImageEncoder GetEncoder()
+        private IImageEncoder GetEncoder(string extenstion)
         {
-            string extension = _extenstion;
+            string extension = extenstion;
             IImageEncoder encoder = null;
 
             extension = extension.Replace(".", "");

@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.Common.Interfaces;
 using Domain.Interfaces;
+using Infrastructure.Files;
 using Infrastructure.Persistence;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +18,9 @@ namespace Infrastructure
                options.UseSqlServer(
                    configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IAudioFileBulider, AudioFileBulider>();
+            services.AddTransient<IImageFileBulider, ImageFileBulider>();
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddScoped<IContext, Context>();
-            services.AddSingleton<AvatarPathService>();
 
             return services;
         }

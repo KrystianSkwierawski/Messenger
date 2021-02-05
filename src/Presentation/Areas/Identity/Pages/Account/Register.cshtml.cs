@@ -28,7 +28,6 @@ namespace Messenger.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         readonly IWebHostEnvironment _hostEnvironment;
-        private IAvatarPath _avatarPath;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -42,7 +41,6 @@ namespace Messenger.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _hostEnvironment = hostEnvironment;
-            _avatarPath = new AvatarPathService();
         }
 
         [BindProperty]
@@ -87,10 +85,12 @@ namespace Messenger.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                string defaultAvatarPath = @"\images\avatars\default-avatar.png";
+
                 ApplicationUser user = new ApplicationUser { 
                     UserName = Input.UserName, 
                     Email = Input.Email, 
-                    ImageUrl = _avatarPath.DefaultAvatarPath,
+                    ImageUrl = defaultAvatarPath,
                     Theme = Theme.Default
                 };
 
