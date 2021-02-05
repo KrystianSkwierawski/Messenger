@@ -41,21 +41,21 @@ namespace Messenger.Areas.User.Controllers
 
             if (!String.IsNullOrEmpty(userId))
             {
-                IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
+                IQueryable<RelationShip> relationShips = await Mediator.Send(new GetRelationShipsByUserIdQuery
                 {
                     Id = userId
-                })).Value;
+                });
 
-                List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+                List<ApplicationUser> friends = await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
                 {
                     Id = userId,
                     RelationShips = relationShips
-                })).Value;
+                });
 
-                string theme = (string)base.Ok(await Mediator.Send(new GetThemeByUserIdQuery
+                string theme = await Mediator.Send(new GetThemeByUserIdQuery
                 {
                     UserId = userId
-                })).Value;
+                });
 
                 HomeViewModel homeViewModel = new HomeViewModel()
                 {
@@ -75,16 +75,16 @@ namespace Messenger.Areas.User.Controllers
         {
             string userId = GetUserId();
 
-            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
+            IQueryable<RelationShip> relationShips = await Mediator.Send(new GetRelationShipsByUserIdQuery
             {
                 Id = userId
-            })).Value;
+            });
 
-            List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+            List<ApplicationUser> friends = await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
             {
                 Id = userId,
                 RelationShips = relationShips
-            })).Value;
+            });
 
             return new JsonResult(new { relationShips = relationShips, friends = friends });
         }
@@ -92,16 +92,16 @@ namespace Messenger.Areas.User.Controllers
         [HttpGet]
         public async Task<ActionResult> GetMessagesFromCurrentRelationShipAndRelationShipId(string friendId)
         {
-            int relationShipId = (int)base.Ok(await Mediator.Send(new GetRelationShipIdByUserIdAndFriendIdQuery
+            int relationShipId = await Mediator.Send(new GetRelationShipIdByUserIdAndFriendIdQuery
             {
                 FriendId = friendId,
                 CurrentUserId = GetUserId()
-            })).Value;
+            });
 
-            List<Message> messages = (List<Message>)base.Ok(await Mediator.Send(new GetMessagesByRelationShipIdQuery
+            List<Message> messages = await Mediator.Send(new GetMessagesByRelationShipIdQuery
             {
                 RelationShipId = relationShipId
-            })).Value;
+            });
 
             return new JsonResult(new { messages = messages, relationShipId = relationShipId });
         }
@@ -112,22 +112,22 @@ namespace Messenger.Areas.User.Controllers
         {
             string userId = GetUserId();
 
-            bool userExist = (bool)base.Ok(await Mediator.Send(new AddRelationShipCommand
+            bool userExist = await Mediator.Send(new AddRelationShipCommand
             {
                 CurrentUserId = userId,
                 UserName = userName
-            })).Value;
+            });
 
-            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
+            IQueryable<RelationShip> relationShips = await Mediator.Send(new GetRelationShipsByUserIdQuery
             {
                 Id = userId
-            })).Value;
+            });
 
-            List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+            List<ApplicationUser> friends = await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
             {
                 Id = userId,
                 RelationShips = relationShips
-            })).Value;
+            });
 
 
             return new JsonResult(new { userExist = userExist, friends = friends, relationShips = relationShips });
@@ -136,12 +136,12 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> AddMessage(string messageContent, int relationShipId)
         {
-            Message message = (Message)base.Ok(await Mediator.Send(new AddMessageCommand
+            Message message = await Mediator.Send(new AddMessageCommand
             {
                 MessageContent = messageContent,
                 RelationShipId = relationShipId,
                 UserId = GetUserId()
-            })).Value;
+            });
 
             return new JsonResult(message);
         }
@@ -149,11 +149,11 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> EditMessage(int messageId, string content)
         {
-            base.Ok(await Mediator.Send(new UpdateMessageCommand
+            await Mediator.Send(new UpdateMessageCommand
             {
                 Content = content,
                 MessageId = messageId
-            }));
+            });
 
             return new JsonResult(new EmptyResult());
         }
@@ -161,10 +161,10 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> RemoveMessage(int messageId)
         {
-            base.Ok(await Mediator.Send(new RemoveMessageCommand
+            await Mediator.Send(new RemoveMessageCommand
             {
                 MessageId = messageId
-            }));
+            });
 
             return new JsonResult(new EmptyResult());
         }
@@ -176,22 +176,22 @@ namespace Messenger.Areas.User.Controllers
         {
             string userId = GetUserId();
 
-            base.Ok(await Mediator.Send(new AcceptFriendRequestCommand
+            await Mediator.Send(new AcceptFriendRequestCommand
             {
                 InvitedUserId = userId,
                 InvitingUserId = invitingUserId
-            }));
+            });
 
-            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
+            IQueryable<RelationShip> relationShips = await Mediator.Send(new GetRelationShipsByUserIdQuery
             {
                 Id = userId
-            })).Value;
+            });
 
-            List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+            List<ApplicationUser> friends = await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
             {
                 Id = userId,
                 RelationShips = relationShips
-            })).Value;
+            });
 
             return new JsonResult(new { relationShips = relationShips, friends = friends });
         }
@@ -219,24 +219,24 @@ namespace Messenger.Areas.User.Controllers
         {
             string userId = GetUserId();
 
-            base.Ok(await Mediator.Send(new RejectFriendRequestCommand
+            await Mediator.Send(new RejectFriendRequestCommand
             {
                 InvitedUserId = userId,
                 InvitingUserId = invitingUserId
-            }));
+            });
 
-            IQueryable<RelationShip> relationShips = (IQueryable<RelationShip>)base.Ok(await Mediator.Send(new GetRelationShipsByUserIdQuery
+            IQueryable<RelationShip> relationShips = await Mediator.Send(new GetRelationShipsByUserIdQuery
             {
                 Id = userId
-            })).Value;
+            });
 
-            List<ApplicationUser> friends = (List<ApplicationUser>)base.Ok(await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
+            List<ApplicationUser> friends = await Mediator.Send(new GetFriendsByUserIdAndRelationShipsQuery
             {
                 Id = userId,
                 RelationShips = relationShips
-            })).Value;
+            });
 
-            return new JsonResult(new { relationShips = relationShips, friends = friends/*.OrderByDescending(x => x.Id)*/ });
+            return new JsonResult(new { relationShips = relationShips, friends = friends });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
