@@ -1,4 +1,5 @@
 using Application;
+using Application.Common.Interfaces;
 using Infrastructure;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Presentation.Hubs;
+using Presentation.Services;
 
 namespace Messenger
 {
@@ -29,6 +31,7 @@ namespace Messenger
             services.AddRazorPages();
             services.AddInfrastructure(Configuration);
             services.AddApplication();
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
             services.AddSignalR();
         }
 

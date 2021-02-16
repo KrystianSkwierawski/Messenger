@@ -26,18 +26,20 @@ namespace Messenger.Areas.User.Controllers
         private readonly ILogger<HomeController> _logger;
         readonly IWebHostEnvironment _hostEnvironment;
         private IAudioFileBulider _audioFileBulider;
+        private readonly ICurrentUserService _currentUserService;
 
-        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment hostEnvironment, IAudioFileBulider audioFileBulider)
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment hostEnvironment, IAudioFileBulider audioFileBulider, ICurrentUserService currentUserService)
         {
             _logger = logger;
             _hostEnvironment = hostEnvironment;
             _audioFileBulider = audioFileBulider;
+            _currentUserService = currentUserService;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            string userId = GetUserId();
+            string userId = _currentUserService.UserId;
 
             if (!String.IsNullOrEmpty(userId))
             {
@@ -73,7 +75,7 @@ namespace Messenger.Areas.User.Controllers
         [HttpGet]
         public async Task<ActionResult> GetFriendsAndRelationShips()
         {
-            string userId = GetUserId();
+            string userId = _currentUserService.UserId;
 
             IQueryable<RelationShip> relationShips = await Mediator.Send(new GetRelationShipsByUserIdQuery
             {
@@ -95,7 +97,7 @@ namespace Messenger.Areas.User.Controllers
             int relationShipId = await Mediator.Send(new GetRelationShipIdByUserIdAndFriendIdQuery
             {
                 FriendId = friendId,
-                CurrentUserId = GetUserId()
+                CurrentUserId = _currentUserService.UserId
             });
 
             List<Message> messages = await Mediator.Send(new GetMessagesByRelationShipIdQuery
@@ -110,7 +112,7 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> SendFriendRequest(string userName)
         {
-            string userId = GetUserId();
+            string userId = _currentUserService.UserId;
 
             bool userExist = await Mediator.Send(new AddRelationShipCommand
             {
@@ -140,7 +142,7 @@ namespace Messenger.Areas.User.Controllers
             {
                 MessageContent = messageContent,
                 RelationShipId = relationShipId,
-                UserId = GetUserId()
+                UserId = _currentUserService.UserId
             });
 
             return new JsonResult(message);
@@ -174,7 +176,7 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> AcceptFriendRequest(string invitingUserId)
         {
-            string userId = GetUserId();
+            string userId = _currentUserService.UserId;
 
             await Mediator.Send(new AcceptFriendRequestCommand
             {
@@ -216,7 +218,7 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> RejectFriendRequest(string invitingUserId)
         {
-            string userId = GetUserId();
+            string userId = _currentUserService.UserId;
 
             await Mediator.Send(new RejectFriendRequestCommand
             {
@@ -242,22 +244,6 @@ namespace Messenger.Areas.User.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-
-        private string GetUserId()
-        {
-            string o_userId = string.Empty;
-
-            ClaimsIdentity claimsIdentity = (ClaimsIdentity)User.Identity;
-            Claim claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-            if (claim != null)
-            {
-                o_userId = claim.Value;
-            }
-
-            return o_userId;
         }
     }
 }
