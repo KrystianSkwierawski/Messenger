@@ -36,7 +36,7 @@ namespace Application.ApplicationUsers.Commands
                         _imageFileBulider.RemoveOldImage(request.ImageFile);
                     }
 
-                    _imageFileBulider.ConvertAndCopyImageToWebRoot(request.ImageFile);
+                    _imageFileBulider.ConvertAndSaveImage(request.ImageFile);
 
                     string extension = _imageFileBulider.GetExtension(request.ImageFile);
                     user.ImageUrl = @"\images\avatars\" + request.ImageFile.FileName + extension;

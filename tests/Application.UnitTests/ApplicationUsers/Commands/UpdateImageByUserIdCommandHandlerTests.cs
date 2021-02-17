@@ -22,7 +22,6 @@ namespace Application.Tests.ApplicationUsers.Commands
             ImageFile imageFile = new ImageFile 
             { 
                 FileName = "ImageUrlIsUpdated",
-                Extenstion = ".jpg"
             };
             Mock<IImageFileBulider> imageFileBuliderMock = new Mock<IImageFileBulider>();
 
@@ -39,7 +38,7 @@ namespace Application.Tests.ApplicationUsers.Commands
             }, CancellationToken.None);
 
             // Assert
-            string expectedImageUrl = @"\images\avatars\" + imageFile.FileName + imageFile.Extenstion;
+            string expectedImageUrl = @"\images\avatars\" + imageFile.FileName;
             _context.ApplicationUsers.Find(user.Id).ImageUrl.Should().Be(expectedImageUrl);
         }
     }

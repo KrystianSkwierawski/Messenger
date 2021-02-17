@@ -201,7 +201,7 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> AddVoiceMessage(string chunks)
         {
-            string fileNameWithExtenstion = await _audioFileBulider.CopyAudioToWebRoot(_hostEnvironment.WebRootPath, chunks);
+            string fileNameWithExtenstion = _audioFileBulider.SaveAudio(_hostEnvironment.WebRootPath, chunks);
 
             return new JsonResult(fileNameWithExtenstion);
         }
@@ -209,7 +209,7 @@ namespace Messenger.Areas.User.Controllers
         [HttpPost]
         public async Task<ActionResult> RemoveVoiceMessage(string fileNameWithExtenstion)
         {
-            await _audioFileBulider.RemoveAudio(_hostEnvironment.WebRootPath, fileNameWithExtenstion);
+            _audioFileBulider.RemoveAudio(_hostEnvironment.WebRootPath, fileNameWithExtenstion);
 
             return new JsonResult(new EmptyResult());
         }
