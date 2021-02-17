@@ -16,7 +16,7 @@ namespace Infrastructure.Files
         private void CopyImageToWebRoot(ImageFile imageFile)
         {
             string avatarsPath = Path.Combine(imageFile.WebRootPath, @"images\avatars\");
-            string fileNameWithPath = Path.Combine(avatarsPath, imageFile.FileName + imageFile.Extenstion);
+            string fileNameWithPath = Path.Combine(avatarsPath, imageFile.FileName + GetExtension(imageFile.FormFile.FileName));
 
             using (var filesStreams = new FileStream(fileNameWithPath, FileMode.Create))
             {
@@ -26,7 +26,7 @@ namespace Infrastructure.Files
 
         public void ConvertAndCopyImageToWebRoot(ImageFile imageFile)
         {
-            var encoder = GetEncoder(imageFile.Extenstion);
+            var encoder = GetEncoder(GetExtension(imageFile.FormFile.FileName));
             if (encoder != null)
             {
                 using (var output = new MemoryStream())
@@ -46,7 +46,7 @@ namespace Infrastructure.Files
 
         public void RemoveOldImage(ImageFile ImageFile)
         {
-            string filePath = Path.Combine(ImageFile.WebRootPath, ImageFile.ImageUrl.TrimStart('\\'));
+            string filePath = Path.Combine(ImageFile.WebRootPath, ImageFile.PreviousImageUrl.TrimStart('\\'));
             if (File.Exists(filePath))
             {
                 File.Delete(filePath);
@@ -84,6 +84,11 @@ namespace Infrastructure.Files
             }
 
             return encoder;
+        }
+
+        private string GetExtension(string fileName)
+        {
+            return Path.GetExtension(fileName);
         }
     }
 }

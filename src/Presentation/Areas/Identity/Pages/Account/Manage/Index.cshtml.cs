@@ -110,8 +110,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
                 {
                     WebRootPath = _hostEnvironment.WebRootPath,
                     FileName = Guid.NewGuid().ToString(),
-                    Extenstion = Path.GetExtension(files[0].FileName),
-                    ImageUrl = user.ImageUrl,
+                    PreviousImageUrl = user.ImageUrl,
                     FormFile = files[0]
                 };
 
