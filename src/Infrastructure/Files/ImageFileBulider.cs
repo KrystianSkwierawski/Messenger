@@ -16,7 +16,7 @@ namespace Infrastructure.Files
         private void CopyImageToWebRoot(ImageFile imageFile)
         {
             string avatarsPath = Path.Combine(imageFile.WebRootPath, @"images\avatars\");
-            string fileNameWithPath = Path.Combine(avatarsPath, imageFile.FileName + GetExtension(imageFile.FormFile.FileName));
+            string fileNameWithPath = Path.Combine(avatarsPath, imageFile.FileName + GetExtension(imageFile));
 
             using (var filesStreams = new FileStream(fileNameWithPath, FileMode.Create))
             {
@@ -26,7 +26,7 @@ namespace Infrastructure.Files
 
         public void ConvertAndCopyImageToWebRoot(ImageFile imageFile)
         {
-            var encoder = GetEncoder(GetExtension(imageFile.FormFile.FileName));
+            var encoder = GetEncoder(GetExtension(imageFile));
             if (encoder != null)
             {
                 using (var output = new MemoryStream())
@@ -55,16 +55,15 @@ namespace Infrastructure.Files
 
         private IImageEncoder GetEncoder(string extenstion)
         {
-            string extension = extenstion;
             IImageEncoder encoder = null;
 
-            extension = extension.Replace(".", "");
+            extenstion = extenstion.Replace(".", "");
 
-            var isSupported = Regex.IsMatch(extension, "gif|png|jpe?g", RegexOptions.IgnoreCase);
+            var isSupported = Regex.IsMatch(extenstion, "gif|png|jpe?g", RegexOptions.IgnoreCase);
 
             if (isSupported)
             {
-                switch (extension)
+                switch (extenstion)
                 {
                     case "png":
                         encoder = new PngEncoder();
@@ -86,9 +85,9 @@ namespace Infrastructure.Files
             return encoder;
         }
 
-        private string GetExtension(string fileName)
+        public string GetExtension(ImageFile imageFile)
         {
-            return Path.GetExtension(fileName);
+            return Path.GetExtension(imageFile.FormFile.FileName);
         }
     }
 }

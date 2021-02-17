@@ -8,5 +8,6 @@ namespace Application.Common.Interfaces
 
         public void RemoveOldImage(ImageFile ImageFile);
 
+        public string GetExtension(ImageFile ImageFile);
     }
 }

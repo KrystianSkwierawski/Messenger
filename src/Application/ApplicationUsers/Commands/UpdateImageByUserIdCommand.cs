@@ -38,7 +38,8 @@ namespace Application.ApplicationUsers.Commands
 
                     _imageFileBulider.ConvertAndCopyImageToWebRoot(request.ImageFile);
 
-                    user.ImageUrl = @"\images\avatars\" + request.ImageFile.FileName + request.ImageFile.Extenstion;
+                    string extension = _imageFileBulider.GetExtension(request.ImageFile);
+                    user.ImageUrl = @"\images\avatars\" + request.ImageFile.FileName + extension;
                     await _context.SaveChangesAsync();
                 }
 
