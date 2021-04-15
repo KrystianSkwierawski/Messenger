@@ -18,15 +18,14 @@ namespace Infrastructure.Files
 
         public void ConvertAndSaveImage(ImageFile imageFile)
         {
-            using (Image image = Image.Load(imageFile.FormFile.OpenReadStream()))
-            {
-                int width = 256;
-                int height = 256;
+            using var image = Image.Load(imageFile.FormFile.OpenReadStream());
 
-                image.Mutate(x => x.Resize(width, height));
+            int width = 256;
+            int height = 256;
 
-                SaveImage(imageFile, image);
-            }
+            image.Mutate(x => x.Resize(width, height));
+
+            SaveImage(imageFile, image);
         }
 
         public void RemoveOldImage(ImageFile ImageFile)

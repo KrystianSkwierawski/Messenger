@@ -12,14 +12,11 @@ namespace Application
             string fileNameWithExtenstion = Guid.NewGuid() + extenstion;
             string fileNameWithPath = Path.Combine(GetAudiosPath(webRootPath), fileNameWithExtenstion);
 
-            using (FileStream fileStream = new FileStream(fileNameWithPath, FileMode.Create))
-            {
-                using (BinaryWriter binaryWriter = new BinaryWriter(fileStream))
-                {
-                    byte[] data = Convert.FromBase64String(chunks);
-                    binaryWriter.Write(data);
-                }
-            }
+            using var fileStream = new FileStream(fileNameWithPath, FileMode.Create);
+            using var binaryWriter = new BinaryWriter(fileStream);
+
+            byte[] data = Convert.FromBase64String(chunks);
+            binaryWriter.Write(data);
 
             return fileNameWithExtenstion;
         }
