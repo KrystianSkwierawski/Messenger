@@ -1,7 +1,5 @@
-﻿using Application.Common.Interfaces;
-using Domain;
-using Domain.Entities;
-using Infrastructure.Services;
+﻿using Domain.Entities;
+using Domain.ValueObjects;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;

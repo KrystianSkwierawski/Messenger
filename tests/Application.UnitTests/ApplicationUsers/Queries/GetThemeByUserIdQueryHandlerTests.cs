@@ -1,6 +1,6 @@
 ﻿using Application.ApplicationUsers.Queries;
 using Application.UnitTests.Common;
-using Domain;
+using Domain.ValueObjects;
 using Domain.Entities;
 using FluentAssertions;
 using Infrastructure.Persistence;
