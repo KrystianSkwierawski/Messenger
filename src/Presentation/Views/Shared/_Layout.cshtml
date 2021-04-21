@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Realtime chat communicator using SignalR">
     <title>@ViewData["Title"] - Messenger</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/mdboostrap/css/mdb.min.css" />
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="~/lib/mdboostrap/css/mdb.min.css" />
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <link rel="stylesheet" href="~/css/main.min.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -18,7 +19,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js" async></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" async></script>
     <script src="https://kit.fontawesome.com/88d2a979b7.js" crossorigin="anonymous" async></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" async></script>
     <script>
         function notificationme() {
             toastr.options = {

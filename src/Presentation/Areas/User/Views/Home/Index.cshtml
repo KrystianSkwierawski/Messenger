@@ -16,7 +16,7 @@
     <div class="main__container" data-relatioshipid="" data-userid="@_userId">
 
         <div class="menu__container">
-            <button class="fas fa-bars menu__button"></button>
+            <button class="fas fa-bars menu__button" aria-label="menu"></button>
             <h1 class="menu__friend-name"></h1>
         </div>
 
@@ -24,7 +24,7 @@
 
             <div class="voice-message__container p-1">
                 <div class="mr-3 my-0">Speak now<span> . . .</span></div>
-                <button class="stop-recording-voice-message__button"><i class="fas fa-stop"></i></button>
+                <button class="stop-recording-voice-message__button" aria-label="stop recording voice message"><i class="fas fa-stop"></i></button>
             </div>
 
             <div class="messages__container">
@@ -33,20 +33,20 @@
 
             <div class="interaction-menu__container mb-2 mt-3">
                 <textarea class="input-to-send-messages p-1"></textarea>
-                <button class="ml-2 send-message__button text-primary"><i class="fab fa-telegram-plane"></i></button>
-                <button class="ml-3 start-recording-voice-message__button"><i class="fas fa-microphone"></i></button>
+                <button class="ml-2 send-message__button text-primary" aria-label="send message"><i class="fab fa-telegram-plane"></i></button>
+                <button class="ml-3 start-recording-voice-message__button" aria-label="start recording voice message"><i class="fas fa-microphone"></i></button>
                 <button class="ml-3 display-emojis__button"><i class="fas fa-smile-beam"></i></button>
             </div>
 
             <div class="emojis__container p-2">
                 <div class="emojis-types__container border-bottom pb-1">
-                    <button class="emoji-type__button emoji-type__button_active" id="smileys">😀</button>
-                    <button class="emoji-type__button" id="gesturesAndBodyParts">👋</button>
-                    <button class="emoji-type__button" id="peopleAndFantasy">👶</button>
-                    <button class="emoji-type__button" id="activityAndSports">⚽️</button>
-                    <button class="emoji-type__button" id="foodAndDrink">🍏</button>
-                    <button class="emoji-type__button" id="animalsAndNature">🐻</button>
-                    <button class="emoji-type__button original-emoji-type__button fas fa-image" id="originalEmojis"></button>
+                    <button class="emoji-type__button emoji-type__button_active" id="smileys" aria-label="smileys">😀</button>
+                    <button class="emoji-type__button" id="gesturesAndBodyParts" aria-label="gesture aAnd body parts">👋</button>
+                    <button class="emoji-type__button" id="peopleAndFantasy" aria-label="people and fantasy">👶</button>
+                    <button class="emoji-type__button" id="activityAndSports" aria-label="activity and sports">⚽️</button>
+                    <button class="emoji-type__button" id="foodAndDrink" aria-label="food and drink">🍏</button>
+                    <button class="emoji-type__button" id="animalsAndNature" aria-label="smilanimals and natureeys">🐻</button>
+                    <button class="emoji-type__button original-emoji-type__button fas fa-image" id="originalEmojis" aria-label="original emojis"></button>
                 </div>
 
                 <div class="emojis pt-3">
@@ -87,10 +87,10 @@
                     {
                         <div class="friend__container" id="@friend.Id">
                             <div class="friend__request ml-3 mb-1">
-                                <button class="fas fa-check text-success p-0 friend__accept-request btn btn-link"></button>
-                                <button class="fas fa-times ml-2 text-danger p-0 friend__reject-request btn btn-link"></button>
+                                <button class="fas fa-check text-success p-0 friend__accept-request btn btn-link" aria-label="accept friend request"></button>
+                                <button class="fas fa-times ml-2 text-danger p-0 friend__reject-request btn btn-link"aria-label="reject friend request"></button>
                             </div>
-                            <button disabled class="friend__details ml-3 mb-4">
+                            <button disabled class="friend__details ml-3 mb-4" aria-label="friend details">
                                 <img src="@friend.ImageUrl" class="friend__image rounded-circle" alt="friend avatar" />
                                 <h2 class="friend__name ml-2 text-break">@friend.UserName</h2>
                             </button>
@@ -102,11 +102,11 @@
         </div>
 
         <div class="settings__container">
-            <button class="fas fa-user-plus add-friend__button ml-1 p-0" data-friends='@Json.Serialize(Model.Friends)' data-username="@_user.UserName"></button>
+            <button class="fas fa-user-plus add-friend__button ml-1 p-0" data-friends='@Json.Serialize(Model.Friends)' data-username="@_user.UserName" aria-label="add friend"></button>
 
 
             <form class="" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="text-danger my-0 logout__button">Logout</button>
+                <button type="submit" class="text-danger my-0 logout__button" aria-label="logout">Logout</button>
             </form>
 
             <a asp-area="Identity" asp-page="/Account/Manage/Index" class="fas fa-user-cog settings__button mr-1 p-0 "></a>
