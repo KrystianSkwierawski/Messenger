@@ -24,7 +24,7 @@ Messenger - realtime chat communicator using SignalR. The idea for this project 
 
 ### Back-end
  * C#
- * .NET 5.0
+ * .NET Core 3.1
  * SignalR
  * MediatR
  * xUnit
