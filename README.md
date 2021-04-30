@@ -25,6 +25,7 @@ Messenger - real time chat communicator. The idea for this project came up when 
 ### Back-end
  * C#
  * .NET Core 3.1
+ * Entity Framework
  * Microsoft SQL Server
  * SignalR
  * MediatR
