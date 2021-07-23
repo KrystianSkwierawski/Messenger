@@ -102,7 +102,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
             }
             
             IFormFileCollection files = HttpContext.Request.Form.Files;
-            bool imageExist = files.Count > 0 ? true : false;
+            bool imageExist = files.Count > 0;
 
             if (imageExist)
             {

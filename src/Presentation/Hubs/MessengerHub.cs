@@ -127,7 +127,7 @@ namespace Presentation.Hubs
 
         private bool CheckIfGroupExist(string connectionId)
         {
-            return _groups.ContainsKey(connectionId) ? true : false;
+            return _groups.ContainsKey(connectionId);
         }
 
         private void TryRemoveConnection()

@@ -142,13 +142,13 @@ const doesNotHaveThisFriend = friendName => {
 
     const result = friends.filter(x => x.userName === friendName);
 
-    return result.length === 0 ? true : false;
+    return result.length === 0;
 };
 
 const doesNotInvitingHimSelf = friendName => {
     const currentUserId = indexView.getUserName();
 
-    return friendName === currentUserId ? false : true;
+    return friendName !== currentUserId;
 };
 
 async function trySendFriendRequest() {
@@ -183,7 +183,7 @@ async function sendMessage(message) {
 
 const sendMessageIfInputIsNotEmpty = async () => {
     const message = indexView.getInputToSendMessagesValue();
-    const inputIsNotEmpty = message.trim() ? true : false;
+    const inputIsNotEmpty = !!message.trim();
 
     if (inputIsNotEmpty) {
         const convertedMessage = EmojisConverter.convertTextToEmojis(message);
@@ -193,7 +193,7 @@ const sendMessageIfInputIsNotEmpty = async () => {
 
 elements.inputToSendMessages.addEventListener('keypress', async () => {
     const enterKey = 13; 
-    const clickedEnterKey = (event.keyCode === enterKey && !event.shiftKey) ? true : false;
+    const clickedEnterKey = (event.keyCode === enterKey && !event.shiftKey);
 
     if (clickedEnterKey) {
         sendMessageIfInputIsNotEmpty();
@@ -294,8 +294,8 @@ export const addEventListeningToAllEditMessageButtons = () => {
         editMessageButton.addEventListener('click', e => {
 
             const message = e.target.closest(`.${elementStrings.message}`)
-            const isNotVoiceMessage = message.querySelector(`.${elementStrings.voiceMessage}`) === null ? true : false;
-            const isNotOriginalEmoji = message.querySelector(`.${elementStrings.originalEmoji}`) === null ? true : false;
+            const isNotVoiceMessage = message.querySelector(`.${elementStrings.voiceMessage}`) === null;
+            const isNotOriginalEmoji = message.querySelector(`.${elementStrings.originalEmoji}`) === null;
 
             if (message.id && isNotVoiceMessage && isNotOriginalEmoji) {
 

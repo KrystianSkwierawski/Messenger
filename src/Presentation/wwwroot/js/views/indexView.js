@@ -78,14 +78,14 @@ export const renderFriends = friends => {
             x.isAccepted === false
         );
 
-        const currentRelationShipIsAccepted = currentNotAcceptedRelationShip.length === 0 ? true : false;
+        const currentRelationShipIsAccepted = currentNotAcceptedRelationShip.length === 0;
 
         if (currentRelationShipIsAccepted) {
             renderAcceptedFriend(friend);
         }
         else {
             const relationShipsWhereCurrentUserIsInvited = currentNotAcceptedRelationShip.filter(x => x.invitedUser.userName == currentUserName);
-            const currentUserIsInvited = relationShipsWhereCurrentUserIsInvited.length === 0 ? false : true;
+            const currentUserIsInvited = relationShipsWhereCurrentUserIsInvited.length === 0;
 
             if (currentUserIsInvited) {
                 renderNotAcceptedFriend(friend);
