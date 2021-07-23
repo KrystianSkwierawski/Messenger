@@ -1,8 +1,6 @@
-Messenger - realtime chat communicator using SignalR. The idea for this project came up when I was learning SignalR, I wanted to put it into practice. During this project i also learned MediatR and Sass.
+Messenger - real time chat communicator. The idea for this project came up when I was learning <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR.</a> I wanted to put it into practice. During the project I also learned <a href="https://medium.com/@ducmeit/net-core-using-cqrs-pattern-with-mediatr-part-1-55557e90931b">MediatR</a> and <a href="https://sass-lang.com/">Sass.</a>
 
-![image](https://user-images.githubusercontent.com/52860350/98403497-5b478200-2069-11eb-876a-3d2ddb9f8284.png)
-![image](https://user-images.githubusercontent.com/52860350/99070052-d64ff180-25af-11eb-9e80-ac56813c7bd2.png)
-
+![messenger](https://user-images.githubusercontent.com/52860350/123298884-3f6def00-d519-11eb-9d9c-31052af42a6e.jpg)
 
 ## Features
 
@@ -20,57 +18,21 @@ Messenger - realtime chat communicator using SignalR. The idea for this project 
 
 ### - Light/Dark theme
  
-## Tools
+## Main technologies: 
 
-### Back-end:
-* MediatR" Version="9.0.0"
+### Back-end
+ * C#
+ * .NET Core 3.1
+ * Entity Framework
+ * Microsoft SQL Server
+ * SignalR
+ * MediatR
+ * xUnit
 
-* MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0"
-
-* Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.3"
-
-* Microsoft.AspNetCore.Http.Features" Version="3.1.9"
-
-* SixLabors.ImageSharp" Version="1.0.1"
-
-* Microsoft.EntityFrameworkCore" Version="3.1.8"
-
-* Microsoft.Extensions.Identity.Stores" Version="3.1.6"
-
-* Microsoft.EntityFrameworkCore.Relational" Version="3.1.6"
-
-* Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5"
-
-* Microsoft.AspNet.Identity.Core" Version="2.2.3"
-
-* Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5"
-
-* Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5"
-
-* Microsoft.AspNetCore.Identity.UI" Version="3.1.5"
-
-* Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5"
-
-* Microsoft.EntityFrameworkCore.Tools" Version="3.1.5"
-
-* Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.5"
-
-* Microsoft.Extensions.Identity.Core" Version="3.1.8"
-
-* Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3"
-
-
-### Front-end:
-
-* Boostrap 
-
-* Font awesome
-
-* Toastr
-
-* jQuery
-
-* Sass
+### Front-end
+ * JavaScript
+ * Sass
+ * HTML5 
  
 ## Status
 Project is finished.
