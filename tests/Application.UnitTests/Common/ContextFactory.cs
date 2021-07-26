@@ -1,5 +1,4 @@
-﻿using Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace Application.UnitTests.Common

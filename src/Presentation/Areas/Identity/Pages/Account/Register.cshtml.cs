@@ -85,9 +85,10 @@ namespace Messenger.Areas.Identity.Pages.Account
             {
                 string defaultAvatarPath = @"\images\avatars\default-avatar.png";
 
-                ApplicationUser user = new ApplicationUser { 
-                    UserName = Input.UserName, 
-                    Email = Input.Email, 
+                ApplicationUser user = new ApplicationUser
+                {
+                    UserName = Input.UserName,
+                    Email = Input.Email,
                     ImageUrl = defaultAvatarPath,
                     Theme = Theme.Default
                 };

@@ -17,7 +17,7 @@ namespace Application.UnitTests.RelationShips.Commands
         {
             //Arrange
             ApplicationUser currentUser = new ApplicationUser();
-            ApplicationUser invitedUser = new ApplicationUser { UserName = "InvitedUser"};
+            ApplicationUser invitedUser = new ApplicationUser { UserName = "InvitedUser" };
 
             await _context.ApplicationUsers.AddAsync(currentUser);
             await _context.ApplicationUsers.AddAsync(invitedUser);

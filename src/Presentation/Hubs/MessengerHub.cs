@@ -13,8 +13,8 @@ namespace Presentation.Hubs
     {
         readonly IMediator _mediator;
 
-        static List<HubCallerContext> _connections = new List<HubCallerContext>();
-        static Dictionary<string, string> _groups = new Dictionary<string, string>();
+        static readonly List<HubCallerContext> _connections = new List<HubCallerContext>();
+        static readonly Dictionary<string, string> _groups = new Dictionary<string, string>();
 
         public MessengerHub(IMediator mediator)
         {
@@ -24,7 +24,7 @@ namespace Presentation.Hubs
         public override async Task OnConnectedAsync()
         {
             _connections.Add(Context);
-  
+
             await base.OnConnectedAsync();
         }
 
@@ -45,14 +45,14 @@ namespace Presentation.Hubs
                 string groupName = _groups[Context.ConnectionId];
 
                 await Clients.Group(groupName).SendAsync("ReceiveMessage", message);
-            }         
+            }
         }
 
         public async Task TryToRenderAFriendToTheSender(string invitingUserId)
         {
             HubCallerContext invitingUserConnection = _connections.FirstOrDefault(x => x.UserIdentifier == invitingUserId);
 
-            if(invitingUserConnection != null)
+            if (invitingUserConnection != null)
             {
                 ApplicationUser invitedUser = await _mediator.Send(new GetFriendByIdQuery
                 {
@@ -67,7 +67,7 @@ namespace Presentation.Hubs
         {
             HubCallerContext invitedUserConnection = _connections.FirstOrDefault(x => x.User.Identity.Name == invitedUserName);
 
-            if(invitedUserConnection != null)
+            if (invitedUserConnection != null)
             {
                 ApplicationUser invitingUser = await _mediator.Send(new GetFriendByIdQuery
                 {
@@ -87,7 +87,7 @@ namespace Presentation.Hubs
         public async Task TryLeaveGroup()
         {
             await LeaveGroupIfGroupsContainsConnectionId();
-        } 
+        }
 
         public async Task TryEditMessage(string messageId, string content)
         {

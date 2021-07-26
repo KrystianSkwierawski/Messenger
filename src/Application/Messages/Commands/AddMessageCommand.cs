@@ -16,7 +16,7 @@ namespace Application.Messages.Commands
         public class AddMessageCommandHandler : IRequestHandler<AddMessageCommand, Message>
         {
             readonly IContext _context;
-            IDateTime _dateTime;
+            readonly IDateTime _dateTime;
 
             public AddMessageCommandHandler(IContext context, IDateTime dateTime)
             {

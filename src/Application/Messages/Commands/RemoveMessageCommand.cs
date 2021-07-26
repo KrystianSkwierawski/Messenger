@@ -23,7 +23,7 @@ namespace Application.Messages.Commands
             {
                 Message message = await _context.Messages.FindAsync(request.MessageId);
 
-                if(message != null)
+                if (message != null)
                 {
                     _context.Messages.Remove(message);
                     await _context.SaveChangesAsync();

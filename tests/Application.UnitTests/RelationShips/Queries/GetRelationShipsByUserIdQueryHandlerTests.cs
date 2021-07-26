@@ -2,7 +2,6 @@
 using Application.UnitTests.Common;
 using Domain.Entities;
 using FluentAssertions;
-using Infrastructure.Persistence;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -40,7 +39,7 @@ namespace Application.UnitTests.RelationShips.Queries
             await _context.RelationShips.AddAsync(relationShip);
 
             await _context.SaveChangesAsync();
-             
+
             var handler = new GetRelationShipsByUserIdQueryHandler(_context);
 
             //Act 

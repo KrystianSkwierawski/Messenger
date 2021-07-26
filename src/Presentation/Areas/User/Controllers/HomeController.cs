@@ -15,7 +15,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Messenger.Areas.User.Controllers
@@ -25,7 +24,7 @@ namespace Messenger.Areas.User.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         readonly IWebHostEnvironment _hostEnvironment;
-        private IAudioFileBulider _audioFileBulider;
+        private readonly IAudioFileBulider _audioFileBulider;
         private readonly ICurrentUserService _currentUserService;
 
         public HomeController(ILogger<HomeController> logger, IWebHostEnvironment hostEnvironment, IAudioFileBulider audioFileBulider, ICurrentUserService currentUserService)

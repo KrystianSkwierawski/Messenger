@@ -24,7 +24,7 @@ namespace Application.Messages.Commands
             {
                 Message message = await _context.Messages.FindAsync(request.MessageId);
 
-                if(message != null)
+                if (message != null)
                 {
                     message.Content = request.Content;
 

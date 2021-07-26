@@ -9,7 +9,7 @@ namespace Application.ApplicationUsers.Commands
     public class UpdateThemeByUserIdCommand : IRequest
     {
         public string Theme { get; set; }
-        public string UserId { get; set; } 
+        public string UserId { get; set; }
 
         public class UpdateThemeByUserIdCommandHandler : IRequestHandler<UpdateThemeByUserIdCommand>
         {
@@ -24,7 +24,7 @@ namespace Application.ApplicationUsers.Commands
             {
                 ApplicationUser user = await _context.ApplicationUsers.FindAsync(request.UserId);
 
-                if(user != null)
+                if (user != null)
                 {
                     user.Theme = request.Theme;
                     await _context.SaveChangesAsync();

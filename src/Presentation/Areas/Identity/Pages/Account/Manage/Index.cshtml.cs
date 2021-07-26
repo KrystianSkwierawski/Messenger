@@ -1,9 +1,6 @@
 ﻿using Application.ApplicationUsers.Commands;
-using Application.Common.Interfaces;
 using Application.Common.Models;
 using Domain.Entities;
-using Infrastructure.Files;
-using Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace Messenger.Areas.Identity.Pages.Account.Manage
@@ -92,7 +88,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
 
             string theme = HttpContext.Request.Form["theme"];
 
-            if(theme != user.Theme)
+            if (theme != user.Theme)
             {
                 await _mediator.Send(new UpdateThemeByUserIdCommand
                 {
@@ -100,7 +96,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
                     UserId = user.Id
                 });
             }
-            
+
             IFormFileCollection files = HttpContext.Request.Form.Files;
             bool imageExist = files.Count > 0;
 
@@ -132,7 +128,7 @@ namespace Messenger.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            
+
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)

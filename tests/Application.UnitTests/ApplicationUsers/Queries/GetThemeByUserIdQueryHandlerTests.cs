@@ -1,9 +1,8 @@
 ﻿using Application.ApplicationUsers.Queries;
 using Application.UnitTests.Common;
-using Domain.ValueObjects;
 using Domain.Entities;
+using Domain.ValueObjects;
 using FluentAssertions;
-using Infrastructure.Persistence;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;

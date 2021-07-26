@@ -1,7 +1,5 @@
 using Application;
 using Application.Common.Interfaces;
-using Infrastructure;
-using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -51,7 +49,7 @@ namespace Messenger
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();          
+            app.UseHttpsRedirection();
             app.UseRouting();
 
             const string cacheMaxAge = "604800";

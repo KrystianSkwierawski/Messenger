@@ -19,8 +19,8 @@ namespace Application.Tests.ApplicationUsers.Commands
         {
             // Arrange
             ApplicationUser user = new ApplicationUser { ImageUrl = "ImageUrlIsNotUpdated" };
-            ImageFile imageFile = new ImageFile 
-            { 
+            ImageFile imageFile = new ImageFile
+            {
                 FileName = "ImageUrlIsUpdated",
             };
             Mock<IImageFileBulider> imageFileBuliderMock = new Mock<IImageFileBulider>();

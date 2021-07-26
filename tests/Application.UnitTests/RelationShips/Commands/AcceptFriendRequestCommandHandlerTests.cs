@@ -36,7 +36,7 @@ namespace Application.UnitTests.RelationShips.Commands
 
             //Act
             var result = await handler.Handle(new AcceptFriendRequestCommand
-            { 
+            {
                 InvitedUserId = invitedUser.Id,
                 InvitingUserId = invitingUser.Id
             }, CancellationToken.None);

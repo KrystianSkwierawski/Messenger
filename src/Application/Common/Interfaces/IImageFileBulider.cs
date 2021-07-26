@@ -3,7 +3,7 @@
 namespace Application.Common.Interfaces
 {
     public interface IImageFileBulider
-    {   
+    {
         public void ConvertAndSaveImage(ImageFile imageFile);
 
         public void RemoveOldImage(ImageFile ImageFile);

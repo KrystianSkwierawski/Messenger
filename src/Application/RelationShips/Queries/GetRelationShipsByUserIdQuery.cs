@@ -27,7 +27,7 @@ namespace Application.RelationShips.Queries
 
                 relationShips = _context.RelationShips.Include(x => x.InvitedUser).Include(x => x.InvitingUser).Where(x => x.InvitedUserId == request.Id || x.InvitingUserId == request.Id);
 
-                 return relationShips;
+                return relationShips;
             }
         }
     }

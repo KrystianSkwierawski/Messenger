@@ -22,10 +22,10 @@ namespace Application.RelationShips.Queries
 
             public async Task<int> Handle(GetRelationShipIdByUserIdAndFriendIdQuery request, CancellationToken cancellationToken)
             {
-                 int relationShipId = _context.RelationShips.FirstOrDefault(x =>
-                     (x.InvitedUserId == request.CurrentUserId || x.InvitingUserId == request.CurrentUserId) &&
-                     (x.InvitedUserId == request.FriendId || x.InvitingUserId == request.FriendId)
-                    ).Id;
+                int relationShipId = _context.RelationShips.FirstOrDefault(x =>
+                    (x.InvitedUserId == request.CurrentUserId || x.InvitingUserId == request.CurrentUserId) &&
+                    (x.InvitedUserId == request.FriendId || x.InvitingUserId == request.FriendId)
+                   ).Id;
 
                 return relationShipId;
             }
