@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Persistence;
+using System;
 
 namespace Application.UnitTests.Common
 {

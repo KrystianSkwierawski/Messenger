@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Infrastructure.Persistence;
+using System;
 using Xunit;
 
 namespace Application.UnitTests.Common

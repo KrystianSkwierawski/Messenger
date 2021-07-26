@@ -2,6 +2,7 @@
 using Application.UnitTests.Common;
 using Domain.Entities;
 using FluentAssertions;
+using Infrastructure.Persistence;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;

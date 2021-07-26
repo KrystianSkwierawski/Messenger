@@ -1,6 +1,8 @@
 ﻿using Application.Common.Interfaces;
 using Application.Common.Models;
 using System.IO;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace Infrastructure.Files
 {
