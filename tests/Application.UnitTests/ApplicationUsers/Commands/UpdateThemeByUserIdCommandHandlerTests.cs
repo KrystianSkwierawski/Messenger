@@ -1,7 +1,7 @@
 ﻿using Application.ApplicationUsers.Commands;
 using Application.UnitTests.Common;
 using Domain.Entities;
-using Domain.ValueObjects;
+using Domain.Common;
 using FluentAssertions;
 using System.Threading;
 using System.Threading.Tasks;

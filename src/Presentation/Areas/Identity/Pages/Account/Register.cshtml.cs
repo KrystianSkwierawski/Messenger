@@ -1,5 +1,5 @@
 ﻿using Domain.Entities;
-using Domain.ValueObjects;
+using Domain.Common;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
