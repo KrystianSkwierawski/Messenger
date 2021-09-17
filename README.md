@@ -1,4 +1,4 @@
-Messenger - real time chat communicator. The idea for this project came up when I was learning <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR.</a> I wanted to put it into practice. During the project I also learned <a href="https://medium.com/@ducmeit/net-core-using-cqrs-pattern-with-mediatr-part-1-55557e90931b">MediatR</a> and <a href="https://sass-lang.com/">Sass.</a>
+Messenger - real-time chat communicator. The idea for this project came up when I was learning <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR.</a> I wanted to put it into practice. During the project, I also learned <a href="https://medium.com/@ducmeit/net-core-using-cqrs-pattern-with-mediatr-part-1-55557e90931b">MediatR</a> and <a href="https://sass-lang.com/">Sass.</a>
 
 ![messenger](https://user-images.githubusercontent.com/52860350/123298884-3f6def00-d519-11eb-9d9c-31052af42a6e.jpg)
 
