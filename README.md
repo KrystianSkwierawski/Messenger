@@ -3,7 +3,7 @@ Real-time chat communicator.
 
 
 ## Why did I make this application?
-The idea for this project came up when I was learning SignalR. I wanted to put it into practice. 
+The idea for this project came up when I was learning SignalR, I wanted to put it into practice. 
 
 ## What did I learn?
 I learned <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR</a>, <a href="https://medium.com/@ducmeit/net-core-using-cqrs-pattern-with-mediatr-part-1-55557e90931b">MediatR</a>, and <a href="https://sass-lang.com/">Sass.</a>
