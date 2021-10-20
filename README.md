@@ -45,7 +45,7 @@ I learned <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR</a>
 ### Other
  * Trello
  * JustColorPicker
- * VisualStudio
+ * Visual Studio
  * Git
  
 ## Status
