@@ -26,7 +26,7 @@ I learned <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR</a>
 
 ### - Light/Dark theme
  
-## Main technologies: 
+## Tools: 
 
 ### Tools:
  * C#
