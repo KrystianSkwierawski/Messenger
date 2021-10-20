@@ -28,7 +28,7 @@ I learned <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR</a>
  
 ## Main technologies: 
 
-### Back-end
+### Tools:
  * C#
  * .NET Core 3.1
  * Entity Framework
@@ -40,7 +40,13 @@ I learned <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR</a>
 ### Front-end
  * JavaScript
  * Sass
- * HTML5 
+ * HTML5
+
+### Other
+ * Trello
+ * JustColorPicker
+ * VisualStudio
+ * Git
  
 ## Status
 Project is finished.
