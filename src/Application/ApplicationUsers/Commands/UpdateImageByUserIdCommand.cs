@@ -16,9 +16,9 @@ namespace Application.ApplicationUsers.Commands
         public class UpdateImageByUserIdCommandHandler : IRequestHandler<UpdateImageByUserIdCommand>
         {
             readonly IContext _context;
-            private readonly IImageFileBulider _imageFileBulider;
+            private readonly IImageFileBuilder _imageFileBulider;
 
-            public UpdateImageByUserIdCommandHandler(IContext context, IImageFileBulider imageFileBulider)
+            public UpdateImageByUserIdCommandHandler(IContext context, IImageFileBuilder imageFileBulider)
             {
                 _context = context;
                 _imageFileBulider = imageFileBulider;

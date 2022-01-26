@@ -24,10 +24,10 @@ namespace Messenger.Areas.User.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         readonly IWebHostEnvironment _hostEnvironment;
-        private readonly IAudioFileBulider _audioFileBulider;
+        private readonly IAudioFileBuilder _audioFileBulider;
         private readonly ICurrentUserService _currentUserService;
 
-        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment hostEnvironment, IAudioFileBulider audioFileBulider, ICurrentUserService currentUserService)
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment hostEnvironment, IAudioFileBuilder audioFileBulider, ICurrentUserService currentUserService)
         {
             _logger = logger;
             _hostEnvironment = hostEnvironment;

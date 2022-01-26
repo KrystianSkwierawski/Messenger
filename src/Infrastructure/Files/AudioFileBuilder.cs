@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Application
 {
-    public class AudioFileBulider : IAudioFileBulider
+    public class AudioFileBuilder : IAudioFileBuilder
     {
         public string SaveAudio(string webRootPath, string chunks)
         {

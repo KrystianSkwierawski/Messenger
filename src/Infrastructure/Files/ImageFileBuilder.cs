@@ -6,7 +6,7 @@ using SixLabors.ImageSharp.Processing;
 
 namespace Infrastructure.Files
 {
-    public class ImageFileBulider : IImageFileBulider
+    public class ImageFileBuilder : IImageFileBuilder
     {
         private void SaveImage(ImageFile imageFile, Image image)
         {

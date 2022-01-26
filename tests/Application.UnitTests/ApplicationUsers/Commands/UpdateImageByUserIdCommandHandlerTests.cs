@@ -23,7 +23,7 @@ namespace Application.Tests.ApplicationUsers.Commands
             {
                 FileName = "ImageUrlIsUpdated",
             };
-            Mock<IImageFileBulider> imageFileBuliderMock = new Mock<IImageFileBulider>();
+            Mock<IImageFileBuilder> imageFileBuliderMock = new Mock<IImageFileBuilder>();
 
             await _context.ApplicationUsers.AddAsync(user);
             await _context.SaveChangesAsync();

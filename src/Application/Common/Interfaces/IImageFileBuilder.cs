@@ -2,7 +2,7 @@
 
 namespace Application.Common.Interfaces
 {
-    public interface IImageFileBulider
+    public interface IImageFileBuilder
     {
         public void ConvertAndSaveImage(ImageFile imageFile);
 

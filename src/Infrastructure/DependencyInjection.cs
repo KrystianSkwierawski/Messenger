@@ -17,8 +17,8 @@ namespace Infrastructure
             services.AddDbContext<Context>(options =>
                options.UseSqlServer(
                    configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IAudioFileBulider, AudioFileBulider>();
-            services.AddTransient<IImageFileBulider, ImageFileBulider>();
+            services.AddTransient<IAudioFileBuilder, AudioFileBuilder>();
+            services.AddTransient<IImageFileBuilder, ImageFileBuilder>();
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddScoped<IContext, Context>();
 
