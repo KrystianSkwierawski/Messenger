@@ -1,5 +1,6 @@
 ﻿using Domain.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +22,10 @@ namespace Application.ApplicationUsers.Queries
 
             public async Task<string> Handle(GetThemeByUserIdQuery request, CancellationToken cancellationToken)
             {
-                return _context.ApplicationUsers.FirstOrDefault(x => x.Id == request.UserId).Theme;
+                return _context.ApplicationUsers
+                    .AsNoTracking()
+                    .Select(x => new { x.Theme, x.Id })
+                    .FirstOrDefault(x => x.Id == request.UserId).Theme;
             }
         }
     }

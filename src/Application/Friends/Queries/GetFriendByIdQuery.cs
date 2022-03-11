@@ -22,7 +22,7 @@ namespace Application.ApplicationUsers.Queries
 
             public async Task<ApplicationUser> Handle(GetFriendByIdQuery request, CancellationToken cancellationToken)
             {
-                return await _context.ApplicationUsers.FirstOrDefaultAsync(x => x.Id == request.Id);
+                return await _context.ApplicationUsers.AsNoTracking().FirstOrDefaultAsync(x => x.Id == request.Id);
             }
         }
     }
