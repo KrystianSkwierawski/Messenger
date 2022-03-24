@@ -27,8 +27,7 @@ I learned <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR</a>
 ### - Light/Dark theme
  
 ## Tools: 
-
-### Tools:
+### Back-end
  * C#
  * .NET Core 3.1
  * Entity Framework
