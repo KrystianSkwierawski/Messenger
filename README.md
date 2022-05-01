@@ -48,7 +48,7 @@ I learned <a href="https://dotnet.microsoft.com/apps/aspnet/signalr">SignalR</a>
  * Git
  
 ## Status
-Project is finished.
+Project(demo) is finished.
  
  
 
